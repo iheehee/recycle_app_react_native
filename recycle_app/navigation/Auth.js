@@ -13,7 +13,7 @@ export default () => {
       screenOptions={{
         presentation: "modal",
         headerBackImage: () => <BackBtn />,
-        headerBackTitleVisible: false
+        headerBackTitleVisible: false,
       }}
     >
       <Auth.Screen name="Welcome" component={Welcome} />

@@ -23,7 +23,7 @@ const Text = styled.Text`
 `;
 
 const Btn = ({ onPress, text }) => (
-  <TouchableOpacity onPress={() => onPress}>
+  <TouchableOpacity onPress={onPress}>
     <Button>
       <Text>
         {text}
