@@ -1,18 +1,26 @@
+import {
+  KeyboardAvoidingView,
+  KeyboardAwareScrollView,
+  TouchableWithoutFeedback,
+  Dimensions,
+  Keyboard,
+} from "react-native";
 import React, { useState } from "react";
-import { TouchableOpacity, Dimensions } from "react-native";
-import { Text, View } from "react-native";
 import styled from "styled-components/native";
 import Btn from "../../components/Auth/Btn";
 
 const { width } = Dimensions.get("screen");
 
-const InputContainer = styled.View`
+const Container = styled.View`
   flex: 1;
   justify-content: center;
+`;
+
+const InputContainer = styled.View`
   align-items: center;
 `;
 
-const Container = styled.TextInput`
+const Input = styled.TextInput`
   width: ${width / 1.5}px;
   padding: 12.5px 20px;
   border: 1px solid grey;
@@ -51,42 +59,49 @@ export default () => {
       });
       if (status === 201) {
         alert("Account created. Sign in, please.");
+        navigate("SignIn");
       }
     } catch (e) {
       alert("The email is taken");
     } finally {
     }
   };
+  const onPress = () => Keyboard.dismiss();
   return (
-    <InputContainer>
-      <Container
-        placeholder={"Email"}
-        value={email}
-        autocapitalize="off"
-        onChangeText={(text) => setEmail(text)}
-      />
-      <Container
-        placeholder={"Password"}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Container
-        placeholder={"Nickname"}
-        value={nickname}
-        autocapitalize="none"
-        onChangeText={(text) => setNickname(text)}
-      />
-      <Container
-        placeholder={"Username"}
-        value={username}
-        autocapitalize="none"
-        onChangeText={(text) => setUsername(text)}
-      />
-      <Btn
-          loading={loading}
-          text={"Sign Up"}
-          onPress={handleSubmit}
-        ></Btn>
-    </InputContainer>
+    <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <Container>
+          <InputContainer>
+            <Input
+              keyboardType="email-address"
+              placeholder={"Email"}
+              value={email}
+              autoCapitalize="none"
+              onChangeText={(text) => setEmail(text)}
+            />
+            <Input
+              placeholder={"Password"}
+              autoCapitalize="none"
+              secureTextEntry="true"
+              value={password}
+              onChangeText={(text) => setPassword(text)}
+            />
+            <Input
+              placeholder={"Nickname"}
+              value={nickname}
+              autoCapitalize="none"
+              onChangeText={(text) => setNickname(text)}
+            />
+            <Input
+              placeholder={"Username"}
+              value={username}
+              autoCapitalize="none"
+              onChangeText={(text) => setUsername(text)}
+            />
+            <Btn text={"Sign Up"} onPress={handleSubmit} />
+          </InputContainer>
+        </Container>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
