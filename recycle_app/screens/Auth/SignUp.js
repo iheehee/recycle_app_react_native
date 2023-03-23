@@ -1,6 +1,5 @@
 import {
   KeyboardAvoidingView,
-  KeyboardAwareScrollView,
   TouchableWithoutFeedback,
   Dimensions,
   Keyboard,
@@ -8,6 +7,8 @@ import {
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import Btn from "../../components/Auth/Btn";
+import utils from "../../utils";
+import api from "../../api";
 
 const { width } = Dimensions.get("screen");
 
@@ -30,7 +31,7 @@ const Input = styled.TextInput`
   font-weight: 500;
 `;
 
-export default () => {
+export default ({navigation: { navigate}}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
@@ -45,15 +46,17 @@ export default () => {
       alert("Please add a valid email.");
       return false;
     }
+    return true;
   };
   const handleSubmit = async () => {
     if (!isValid()) {
       return;
     }
+
     try {
       const { status } = await api.createAccount({
-        email,
-        password,
+        email: email,
+        password: password,
         nickname: nickname,
         username: username,
       });
@@ -98,8 +101,8 @@ export default () => {
               autoCapitalize="none"
               onChangeText={(text) => setUsername(text)}
             />
-            <Btn text={"Sign Up"} onPress={handleSubmit} />
           </InputContainer>
+          <Btn text={"Sign Up"} onPress={handleSubmit} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
