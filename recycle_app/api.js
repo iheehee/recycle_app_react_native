@@ -21,5 +21,5 @@ const callApi = async (method_type, path, data, jwt) => {
 
 export default {
   createAccount: (form) => callApi("post", "/users/", form),
-  getPost : () => axios.get("https://jsonplaceholder.typicode.com/posts/1"),
+  login: form => callApi("post", "/users/login/", form)
 };

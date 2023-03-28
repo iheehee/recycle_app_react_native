@@ -15,10 +15,11 @@ const { width } = Dimensions.get("screen");
 const Container = styled.View`
   flex: 1;
   justify-content: center;
+  align-items: center;
 `;
 
 const InputContainer = styled.View`
-  align-items: center;
+  
 `;
 
 const Input = styled.TextInput`
@@ -61,8 +62,8 @@ export default ({navigation: { navigate}}) => {
         username: username,
       });
       if (status === 201) {
-        alert("Account created. Sign in, please.");
-        navigate("SignIn");
+        alert("회원가입이 완료되었습니다.");
+        navigate("SignIn", { email, password });
       }
     } catch (e) {
       alert("The email is taken");
