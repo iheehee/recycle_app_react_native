@@ -1,5 +1,4 @@
 import React from "react";
-import {} from "react-native";
 import { useSelector } from "react-redux";
 import Auth from "../navigation/Auth";
 import Main from "../navigation/Main";
