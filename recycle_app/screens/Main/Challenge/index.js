@@ -1,17 +1,17 @@
-import Challenge from "./Challenge";
 import { connect } from "react-redux";
-import { getChallenges } from "../../../redux/challengesSlice";
+import { getChallenges } from "../../../modules/challengesSlice";
+import ChallengeContainer from "./ChallengeContainer";
 
 function mapDispatchToProps(dispatch) {
     return {
-      getRooms: () => dispatch(getChallenges()),
+      getChallenges: () => dispatch(getChallenges()),
       increasePage: () => dispatch(increasePage())
     };
   }
   
   function mapStateToProps(state) {
-    return state.roomsReducer.explore;
+    return state.challengesReducer.explore;
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(Challenge);
+  export default connect(mapStateToProps, mapDispatchToProps)(ChallengeContainer);
   

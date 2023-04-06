@@ -19,11 +19,11 @@ const roomsSlice = createSlice({
         state.explore.page = 1;
       } else {
         payload.challenges.forEach(payloadChallenges => {
-          const exists = explore.rooms.find(
+          const exists = explore.challenges.find(
             savedChallenges => savedChallenges.id === payloadChallenges.id
           );
           if (!exists) {
-            explore.rooms.push(payloadChallenges);
+            explore.challenges.push(payloadChallenges);
           }
         });
       }
@@ -41,6 +41,7 @@ export const getChallenges = page => async dispatch => {
     const {
       data: { results }
     } = await api.challenges(page);
+    console.log(results);
     dispatch(
       setChallenges({
         challenges: results,
