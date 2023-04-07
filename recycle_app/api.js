@@ -9,7 +9,6 @@ const callApi = async (method_type, path, data, jwt) => {
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
     return axios({
-      
       method: method_type,
       url: fullUrl,
       data: data,
@@ -22,5 +21,5 @@ const callApi = async (method_type, path, data, jwt) => {
 export default {
   createAccount: (form) => callApi("post", "/users/", form),
   login: form => callApi("post", "/users/login/", form),
-  challenges: form => callApi("get", "/challenges/", form),
+  challenges: () => callApi("get", "/challenges/",""),
 };
