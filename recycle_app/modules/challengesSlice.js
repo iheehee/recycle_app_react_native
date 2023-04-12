@@ -40,9 +40,6 @@ export const { setChallenges, increasePage } = challengesSlice.actions;
 export const getChallenges = (page) => async (dispatch) => {
   try {
     const { data } = await api.challenges();
-    console.log(data);
-    
-    console.log("실행되었습니다.");
     dispatch(
       setChallenges({
         challenges: data,

@@ -3,7 +3,6 @@ import ChallengePresenter from "./ChallengePresenter";
 
 
 export default ({ getChallenges, challenges }) => {
-
     useEffect(() => {
     getChallenges();
   }, []);
