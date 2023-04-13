@@ -7,28 +7,39 @@ import {
 } from "react-native";
 import ChallengeCard from '../../../components/ChallengeCard';
 
-const Container = styled.View`
+const ChallengeContainer = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
-`
-const StyledText = styled.Text`
-    font-size: 30px;
-`
+    `
+const Container = styled.View`
+    width: 48%;
+    margin: 3px;
+    display: flex;
+    `
+const ChallengeBox = styled.View`
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%
+    
+    
+`  
+
 export default ({ challenges }) => {
     console.log(challenges)
     return (
-      <Container>
+      <ChallengeContainer>
         {challenges.length === 0 ? (
           <ActivityIndicator />
         ) : (
-          <>
           <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ width: "100%" }}
           contentContainerStyle={{ paddingTop: 30 }}
-        >
+          >
+          <ChallengeBox>
           {challenges.map(challenge => (
+          <Container>
             <ChallengeCard
             key={challenge.id}
               banner={challenge.title_banner}
@@ -39,11 +50,12 @@ export default ({ challenges }) => {
               frequency={challenge.frequency}
               max_member={challenge.max_member}
             />
-          ))}
+          </Container>
+            ))}
+          </ChallengeBox>  
         </ScrollView>
-        </>
         )
-      }  
-      </Container>
+      }
+      </ChallengeContainer>
     );
   };
