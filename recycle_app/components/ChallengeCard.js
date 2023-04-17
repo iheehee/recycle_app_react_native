@@ -1,7 +1,7 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, View, Text } from "react-native";
+import { Dimensions, View, Text, Image } from "react-native";
 
 const Container = styled.View`
     flex: 1;
@@ -10,12 +10,12 @@ const Container = styled.View`
 `
 
 const ChallengeCard = ({ banner, id, title, owner, start_day, frequency, max_member }) => (
-    <Container>
+  <Container>
+      
       <Text>{title}</Text>
       <Text>{id}</Text>
       <Text>{owner}</Text>
       <Text>{start_day}</Text>
-      <Text>{banner}</Text>
       <Text>{frequency}</Text>
       <Text>{max_member}</Text>
     </Container>

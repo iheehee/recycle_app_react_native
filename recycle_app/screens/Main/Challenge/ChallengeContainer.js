@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import ChallengePresenter from "./ChallengePresenter";
 
 
-export default ({ getChallenges, challenges }) => {
+export default ({ getChallenges, challenges, page }) => {
     useEffect(() => {
-    getChallenges();
+    getChallenges(1);
   }, []);
 
   /* const ss = useSelector((state) => state);
