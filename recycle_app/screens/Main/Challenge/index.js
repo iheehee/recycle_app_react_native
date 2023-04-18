@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import { getChallenges } from "../../../modules/challengesSlice";
+import { getChallenges, setChallenges } from "../../../modules/challengesSlice";
 import ChallengeContainer from "./ChallengeContainer";
 
 function mapDispatchToProps(dispatch) {
     return {
-      getChallenges: () => dispatch(getChallenges()),
+      getChallenges: (page) => dispatch(getChallenges(page)),
       increasePage: () => dispatch(increasePage())
     };
   }

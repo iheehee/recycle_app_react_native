@@ -14,14 +14,14 @@ const challengesSlice = createSlice({
   reducers: {
     setChallenges(state, action) {
       const { explore } = state;
-      
-      if (action.payload.page === 1) {
-        state.explore.challenges = action.payload.challenges;
+      const { payload } = action;
+      if (payload.page === 1) {
+        state.explore.challenges = payload.challenges;
         state.explore.page = 1;
       } else {
         payload.challenges.forEach((payloadChallenges) => {
           const exists = explore.challenges.find(
-            (savedChallenges) => savedChallenges.id === payloadChallenges.id
+            (savedChallenges) => savedChallenges.id === payload.Challenges.id
           );
           if (!exists) {
             explore.challenges.push(payloadChallenges);
@@ -40,11 +40,10 @@ export const { setChallenges, increasePage } = challengesSlice.actions;
 export const getChallenges = (page) => async (dispatch) => {
   try {
     const { data } = await api.challenges();
-    console.log(page);
     dispatch(
       setChallenges({
         challenges: data,
-        page: page
+        page
       })
     );
   } catch (e) {

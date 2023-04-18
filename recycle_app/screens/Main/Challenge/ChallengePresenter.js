@@ -26,7 +26,6 @@ const ChallengeBox = styled.View`
 `  
 
 export default ({ challenges }) => {
-  console.log(challenges);
     return (
       <ChallengeContainer>
         {challenges.length === 0 ? (
@@ -41,7 +40,7 @@ export default ({ challenges }) => {
           {challenges.map(challenge => (
           <Container>
             <ChallengeCard
-            key={challenge.id}
+              key={challenge.id}
               banner={challenge.title_banner}
               title={challenge.title}
               owner={challenge.owner}

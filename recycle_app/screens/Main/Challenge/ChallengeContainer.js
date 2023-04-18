@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ChallengePresenter from "./ChallengePresenter";
 
 
-export default ({ getChallenges, challenges, page }) => {
-    useEffect(() => {
+export default ({ getChallenges,challenges, page }) => {
+  useEffect(() => {
     getChallenges(1);
   }, []);
+  useEffect(() => {
+    getChallenges(page);
+  }, [page]);
 
-  /* const ss = useSelector((state) => state);
-     console.log(ss); */
   return <ChallengePresenter challenges={challenges} />;
 };
