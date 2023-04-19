@@ -11,6 +11,7 @@ const ChallengeContainer = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
+    background-color: white;
     `
 const Container = styled.View`
     width: 48%;
@@ -45,7 +46,7 @@ export default ({ challenges }) => {
               title={challenge.title}
               owner={challenge.owner}
               start_day={challenge.start_day}
-              id={challenge.id}
+              duration={challenge.duration}
               frequency={challenge.frequency}
               max_member={challenge.max_member}
             />
