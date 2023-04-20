@@ -1,14 +1,14 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, View, Image } from "react-native";
+import { Dimensions, View, Image, Text } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: start;
+  justify-content: start;
+  margin-bottom: 5px;
 `;
 
 const TitleContainer = styled.Text`
@@ -21,16 +21,22 @@ const TitleContainer = styled.Text`
 const DurationContainer = styled.View`
   margin: 10px 0px 0px 6px;
   padding: 3px;
-  background-color: #D8D8D8;
+  background-color: #d8d8d8;
   border-radius: 5px;
-`
-const DurationText = styled.Text`
-
-`
-
+`;
+const FrequencyContainer = styled.View`
+  margin: 10px 0px 0px 6px;
+  padding: 3px;
+  background-color: #d8d8d8;
+  border-radius: 5px;
+`;
 const ImageContainer = styled.View`
   margin: 0px 5px;
 `;
+const TimeContainer = styled.View`
+  flex-direction: row;
+`
+
 
 const ChallengeCard = ({
   banner,
@@ -49,13 +55,15 @@ const ChallengeCard = ({
       />
     </ImageContainer>
     <TitleContainer>{title}</TitleContainer>
-    <DurationContainer>
-      <DurationText>
-      {duration}
-      </DurationText>
-    </DurationContainer>
-    {/*   <Text>{frequency}</Text>
-    <Text>{max_member}</Text> */}
+    <TimeContainer>
+      <DurationContainer>
+        <Text style={{fontSize: 13}}>{duration}</Text>
+      </DurationContainer>
+      <FrequencyContainer>
+        <Text style={{fontSize: 13}}>{frequency}</Text>
+      </FrequencyContainer>
+    </TimeContainer>
+    {/* <Text>{max_member}</Text> */}
   </Container>
 );
 

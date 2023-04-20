@@ -16,14 +16,11 @@ const ChallengeContainer = styled.View`
 const Container = styled.View`
     width: 48%;
     margin: 3px;
-    display: flex;
     `
 const ChallengeBox = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%
-    
-    
 `  
 
 export default ({ challenges }) => {

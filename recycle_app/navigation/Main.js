@@ -20,7 +20,7 @@ const TabIcon = ({ name, size, color }) => {
 const TabNavigation = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Store"
+      initialRouteName="Challenge"
       screenOptions={({ route }) => ({
         tabBarIcon: (props) => {
           let name = "";
