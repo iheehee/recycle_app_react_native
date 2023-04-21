@@ -23,7 +23,8 @@ const ChallengeBox = styled.View`
     width: 100%
 `  
 
-export default ({ challenges }) => {
+export default ({ route }) => {
+  const { challenges } = route.params;
     return (
       <ChallengeContainer>
         {challenges.length === 0 ? (
