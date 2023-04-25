@@ -1,7 +1,9 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, View, Image, Text } from "react-native";
+import { Dimensions, View, Image, Text, TouchableOpacity } from "react-native";
+import ChallengeDetail from '../screens/Main/Challenge/ChallengeDetail';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("screen");
 
@@ -37,7 +39,6 @@ const TimeContainer = styled.View`
   flex-direction: row;
 `
 
-
 const ChallengeCard = ({
   banner,
   title,
@@ -46,7 +47,10 @@ const ChallengeCard = ({
   duration,
   frequency,
   max_member,
-}) => (
+}) => {
+  const navigation = useNavigation();  
+  return(
+  <TouchableOpacity onPress = {() => navigation.navigate('ChallengeDetail')}>
   <Container>
     <ImageContainer>
       <Image
@@ -65,6 +69,7 @@ const ChallengeCard = ({
     </TimeContainer>
     {/* <Text>{max_member}</Text> */}
   </Container>
-);
+  </TouchableOpacity>
+)}
 
 export default ChallengeCard;

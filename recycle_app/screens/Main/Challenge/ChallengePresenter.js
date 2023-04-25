@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import ChallengeCard from '../../../components/ChallengeCard';
 
+
 const ChallengeContainer = styled.View`
     flex: 1;
     justify-content: center;
@@ -23,8 +24,7 @@ const ChallengeBox = styled.View`
     width: 100%
 `  
 
-export default ({ route }) => {
-  const { challenges } = route.params;
+export default ({ challenges }) => {
     return (
       <ChallengeContainer>
         {challenges.length === 0 ? (

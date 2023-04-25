@@ -1,19 +1,43 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Challenge from "../screens/Main/Challenge";
+import { createStackNavigator } from "@react-navigation/stack";
+import index from "../screens/Main/Challenge/index";
+import ChallengeDetail from "../screens/Main/Challenge/ChallengeDetail";
 import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import ChallengeContainer from "../screens/Main/Challenge/ChallengeContainer";
+import Challenge from "../screens/Main/Challenge";
 
 const Tab = createBottomTabNavigator();
+const ChallengeNavi = createStackNavigator();
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
     <FontAwesome name="user-circle-o" size={size} color={color} />
   ) : (
     <MaterialCommunityIcons name={name} size={size} color={color} />
+  );
+};
+
+const ChallengeStackScreen = () => {
+  return (
+    <ChallengeNavi.Navigator
+      mode="card"
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerMode: "screen"
+      }}
+    >
+      <ChallengeNavi.Screen name="Challenge" component={index} />
+      <ChallengeNavi.Screen
+        name="ChallengeDetail"
+        component={ChallengeDetail}
+        options={{ title: "ChallengeDetail" }}
+      />
+    </ChallengeNavi.Navigator>
   );
 };
 
@@ -31,14 +55,13 @@ const TabNavigation = () => {
           else name = "user-circle-o";
           return TabIcon({ ...props, name, size });
         },
-        tabBarItemStyle: { 
-            paddingTop: 10,
-            marginBottom: -5
+        tabBarItemStyle: {
+          paddingTop: 10,
+          marginBottom: -5,
         },
       })}
-      
     >
-      <Tab.Screen name="Challenge" component={Challenge} />
+      <Tab.Screen name="Challenge" component={ChallengeStackScreen} options={{ headerShown : false }}/>
       <Tab.Screen name="Recycle" component={Recycle} />
       <Tab.Screen name="Store" component={Store} />
       <Tab.Screen name="Profile" component={Profile} />
