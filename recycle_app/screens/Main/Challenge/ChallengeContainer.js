@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import ChallengePresenter from "./ChallengePresenter";
 
 
-
 export default ({ getChallenges, challenges, page, navigation }) => {
   useEffect(() => {
     getChallenges(1);

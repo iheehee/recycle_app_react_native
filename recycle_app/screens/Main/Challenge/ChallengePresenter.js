@@ -40,6 +40,7 @@ export default ({ challenges }) => {
           <Container>
             <ChallengeCard
               key={challenge.id}
+              id={challenge.id}
               banner={challenge.title_banner}
               title={challenge.title}
               owner={challenge.owner}

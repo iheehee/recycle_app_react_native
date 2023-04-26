@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getChallenges, setChallenges } from "../../../modules/challengesSlice";
+import { getChallenges } from "../../../modules/challengesSlice";
 import ChallengeContainer from "./ChallengeContainer";
 
 function mapDispatchToProps(dispatch) {

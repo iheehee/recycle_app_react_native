@@ -22,4 +22,5 @@ export default {
   createAccount: (form) => callApi("post", "/users/", form),
   login: form => callApi("post", "/users/login/", form),
   challenges: () => callApi("get", "/challenges/",""),
+  challengeDetail: (form)=> callApi("get", "/challenges/" + form,"")
 };
