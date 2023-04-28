@@ -1,7 +1,7 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, View, Image, Text, TouchableOpacity } from "react-native";
+import { Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");

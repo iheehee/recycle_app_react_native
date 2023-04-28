@@ -8,11 +8,17 @@ import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import ChallengeContainer from "../screens/Main/Challenge/ChallengeContainer";
-import Challenge from "../screens/Main/Challenge";
+import { Image, Dimensions } from "react-native";
+import styled from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
+const { width, height } = Dimensions.get("screen");
+const ImageContainer = styled.View`
+  flex: 1;
+  justify-content: start;
+  height: 100%
+`;
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -28,14 +34,26 @@ const ChallengeStackScreen = () => {
       mode="card"
       screenOptions={{
         headerBackTitleVisible: false,
-        headerMode: "screen"
+        headerMode: "screen",
       }}
     >
       <ChallengeNavi.Screen name="Challenge" component={index} />
       <ChallengeNavi.Screen
         name="ChallengeDetail"
         component={ChallengeDetail}
-        options={{ title: "ChallengeDetail" }}
+        options={{
+          title: null,
+          headerBackground: () => (
+            <ImageContainer>
+              <Image
+                style={{ width: width, height: height / 3 }}
+                source={{
+                  uri: "https://images.unsplash.com/photo-1682588382872-876b524625ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1185&q=80",
+                }}
+              />
+            </ImageContainer>
+          ),
+        }}
       />
     </ChallengeNavi.Navigator>
   );
@@ -61,7 +79,11 @@ const TabNavigation = () => {
         },
       })}
     >
-      <Tab.Screen name="Challenge" component={ChallengeStackScreen} options={{ headerShown : false }}/>
+      <Tab.Screen
+        name="Challenge"
+        component={ChallengeStackScreen}
+        options={{ headerShown: false }}
+      />
       <Tab.Screen name="Recycle" component={Recycle} />
       <Tab.Screen name="Store" component={Store} />
       <Tab.Screen name="Profile" component={Profile} />
