@@ -43,16 +43,7 @@ const ChallengeStackScreen = () => {
         component={ChallengeDetail}
         options={{
           title: null,
-          headerBackground: () => (
-            <ImageContainer>
-              <Image
-                style={{ width: width, height: height / 3 }}
-                source={{
-                  uri: "https://images.unsplash.com/photo-1682588382872-876b524625ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1185&q=80",
-                }}
-              />
-            </ImageContainer>
-          ),
+          
         }}
       />
     </ChallengeNavi.Navigator>
