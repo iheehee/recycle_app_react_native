@@ -19,16 +19,17 @@ export default ({ route }) => {
   useEffect(() => {
     apiRequest(challengeId);
   }, []);
-  console.log(challengeDetail);
   return (
     <Container>
       {challengeDetail.map((challenge) => (
         <ChallengeDetailCard
+          key={challenge.id}
           title={challenge.title}
           banner={challenge.title_banner}
           start_day={challenge.start_day}
           duration={challenge.duration}
           frequency={challenge.frequency}
+          applied_member={challenge.number_of_applied_member}
           max_member={challenge.max_member}
         />
       ))}

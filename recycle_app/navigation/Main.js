@@ -14,11 +14,7 @@ import styled from "styled-components/native";
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
 const { width, height } = Dimensions.get("screen");
-const ImageContainer = styled.View`
-  flex: 1;
-  justify-content: start;
-  height: 100%
-`;
+
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -37,13 +33,12 @@ const ChallengeStackScreen = () => {
         headerMode: "screen",
       }}
     >
-      <ChallengeNavi.Screen name="Challenge" component={index} />
+      <ChallengeNavi.Screen name="ChallengeCard" component={index} />
       <ChallengeNavi.Screen
         name="ChallengeDetail"
         component={ChallengeDetail}
         options={{
-          title: null,
-          
+          title: null
         }}
       />
     </ChallengeNavi.Navigator>
@@ -73,7 +68,10 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Challenge"
         component={ChallengeStackScreen}
-        options={{ headerShown: false }}
+        options={(route) => ({
+          headerShown: false,
+          tabBarStyle: {display: route.params}
+        })}
       />
       <Tab.Screen name="Recycle" component={Recycle} />
       <Tab.Screen name="Store" component={Store} />

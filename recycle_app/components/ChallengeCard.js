@@ -46,11 +46,20 @@ const ChallengeCard = ({
   duration,
   frequency,
   max_member,
-  id
+  id,
 }) => {
   const navigation = useNavigation();
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ChallengeDetail", {challengeId: id})}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("ChallengeDetail", {
+          challengeId: id,
+          screen: 'Challenge',
+          params: 'none'
+        });
+      }}
+    >
       <Container>
         <ImageContainer>
           <Image
