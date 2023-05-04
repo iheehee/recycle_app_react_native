@@ -24,7 +24,7 @@ const TabIcon = ({ name, size, color }) => {
   );
 };
 
-const ChallengeStackScreen = () => {
+const ChallengeStackNavi = () => {
   return (
     <ChallengeNavi.Navigator
       mode="card"
@@ -33,7 +33,9 @@ const ChallengeStackScreen = () => {
         headerMode: "screen",
       }}
     >
-      <ChallengeNavi.Screen name="ChallengeCard" component={index} />
+      <ChallengeNavi.Screen name="ChallengeCard" component={TabNavigation} options={{
+          title: null
+        }}/>
       <ChallengeNavi.Screen
         name="ChallengeDetail"
         component={ChallengeDetail}
@@ -63,11 +65,12 @@ const TabNavigation = () => {
           paddingTop: 10,
           marginBottom: -5,
         },
+        headerShown: false,
       })}
     >
       <Tab.Screen
         name="Challenge"
-        component={ChallengeStackScreen}
+        component={index}
         options={(route) => ({
           headerShown: false,
           tabBarStyle: {display: route.params}
@@ -80,4 +83,4 @@ const TabNavigation = () => {
   );
 };
 
-export default TabNavigation;
+export default ChallengeStackNavi;

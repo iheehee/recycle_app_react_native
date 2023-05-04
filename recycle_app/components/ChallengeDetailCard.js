@@ -51,6 +51,9 @@ const MemberText = styled.Text`
   margin-left: 2px;
   font-size: 15px;
 `;
+const TtText = styled.Text`
+white-space: pre-line;
+`;
 
 const Detail = ({
   banner,
@@ -72,7 +75,7 @@ const Detail = ({
       <TitleContainer>{title}</TitleContainer>
       <MemberContainer>
         <MaterialCommunityIcons name="human-child" size={18} color="black" />
-        <MemberText>{`현재 ${applied_member} / ${max_member}명`}</MemberText>
+        <MemberText>{`현재 ${applied_member}명`}</MemberText>
       </MemberContainer>
       <DFContainer>
         <DurationContainer>
@@ -82,6 +85,7 @@ const Detail = ({
           <Text>{frequency}</Text>
         </FrequencyContainer>
       </DFContainer>
+      <TtText>{"플로깅(Plogging)은 조깅을 하면서 동시에 쓰레기를 줍는 운동입니다.쓰레기를 줍는 조깅을 줄여서 '줍깅'이라고도 합니다.\r\n\r\n\r\n이런 분들에게 추천해요\r\n✓ 환경 보호에 관심이 있는 분들\r\n✓ 조깅을 통한 건강관리를 하고 싶은 분들\r\n✓ 환경 보호 활동으로 기분 좋은 마음을 느끼고 싶은 분들"} </TtText>
     </BgContainer>
   );
 };
