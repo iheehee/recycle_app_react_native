@@ -1,7 +1,7 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Image, Text } from "react-native";
+import { Dimensions, Image, Text, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -13,7 +13,14 @@ const BgContainer = styled.View`
   background-color: white;
 `;
 
-const Container = styled.View``;
+const DivisionLine = styled.View`
+  background-color: #e5e5e5;
+  padding: 3px;
+`;
+
+const HeaderContainer = styled.View`
+  margin: 15px;
+`;
 
 const TitleContainer = styled.Text`
   margin: 16px 0px 0px 6px;
@@ -25,14 +32,13 @@ const BannerContainer = styled.View`
   align-items: center;
 `;
 const DurationContainer = styled.View`
-  width: 14.5%;
-
+  width: 16%;
   padding: 3px;
   background-color: #d8d8d8;
   border-radius: 5px;
 `;
 const FrequencyContainer = styled.View`
-  width: 11%;
+  width: 12%;
   padding: 3px;
   background-color: #d8d8d8;
   border-radius: 5px;
@@ -51,8 +57,28 @@ const MemberText = styled.Text`
   margin-left: 2px;
   font-size: 15px;
 `;
-const TtText = styled.Text`
-white-space: pre-line;
+
+const DescriptionContainer = styled.View`
+  margin: 20px;
+  
+`;
+const Suggestion = styled.Text`
+  font-size: 20px;
+  font-weight: 500;
+`;
+
+const White = styled.Text`
+  color: white;
+`
+
+const ChallengeSummery = styled.Text`
+  margin-top: 15px;
+  line-height: 20%;
+`;
+
+const ChallengeDescription = styled.Text`
+  margin-top: 25px;
+  line-height: 20%;
 `;
 
 const Detail = ({
@@ -63,8 +89,11 @@ const Detail = ({
   max_member,
   applied_member,
   start_day,
+  summery,
+  description,
 }) => {
   return (
+    <ScrollView>
     <BgContainer>
       <BannerContainer>
         <Image
@@ -72,6 +101,7 @@ const Detail = ({
           style={{ width: width / 1, height: height / 3.6 }}
         />
       </BannerContainer>
+      <HeaderContainer>
       <TitleContainer>{title}</TitleContainer>
       <MemberContainer>
         <MaterialCommunityIcons name="human-child" size={18} color="black" />
@@ -85,8 +115,16 @@ const Detail = ({
           <Text>{frequency}</Text>
         </FrequencyContainer>
       </DFContainer>
-      <TtText>{"플로깅(Plogging)은 조깅을 하면서 동시에 쓰레기를 줍는 운동입니다.쓰레기를 줍는 조깅을 줄여서 '줍깅'이라고도 합니다.\r\n\r\n\r\n이런 분들에게 추천해요\r\n✓ 환경 보호에 관심이 있는 분들\r\n✓ 조깅을 통한 건강관리를 하고 싶은 분들\r\n✓ 환경 보호 활동으로 기분 좋은 마음을 느끼고 싶은 분들"} </TtText>
+      </HeaderContainer>
+      <DivisionLine></DivisionLine>
+      <DescriptionContainer>
+        <Suggestion>{"챌린지를 소개해주세요"}</Suggestion>
+        <ChallengeSummery>{summery}</ChallengeSummery>
+        <ChallengeDescription>{description}</ChallengeDescription>
+      </DescriptionContainer>
+      
     </BgContainer>
+    </ScrollView>
   );
 };
 

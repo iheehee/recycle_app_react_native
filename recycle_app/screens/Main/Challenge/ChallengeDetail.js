@@ -31,6 +31,8 @@ export default ({ route }) => {
           frequency={challenge.frequency}
           applied_member={challenge.number_of_applied_member}
           max_member={challenge.max_member}
+          summery={challenge.challenge_summery}
+          description={challenge.challenge_description}
         />
       ))}
     </Container>
