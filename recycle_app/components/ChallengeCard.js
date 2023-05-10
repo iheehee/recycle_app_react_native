@@ -76,7 +76,7 @@ const ChallengeCard = ({
             <Text style={{ fontSize: 13 }}>{frequency}</Text>
           </FrequencyContainer>
         </TimeContainer>
-        {/* <Text>{max_member}</Text> */}
+        
       </Container>
     </TouchableOpacity>
   );

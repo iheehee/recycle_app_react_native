@@ -60,16 +60,32 @@ const MemberText = styled.Text`
 
 const DescriptionContainer = styled.View`
   margin: 20px;
-  
 `;
 const Suggestion = styled.Text`
   font-size: 20px;
   font-weight: 500;
 `;
 
-const White = styled.Text`
+const NoticeContainer = styled.View`
+  margin: 20px;
+`;
+
+const NoticeTitle = styled.Text`
+  font-size: 20px;
+  font-weight: 500;
+`;
+const NoticeDescriptionBox = styled.View`
+background-color: #202833;
+border-radius: 8px;
+margin-top: 18px;
+`;
+
+const NoticeDescription = styled.Text`
+  padding: 10px;
+  margin: 4px;
+  line-height: 20%;  
   color: white;
-`
+`;
 
 const ChallengeSummery = styled.Text`
   margin-top: 15px;
@@ -79,6 +95,7 @@ const ChallengeSummery = styled.Text`
 const ChallengeDescription = styled.Text`
   margin-top: 25px;
   line-height: 20%;
+  
 `;
 
 const Detail = ({
@@ -91,39 +108,50 @@ const Detail = ({
   start_day,
   summery,
   description,
+  notice
 }) => {
   return (
     <ScrollView>
-    <BgContainer>
-      <BannerContainer>
-        <Image
-          source={{ uri: banner }}
-          style={{ width: width / 1, height: height / 3.6 }}
-        />
-      </BannerContainer>
-      <HeaderContainer>
-      <TitleContainer>{title}</TitleContainer>
-      <MemberContainer>
-        <MaterialCommunityIcons name="human-child" size={18} color="black" />
-        <MemberText>{`현재 ${applied_member}명`}</MemberText>
-      </MemberContainer>
-      <DFContainer>
-        <DurationContainer>
-          <Text>{duration}</Text>
-        </DurationContainer>
-        <FrequencyContainer>
-          <Text>{frequency}</Text>
-        </FrequencyContainer>
-      </DFContainer>
-      </HeaderContainer>
-      <DivisionLine></DivisionLine>
-      <DescriptionContainer>
-        <Suggestion>{"챌린지를 소개해주세요"}</Suggestion>
-        <ChallengeSummery>{summery}</ChallengeSummery>
-        <ChallengeDescription>{description}</ChallengeDescription>
-      </DescriptionContainer>
-      
-    </BgContainer>
+      <BgContainer>
+        <BannerContainer>
+          <Image
+            source={{ uri: banner }}
+            style={{ width: width / 1, height: height / 3.6 }}
+          />
+        </BannerContainer>
+        <HeaderContainer>
+          <TitleContainer>{title}</TitleContainer>
+          <MemberContainer>
+            <MaterialCommunityIcons
+              name="human-child"
+              size={18}
+              color="black"
+            />
+            <MemberText>{`현재 ${applied_member}명`}</MemberText>
+          </MemberContainer>
+          <DFContainer>
+            <DurationContainer>
+              <Text>{duration}</Text>
+            </DurationContainer>
+            <FrequencyContainer>
+              <Text>{frequency}</Text>
+            </FrequencyContainer>
+          </DFContainer>
+        </HeaderContainer>
+        <DivisionLine></DivisionLine>
+        <DescriptionContainer>
+          <Suggestion>{"챌린지를 소개해주세요"}</Suggestion>
+          <ChallengeSummery>{summery}</ChallengeSummery>
+          <ChallengeDescription>{description}</ChallengeDescription>
+        </DescriptionContainer>
+        <DivisionLine></DivisionLine>
+        <NoticeContainer>
+          <NoticeTitle>{"이렇게 인증 해주세요"}</NoticeTitle>
+          <NoticeDescriptionBox>
+            <NoticeDescription>{notice}</NoticeDescription>
+          </NoticeDescriptionBox>
+        </NoticeContainer>
+      </BgContainer>
     </ScrollView>
   );
 };

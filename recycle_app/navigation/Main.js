@@ -13,6 +13,7 @@ import styled from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
+const ChallengeDetailTap = createBottomTabNavigator();
 const { width, height } = Dimensions.get("screen");
 
 
@@ -46,6 +47,8 @@ const ChallengeStackNavi = () => {
     </ChallengeNavi.Navigator>
   );
 };
+
+/* const ChallengeDetailTap = () */
 
 const TabNavigation = () => {
   return (

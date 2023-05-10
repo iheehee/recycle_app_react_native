@@ -33,6 +33,7 @@ export default ({ route }) => {
           max_member={challenge.max_member}
           summery={challenge.challenge_summery}
           description={challenge.challenge_description}
+          notice={challenge.certification_notice}
         />
       ))}
     </Container>
