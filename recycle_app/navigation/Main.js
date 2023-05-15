@@ -8,7 +8,7 @@ import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { Image, Dimensions } from "react-native";
+import { Image, Dimensions, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
@@ -38,8 +38,8 @@ const ChallengeStackNavi = () => {
           title: null
         }}/>
       <ChallengeNavi.Screen
-        name="ChallengeDetail"
-        component={ChallengeDetail}
+        name="ChallengeDetailCard"
+        component={ChallengeDetailTapNavi}
         options={{
           title: null
         }}
@@ -48,7 +48,30 @@ const ChallengeStackNavi = () => {
   );
 };
 
-/* const ChallengeDetailTap = () */
+const ChallengeDetailTapNavi = () => {
+  return(
+  <ChallengeDetailTap.Navigator
+      initialRouteName="ChallengeDetail"
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <ChallengeDetailTap.Screen
+        name="ChallengeDetail"
+        component={ChallengeDetail}
+        options={(route) => ({
+          headerShown: false,
+          tabBarStyle: {display: route.params}
+        })}
+      />
+      <ChallengeDetailTap.Screen name="Recycle" component={Recycle} options={(route) => ({
+          headerShown: false,
+          tabBarBadge: 1
+        })}/>
+    </ChallengeDetailTap.Navigator>
+  );
+};
+
 
 const TabNavigation = () => {
   return (
@@ -67,8 +90,8 @@ const TabNavigation = () => {
         tabBarItemStyle: {
           paddingTop: 10,
           marginBottom: -5,
+          headerShown: false,
         },
-        headerShown: false,
       })}
     >
       <Tab.Screen
