@@ -6,6 +6,7 @@ import ChallengeDetail from "../screens/Main/Challenge/ChallengeDetail";
 import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
+import Btn from "../components/ChallengeDetail/Btn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image, Dimensions, TouchableOpacity } from "react-native";
@@ -53,20 +54,26 @@ const ChallengeDetailTapNavi = () => {
   <ChallengeDetailTap.Navigator
       initialRouteName="ChallengeDetail"
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarItemStyle: {
+          paddingTop: 5,
+          marginBottom: -10,
+          paddingEnd: 15
+        },
       }}
     >
       <ChallengeDetailTap.Screen
         name="ChallengeDetail"
         component={ChallengeDetail}
-        options={(route) => ({
+        options={() => ({
           headerShown: false,
-          tabBarStyle: {display: route.params}
+          
         })}
       />
       <ChallengeDetailTap.Screen name="Recycle" component={Recycle} options={(route) => ({
           headerShown: false,
-          tabBarBadge: 1
+          tabBarIcon: () => {return <Btn text={"오늘부터 시작"} />;}
         })}/>
     </ChallengeDetailTap.Navigator>
   );
