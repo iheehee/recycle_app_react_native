@@ -22,7 +22,7 @@ const Text = styled.Text`
   justify-Content: "center";
 `;
 
-const Btn = ({ onPress, text }) => (
+const Date = ({ onPress, text }) => (
   <TouchableOpacity onPress={onPress}>
     <Button>
       <Text>
@@ -32,4 +32,4 @@ const Btn = ({ onPress, text }) => (
   </TouchableOpacity>
 );
 
-export default Btn;
+export default Date;

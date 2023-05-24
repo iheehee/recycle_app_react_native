@@ -36,8 +36,8 @@ const ChallengeStackNavi = () => {
       }}
     >
       <ChallengeNavi.Screen name="ChallengeCard" component={TabNavigation} options={{
-          title: null
-        }}/>
+        title: null
+      }} />
       <ChallengeNavi.Screen
         name="ChallengeDetailCard"
         component={ChallengeDetailTapNavi}
@@ -50,17 +50,21 @@ const ChallengeStackNavi = () => {
 };
 
 const ChallengeDetailTapNavi = () => {
-  return(
-  <ChallengeDetailTap.Navigator
+  return (
+    <ChallengeDetailTap.Navigator
       initialRouteName="ChallengeDetail"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
         tabBarItemStyle: {
           paddingTop: 5,
-          marginBottom: -10,
+          marginBottom: -5,
+          paddingRight: 10,
           paddingEnd: 15
         },
+        tabBarStyle: {
+          marginRight: 5
+        }
       }}
     >
       <ChallengeDetailTap.Screen
@@ -68,13 +72,13 @@ const ChallengeDetailTapNavi = () => {
         component={ChallengeDetail}
         options={() => ({
           headerShown: false,
-          
+
         })}
       />
-      <ChallengeDetailTap.Screen name="Recycle" component={Recycle} options={(route) => ({
-          headerShown: false,
-          tabBarIcon: () => {return <Btn text={"오늘부터 시작"} />;}
-        })}/>
+      <ChallengeDetailTap.Screen name="Recycle" component={""} options={(route) => ({
+        headerShown: false,
+        tabBarButton: () => <Btn text={"오늘부터 시작"} />,
+      })} />
     </ChallengeDetailTap.Navigator>
   );
 };
@@ -106,7 +110,7 @@ const TabNavigation = () => {
         component={index}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: {display: route.params}
+          tabBarStyle: { display: route.params }
         })}
       />
       <Tab.Screen name="Recycle" component={Recycle} />

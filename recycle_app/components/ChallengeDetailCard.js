@@ -110,7 +110,9 @@ const Detail = ({
   description,
   notice
 }) => {
-  console.log(new Date(start_day).getFullYear());
+  let day = new Date(start_day);
+  console.log(day.setDate(day.getDate()));
+  console.log(day);
   return (
     <ScrollView>
       <BgContainer>
