@@ -9,14 +9,13 @@ import Profile from "../screens/Main/Profile";
 import Btn from "../components/ChallengeDetail/Btn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { Image, Dimensions, TouchableOpacity } from "react-native";
+import { Image, Dimensions, TouchableOpacity, Text } from "react-native";
 import styled from "styled-components/native";
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
 const ChallengeDetailTap = createBottomTabNavigator();
 const { width, height } = Dimensions.get("screen");
-
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -35,14 +34,18 @@ const ChallengeStackNavi = () => {
         headerMode: "screen",
       }}
     >
-      <ChallengeNavi.Screen name="ChallengeCard" component={TabNavigation} options={{
-        title: null
-      }} />
+      <ChallengeNavi.Screen
+        name="ChallengeCard"
+        component={TabNavigation}
+        options={{
+          title: null,
+        }}
+      />
       <ChallengeNavi.Screen
         name="ChallengeDetailCard"
         component={ChallengeDetailTapNavi}
         options={{
-          title: null
+          title: null,
         }}
       />
     </ChallengeNavi.Navigator>
@@ -60,11 +63,11 @@ const ChallengeDetailTapNavi = () => {
           paddingTop: 5,
           marginBottom: -5,
           paddingRight: 10,
-          paddingEnd: 15
+          paddingEnd: 15,
         },
         tabBarStyle: {
-          marginRight: 5
-        }
+          marginRight: 5,
+        },
       }}
     >
       <ChallengeDetailTap.Screen
@@ -72,17 +75,20 @@ const ChallengeDetailTapNavi = () => {
         component={ChallengeDetail}
         options={() => ({
           headerShown: false,
-
+          tabBarButton: () => null,
         })}
       />
-      <ChallengeDetailTap.Screen name="Recycle" component={""} options={(route) => ({
-        headerShown: false,
-        tabBarButton: () => <Btn text={"오늘부터 시작"} />,
-      })} />
+      <ChallengeDetailTap.Screen
+        name="Recycle"
+        component={""}
+        options={(route) => ({
+          headerShown: false,
+          tabBarButton: () => <Btn text={"오늘부터 시작"} />,
+        })}
+      />
     </ChallengeDetailTap.Navigator>
   );
 };
-
 
 const TabNavigation = () => {
   return (
@@ -110,7 +116,7 @@ const TabNavigation = () => {
         component={index}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: { display: route.params }
+          tabBarStyle: { display: route.params },
         })}
       />
       <Tab.Screen name="Recycle" component={Recycle} />
