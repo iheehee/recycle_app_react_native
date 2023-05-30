@@ -54,8 +54,13 @@ const ChallengeCard = ({
     <TouchableOpacity
       onPress={() => {
         navigation.navigate("ChallengeDetailCard", {
-          screen: 'ChallengeDetail',
-          params: {challengeId: id}
+          screen: "ChallengeDetail",
+          params: {
+            challengeId: id,
+            start_day: start_day,
+            duration: duration,
+            frequency: frequency,
+          },
         });
       }}
     >
@@ -75,7 +80,6 @@ const ChallengeCard = ({
             <Text style={{ fontSize: 13 }}>{frequency}</Text>
           </FrequencyContainer>
         </TimeContainer>
-        
       </Container>
     </TouchableOpacity>
   );

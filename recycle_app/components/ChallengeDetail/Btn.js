@@ -2,32 +2,25 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
 const Button = styled.View`
   border-radius: 10px;
-  margin-bottom: 5px;
-  padding: 13px 0px;
-  width: 180px;
+  padding: 14px 0px;
+  width: 195px;
   background-color: green;
   align-items: center;
   justify-content: center;
 `;
 const Text = styled.Text`
   color: white;
-  align-Items: "center";
-  justify-Content: "center";
+  align-items: "center";
+  justify-content: "center";
+  fontsize: 14;
 `;
 
 const Btn = ({ onPress, text }) => (
   <TouchableOpacity onPress={onPress}>
     <Button>
-      <Text>
-        {text}
-      </Text>
+      <Text>{text}</Text>
     </Button>
   </TouchableOpacity>
 );
