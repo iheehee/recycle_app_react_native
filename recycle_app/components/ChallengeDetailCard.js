@@ -75,15 +75,15 @@ const NoticeTitle = styled.Text`
   font-weight: 500;
 `;
 const NoticeDescriptionBox = styled.View`
-background-color: #202833;
-border-radius: 8px;
-margin-top: 18px;
+  background-color: #202833;
+  border-radius: 8px;
+  margin-top: 18px;
 `;
 
 const NoticeDescription = styled.Text`
   padding: 10px;
   margin: 4px;
-  line-height: 20%;  
+  line-height: 20%;
   color: white;
 `;
 
@@ -95,7 +95,6 @@ const ChallengeSummery = styled.Text`
 const ChallengeDescription = styled.Text`
   margin-top: 25px;
   line-height: 20%;
-  
 `;
 
 const Detail = ({
@@ -108,11 +107,8 @@ const Detail = ({
   start_day,
   summery,
   description,
-  notice
+  notice,
 }) => {
-  let day = new Date(start_day);
-  console.log(day.setDate(day.getDate()));
-  console.log(day);
   return (
     <ScrollView>
       <BgContainer>
