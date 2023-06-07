@@ -72,6 +72,7 @@ const ChallengeDetailTapNavi = () => {
           tabBarButton: (props) => (
             <Text>
               <Day
+                id={route.params.challengeId}
                 start_day={route.params.start_day}
                 duration={route.params.duration}
                 frequency={route.params.frequency}

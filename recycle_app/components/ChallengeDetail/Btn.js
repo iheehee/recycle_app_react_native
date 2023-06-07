@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
+import api from "../../api";
 
 const Button = styled.View`
   border-radius: 10px;
@@ -16,8 +17,9 @@ const Text = styled.Text`
   justify-content: "center";
   fontsize: 14;
 `;
+const onPress = (id) => api.challengeApply(id);
 
-const Btn = ({ onPress, text }) => (
+const Btn = ({ id, text }) => (
   <TouchableOpacity onPress={onPress}>
     <Button>
       <Text>{text}</Text>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import { Text } from "react-native";
 import Btn from "../../components/ChallengeDetail/Btn";
+import { FontAwesome } from "@expo/vector-icons";
 
 const Container = styled.View`
   flex: 1;
@@ -16,9 +17,13 @@ const DurationContainer = styled.View`
   padding: 3px;
 `;
 const PeriodContainer = styled.View`
-  padding: 5px 0 0 20px;
+  padding: 7px 0 0 20px;
   align-items: start;
   width: 51%;
+`;
+const DateContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 const BtnContainer = styled.View`
   margin-top: 3px;
@@ -26,7 +31,7 @@ const BtnContainer = styled.View`
 `;
 const fontSize = 14;
 
-const Day = ({ start_day, duration, frequency }) => {
+const Day = ({ id, start_day, duration, frequency }) => {
   const [period, setPeriod] = useState("");
   const challengePeriod = (start_day, duration) => {
     let dt = new Date(start_day);
@@ -44,7 +49,7 @@ const Day = ({ start_day, duration, frequency }) => {
       dt.setDate(dt.getMonth() + durationDay[duration]);
       return startDay();
     };
-    return setPeriod(startDay() + "-" + endDay());
+    return setPeriod(startDay() + " - " + endDay());
   };
   useEffect(() => {
     challengePeriod(start_day, duration);
@@ -53,7 +58,10 @@ const Day = ({ start_day, duration, frequency }) => {
     <Container>
       <ObjectContainer>
         <PeriodContainer>
-          <Text style={{ fontSize: fontSize }}>{period}</Text>
+          <DateContainer>
+            <Text style={{ fontSize: fontSize, marginRight: 5 }}>{period}</Text>
+            <FontAwesome name="calendar" size={14} color="black" />
+          </DateContainer>
           <DurationContainer>
             <Text style={{ fontSize: fontSize }}>
               {duration + ", " + frequency}
@@ -61,7 +69,7 @@ const Day = ({ start_day, duration, frequency }) => {
           </DurationContainer>
         </PeriodContainer>
         <BtnContainer>
-          <Btn text={"오늘부터 시작"} />
+          <Btn id={id} text={"오늘부터 시작"} />
         </BtnContainer>
       </ObjectContainer>
     </Container>

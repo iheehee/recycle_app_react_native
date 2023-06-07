@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 
 const callApi = async (method_type, path, data, jwt) => {
   const headers = {
-    "Authorization": jwt,
+    Authorization: jwt,
     "Content-Type": "application/json",
   };
   const baseUrl = "http://127.0.0.1:8000";
@@ -20,7 +20,9 @@ const callApi = async (method_type, path, data, jwt) => {
 
 export default {
   createAccount: (form) => callApi("post", "/users/", form),
-  login: form => callApi("post", "/users/login/", form),
-  challenges: () => callApi("get", "/challenges/",""),
-  challengeDetail: (form)=> callApi("get", "/challenges/" + form,"")
+  login: (form) => callApi("post", "/users/login/", form),
+  challenges: () => callApi("get", "/challenges/", ""),
+  challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
+  challengeApply: (form) =>
+    callApi("post", "/challenges/" + form + "/apply_challenge/"),
 };
