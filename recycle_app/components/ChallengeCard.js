@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { Dimensions, View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+
 const { width, height } = Dimensions.get("screen");
 
 const Container = styled.View`
@@ -25,15 +26,18 @@ const DurationContainer = styled.View`
   background-color: #d8d8d8;
   border-radius: 5px;
 `;
+
 const FrequencyContainer = styled.View`
   margin: 10px 0px 0px 6px;
   padding: 3px;
   background-color: #d8d8d8;
   border-radius: 5px;
 `;
+
 const ImageContainer = styled.View`
   margin: 0px 5px;
 `;
+
 const TimeContainer = styled.View`
   flex-direction: row;
 `;
@@ -49,7 +53,6 @@ const ChallengeCard = ({
   id,
 }) => {
   const navigation = useNavigation();
-
   return (
     <TouchableOpacity
       onPress={() => {

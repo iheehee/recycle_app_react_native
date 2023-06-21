@@ -9,7 +9,7 @@ const challengesSlice = createSlice({
       page: 1,
       challenges: [],
     },
-    favs: [],
+    Applied: [],
   },
   reducers: {
     setChallenges(state, action) {
@@ -43,7 +43,7 @@ export const getChallenges = (page) => async (dispatch) => {
     dispatch(
       setChallenges({
         challenges: data,
-        page
+        page,
       })
     );
   } catch (e) {

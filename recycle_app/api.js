@@ -2,19 +2,23 @@ import axios from "axios";
 
 const callApi = async (method_type, path, data, jwt) => {
   const headers = {
-    Authorization: jwt,
     "Content-Type": "application/json",
+    Authorization: jwt,
   };
   const baseUrl = "http://127.0.0.1:8000";
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
     return axios({
-      method: method_type,
       url: fullUrl,
       data: data,
     });
   } else {
-    return axios.post(fullUrl, data);
+    return axios({
+      method: method_type,
+      headers: headers,
+      data: data,
+      url: fullUrl,
+    });
   }
 };
 
@@ -23,6 +27,6 @@ export default {
   login: (form) => callApi("post", "/users/login/", form),
   challenges: () => callApi("get", "/challenges/", ""),
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
-  challengeApply: (form) =>
-    callApi("post", "/challenges/" + form + "/apply_challenge/"),
+  challengeApply: (form, data, jwt) =>
+    callApi("post", "/challenges/" + form + "/apply_challenge/", data, jwt),
 };

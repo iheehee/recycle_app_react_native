@@ -9,8 +9,8 @@ import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { Image, Dimensions, TouchableOpacity, Text } from "react-native";
-import styled from "styled-components/native";
+import { Image, Dimensions, Text } from "react-native";
+
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();

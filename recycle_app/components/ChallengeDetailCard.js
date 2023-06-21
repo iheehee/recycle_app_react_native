@@ -89,12 +89,12 @@ const NoticeDescription = styled.Text`
 
 const ChallengeSummery = styled.Text`
   margin-top: 15px;
-  line-height: 20%;
+  line-height: 20;
 `;
 
 const ChallengeDescription = styled.Text`
-  margin-top: 25px;
-  line-height: 20%;
+  margin-top: 25;
+  line-height: 20;
 `;
 
 const Detail = ({
