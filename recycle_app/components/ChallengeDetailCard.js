@@ -1,9 +1,17 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import { Dimensions, Image, Text, ScrollView } from "react-native";
+import {
+  Dimensions,
+  Image,
+  Text,
+  ScrollView,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Swiper from "react-native-swiper";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -150,6 +158,60 @@ const Detail = ({
             <NoticeDescription>{notice}</NoticeDescription>
           </NoticeDescriptionBox>
         </NoticeContainer>
+        <View style={{ alignItems: "center" }}>
+          <Swiper
+            height={300}
+            width={width * 0.9}
+            from={1}
+            minDistanceForAction={0.1}
+            controlsProps={{
+              dotsTouchable: true,
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(20,20,200,0.3)",
+              }}
+            >
+              <Text>Slide 1</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(20,200,20,0.3)",
+                position: "relative",
+              }}
+            >
+              <Text>Slide 2</Text>
+              <View style={{ zIndex: 1 }}>
+                <View
+                  style={{
+                    height: 41,
+                    backgroundColor: "white",
+                    width: "200%",
+                    position: "absolute",
+                    transform: [{ translateX: -200 }, { translateY: 101 }],
+                  }}
+                ></View>
+              </View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(200,20,20,0.3)",
+              }}
+            >
+              <Text>Slide 3</Text>
+            </View>
+          </Swiper>
+        </View>
       </BgContainer>
     </ScrollView>
   );
