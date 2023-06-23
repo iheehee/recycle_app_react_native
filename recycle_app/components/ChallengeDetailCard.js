@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 
 const { width, height } = Dimensions.get("screen");
@@ -160,12 +160,13 @@ const Detail = ({
         </NoticeContainer>
         <View style={{ alignItems: "center" }}>
           <Swiper
-            height={300}
+            height={height * 0.3}
             width={width * 0.9}
-            from={1}
-            minDistanceForAction={0.1}
             controlsProps={{
               dotsTouchable: true,
+            }}
+            paginationStyle={{
+              bottom: 55,
             }}
           >
             <View
@@ -188,16 +189,24 @@ const Detail = ({
               }}
             >
               <Text>Slide 2</Text>
-              <View style={{ zIndex: 1 }}>
+              <View>
                 <View
                   style={{
-                    height: 41,
-                    backgroundColor: "white",
-                    width: "200%",
+                    height: height * 0.05,
+                    backgroundColor: "#3CB371",
+                    width: width * 0.9,
                     position: "absolute",
-                    transform: [{ translateX: -200 }, { translateY: 101 }],
+                    transform: [{ translateX: -192 }, { translateY: 84 }],
                   }}
                 ></View>
+                <View
+                  style={{
+                    position: "absolute",
+                    transform: [{ translateX: -16 }, { translateY: 90 }],
+                  }}
+                >
+                  <Entypo name="circle" size={32} color="white" />
+                </View>
               </View>
             </View>
             <View
@@ -209,6 +218,25 @@ const Detail = ({
               }}
             >
               <Text>Slide 3</Text>
+              <View>
+                <View
+                  style={{
+                    height: height * 0.05,
+                    backgroundColor: "#DC143C",
+                    width: width * 0.898,
+                    position: "absolute",
+                    transform: [{ translateX: -192 }, { translateY: 84 }],
+                  }}
+                ></View>
+                <View
+                  style={{
+                    position: "absolute",
+                    transform: [{ translateX: -16 }, { translateY: 90 }],
+                  }}
+                >
+                  <Feather name="x" size={32} color="white" />
+                </View>
+              </View>
             </View>
           </Swiper>
         </View>
