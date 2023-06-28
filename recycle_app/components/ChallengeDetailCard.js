@@ -91,7 +91,7 @@ const NoticeDescriptionBox = styled.View`
 const NoticeDescription = styled.Text`
   padding: 10px;
   margin: 4px;
-  line-height: 20%;
+  line-height: 20;
   color: white;
 `;
 
@@ -103,6 +103,12 @@ const ChallengeSummery = styled.Text`
 const ChallengeDescription = styled.Text`
   margin-top: 25;
   line-height: 20;
+`;
+const PhotoBar = styled.View`
+  height: ${height * 0.035};
+  width: ${width * 0.9};
+  background-color: ${(props) => (props.success ? "#40e0d0" : "#FA8072")};
+  position: absolute;
 `;
 
 const Detail = ({
@@ -116,6 +122,7 @@ const Detail = ({
   summery,
   description,
   notice,
+  success_example,
 }) => {
   return (
     <ScrollView>
@@ -160,7 +167,7 @@ const Detail = ({
         </NoticeContainer>
         <View style={{ alignItems: "center" }}>
           <Swiper
-            height={height * 0.3}
+            height={height * 0.33}
             width={width * 0.9}
             controlsProps={{
               dotsTouchable: true,
@@ -169,75 +176,54 @@ const Detail = ({
               bottom: 55,
             }}
           >
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "rgba(20,20,200,0.3)",
-              }}
-            >
-              <Text>Slide 1</Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "rgba(20,200,20,0.3)",
-                position: "relative",
-              }}
-            >
-              <Text>Slide 2</Text>
-              <View>
-                <View
+            {success_example.map((photo) => (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "end",
+                  backgroundColor: "rgba(20,20,200,0.3)",
+                }}
+              >
+                <View>
+                  <PhotoBar
+                    success={photo.SuccessOrFail}
+                    style={{
+                      transform: [{ translateX: -193 }, { translateY: 272 }],
+                    }}
+                  ></PhotoBar>
+
+                  {photo.SuccessOrFail ? (
+                    <View
+                      style={{
+                        position: "absolute",
+                        transform: [{ translateX: -12 }, { translateY: 276 }],
+                      }}
+                    >
+                      <Entypo name="circle" size={25} color="white" />
+                    </View>
+                  ) : (
+                    <View
+                      style={{
+                        position: "absolute",
+                        transform: [{ translateX: -12 }, { translateY: 273 }],
+                      }}
+                    >
+                      <Feather name="x" size={29} color="white" />
+                    </View>
+                  )}
+                </View>
+                <Image
+                  source={{ uri: photo.certification_photo_example }}
                   style={{
-                    height: height * 0.05,
-                    backgroundColor: "#3CB371",
                     width: width * 0.9,
-                    position: "absolute",
-                    transform: [{ translateX: -192 }, { translateY: 84 }],
+                    height: height * 0.3,
+                    position: "relative",
+                    zIndex: -1,
                   }}
-                ></View>
-                <View
-                  style={{
-                    position: "absolute",
-                    transform: [{ translateX: -16 }, { translateY: 90 }],
-                  }}
-                >
-                  <Entypo name="circle" size={32} color="white" />
-                </View>
+                />
               </View>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "rgba(200,20,20,0.3)",
-              }}
-            >
-              <Text>Slide 3</Text>
-              <View>
-                <View
-                  style={{
-                    height: height * 0.05,
-                    backgroundColor: "#DC143C",
-                    width: width * 0.898,
-                    position: "absolute",
-                    transform: [{ translateX: -192 }, { translateY: 84 }],
-                  }}
-                ></View>
-                <View
-                  style={{
-                    position: "absolute",
-                    transform: [{ translateX: -16 }, { translateY: 90 }],
-                  }}
-                >
-                  <Feather name="x" size={32} color="white" />
-                </View>
-              </View>
-            </View>
+            ))}
           </Swiper>
         </View>
       </BgContainer>

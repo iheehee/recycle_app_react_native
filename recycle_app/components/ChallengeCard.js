@@ -4,7 +4,6 @@ import styled from "styled-components/native";
 import { Dimensions, View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-
 const { width, height } = Dimensions.get("screen");
 
 const Container = styled.View`
@@ -15,9 +14,9 @@ const Container = styled.View`
 
 const TitleContainer = styled.Text`
   margin: 10px 0px 0px 6px;
-  font-size: 15%;
-  text-align: start;
-  font-weight: lighter;
+  font-size: 15;
+
+  font-weight: light;
 `;
 
 const DurationContainer = styled.View`

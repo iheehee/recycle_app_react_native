@@ -35,6 +35,8 @@ export default ({ route }) => {
           summery={challenge.challenge_summery}
           description={challenge.challenge_description}
           notice={challenge.certification_notice}
+          success_example={challenge.certification_photo_example}
+          successOrFail={challenge.certification_photo_example.SuccessOrFail}
         />
       ))}
     </Container>
