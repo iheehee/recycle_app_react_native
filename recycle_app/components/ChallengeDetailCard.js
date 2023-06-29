@@ -32,7 +32,7 @@ const HeaderContainer = styled.View`
 
 const TitleContainer = styled.Text`
   margin: 16px 0px 0px 6px;
-  font-size: 22%;
+  font-size: 22px;
   font-weight: 600;
 `;
 
@@ -105,8 +105,8 @@ const ChallengeDescription = styled.Text`
   line-height: 20;
 `;
 const PhotoBar = styled.View`
-  height: ${height * 0.035};
-  width: ${width * 0.9};
+  height: ${height * 0.035}px;
+  width: ${width * 0.9}px;
   background-color: ${(props) => (props.success ? "#40e0d0" : "#FA8072")};
   position: absolute;
 `;

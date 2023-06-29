@@ -14,7 +14,7 @@ const Container = styled.View`
 
 const TitleContainer = styled.Text`
   margin: 10px 0px 0px 6px;
-  font-size: 15;
+  font-size: 15px;
 
   font-weight: light;
 `;
