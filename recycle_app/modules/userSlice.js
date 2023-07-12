@@ -16,17 +16,18 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
+    myChallenge: [],
   },
 });
-export const {logIn, logOut} = userSlice.actions;
+export const { logIn, logOut, myChallenge } = userSlice.actions;
 
-export const userLogin = form => async dispatch => {
+export const userLogin = (form) => async (dispatch) => {
   try {
     const {
-      data: { id, token }
+      data: { id, token },
     } = await api.login(form);
-    if (id && token) { 
-      dispatch(logIn( {token} ));
+    if (id && token) {
+      dispatch(logIn({ token }));
     }
   } catch (e) {
     alert("Wrong user/password");

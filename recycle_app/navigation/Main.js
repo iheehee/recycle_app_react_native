@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import index from "../screens/Main/Challenge/index";
-import ChallengeDetail from "../screens/Main/Challenge/ChallengeDetail";
+import ChallengeDetailCard from "../screens/Main/Challenge/ChallengeDetail";
 import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
@@ -10,7 +10,6 @@ import Day from "../components/ChallengeDetail/Day";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Image, Dimensions, Text } from "react-native";
-
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
@@ -28,7 +27,7 @@ const TabIcon = ({ name, size, color }) => {
 const ChallengeStackNavi = () => {
   return (
     <ChallengeNavi.Navigator
-      mode="card"
+      presentation="card"
       screenOptions={{
         headerBackTitleVisible: false,
         headerMode: "screen",
@@ -55,7 +54,7 @@ const ChallengeStackNavi = () => {
 const ChallengeDetailTapNavi = () => {
   return (
     <ChallengeDetailTap.Navigator
-      initialRouteName="ChallengeDetail"
+      initialRouteName="ChallengeDetailCard"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -65,8 +64,8 @@ const ChallengeDetailTapNavi = () => {
       }}
     >
       <ChallengeDetailTap.Screen
-        name="ChallengeDetail"
-        component={ChallengeDetail}
+        name="ChallengeDetailCard"
+        component={ChallengeDetailCard}
         options={({ route }) => ({
           headerShown: false,
           tabBarButton: (props) => (

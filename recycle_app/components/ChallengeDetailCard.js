@@ -1,14 +1,7 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
-import {
-  Dimensions,
-  Image,
-  Text,
-  ScrollView,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
@@ -91,18 +84,18 @@ const NoticeDescriptionBox = styled.View`
 const NoticeDescription = styled.Text`
   padding: 10px;
   margin: 4px;
-  line-height: 20;
+  line-height: 20px;
   color: white;
 `;
 
 const ChallengeSummery = styled.Text`
   margin-top: 15px;
-  line-height: 20;
+  line-height: 20px;
 `;
 
 const ChallengeDescription = styled.Text`
-  margin-top: 25;
-  line-height: 20;
+  margin-top: 25px;
+  line-height: 20px;
 `;
 const PhotoBar = styled.View`
   height: ${height * 0.035}px;

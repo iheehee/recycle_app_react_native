@@ -9,7 +9,7 @@ const challengesSlice = createSlice({
       page: 1,
       challenges: [],
     },
-    Applied: [],
+    myChallenge: [],
   },
   reducers: {
     setChallenges(state, action) {
@@ -32,6 +32,9 @@ const challengesSlice = createSlice({
     increasePage(state) {
       state.explore.page += 1;
     },
+    setMyChallenge(state, action) {
+      state.myChallenge;
+    },
   },
 });
 
@@ -46,6 +49,14 @@ export const getChallenges = (page) => async (dispatch) => {
         page,
       })
     );
+  } catch (e) {
+    console.warn(e);
+  }
+};
+export const getMyChallenge = (token) => async (dispatch) => {
+  try {
+    const { data } = await api.myChallenge();
+    dispatch(setMyChallenge({ myChallenge: data }));
   } catch (e) {
     console.warn(e);
   }
