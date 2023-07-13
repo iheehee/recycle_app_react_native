@@ -9,7 +9,7 @@ import styled from "styled-components/native";
 import { userLogin } from "../../modules/userSlice";
 import Btn from "../../components/Auth/Btn";
 import utils from "../../utils";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 const { width } = Dimensions.get("screen");
@@ -59,6 +59,7 @@ export default ({ route: { params } }) => {
         password: password,
       })
     );
+    dispatch(userProfile(user_id));
   };
   const onPress = () => Keyboard.dismiss();
   return (

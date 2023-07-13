@@ -6,6 +6,9 @@ const userSlice = createSlice({
   initialState: {
     isLoggedIn: false,
     token: null,
+    profile: {
+      myChallenge: [],
+    },
   },
   reducers: {
     logIn(state, action) {
@@ -16,10 +19,12 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
-    myChallenge: [],
+    getProfile(state, action) {
+      state.profile.myChallenge = action.payload.profile;
+    },
   },
 });
-export const { logIn, logOut, myChallenge } = userSlice.actions;
+export const { logIn, logOut, profile } = userSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -31,6 +36,14 @@ export const userLogin = (form) => async (dispatch) => {
     }
   } catch (e) {
     alert("Wrong user/password");
+  }
+};
+export const userProfile = (form) => async (dispatch) => {
+  try {
+    const { data } = await api.profile();
+    dispatch(profile({ profile: data }));
+  } catch (e) {
+    console.warn(e);
   }
 };
 

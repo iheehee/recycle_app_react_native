@@ -9,6 +9,8 @@ const callApi = async (method_type, path, data, jwt) => {
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
     return axios({
+      method: method_type,
+      headers: headers,
       url: fullUrl,
       data: data,
     });
@@ -28,5 +30,6 @@ export default {
   challenges: () => callApi("get", "/challenges/", ""),
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
   challengeApply: (form, data, jwt) =>
-    callApi("post", "/challenges/" + form + "/apply_challenge/", data, jwt),
+    callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
+  profile: (form) => callApi("get", `/users/${form}/profile/`, form),
 };
