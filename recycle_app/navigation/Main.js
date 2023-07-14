@@ -2,19 +2,18 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import index from "../screens/Main/Challenge/index";
-import ChallengeDetailCard from "../screens/Main/Challenge/ChallengeDetail";
+import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { Image, Dimensions, Text } from "react-native";
+import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const ChallengeNavi = createStackNavigator();
 const ChallengeDetailTap = createBottomTabNavigator();
-const { width, height } = Dimensions.get("screen");
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -71,7 +70,7 @@ const ChallengeDetailTapNavi = () => {
           tabBarButton: (props) => (
             <Text>
               <Day
-                id={route.params.challengeId}
+                id={route.params.id}
                 start_day={route.params.start_day}
                 duration={route.params.duration}
                 frequency={route.params.frequency}

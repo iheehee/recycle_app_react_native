@@ -19,12 +19,12 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
-    getProfile(state, action) {
+    userProfile(state, action) {
       state.profile.myChallenge = action.payload.profile;
     },
   },
 });
-export const { logIn, logOut, profile } = userSlice.actions;
+export const { logIn, logOut, userProfile } = userSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -38,10 +38,10 @@ export const userLogin = (form) => async (dispatch) => {
     alert("Wrong user/password");
   }
 };
-export const userProfile = (form) => async (dispatch) => {
+export const getProfile = (userId) => async (dispatch) => {
   try {
-    const { data } = await api.profile();
-    dispatch(profile({ profile: data }));
+    const { data } = await api.profile(userId);
+    dispatch(userProfile({ profile: data }));
   } catch (e) {
     console.warn(e);
   }

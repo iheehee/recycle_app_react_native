@@ -9,7 +9,6 @@ const challengesSlice = createSlice({
       page: 1,
       challenges: [],
     },
-    myChallenge: [],
   },
   reducers: {
     setChallenges(state, action) {

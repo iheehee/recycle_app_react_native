@@ -17,9 +17,9 @@ export default ({ route }) => {
       .challengeDetail(id)
       .then((response) => setChallengeDetail([response.data]));
 
-  useEffect(() => {
+  /*useEffect(() => {
     apiRequest(challengeId);
-  }, []);
+  }, []); */
   return (
     <Container>
       {challengeDetail.map((challenge) => (

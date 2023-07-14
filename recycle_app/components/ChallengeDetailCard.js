@@ -104,19 +104,23 @@ const PhotoBar = styled.View`
   position: absolute;
 `;
 
-const Detail = ({
-  banner,
-  title,
-  duration,
-  frequency,
-  max_member,
-  applied_member,
-  start_day,
-  summery,
-  description,
-  notice,
-  success_example,
-}) => {
+const ChallengeDetailCard = ({ route }) => {
+  const {
+    id,
+    title,
+    banner,
+    duration,
+    frequency,
+    member,
+    count_member,
+    max_member,
+    applied_member,
+    start_day,
+    summery,
+    description,
+    notice,
+    success_example,
+  } = route.params;
   return (
     <ScrollView>
       <BgContainer>
@@ -134,7 +138,7 @@ const Detail = ({
               size={18}
               color="black"
             />
-            <MemberText>{`현재 ${applied_member}명`}</MemberText>
+            <MemberText>{`현재 ${count_member}명`}</MemberText>
           </MemberContainer>
           <DFContainer>
             <DurationContainer>
@@ -224,4 +228,4 @@ const Detail = ({
   );
 };
 
-export default Detail;
+export default ChallengeDetailCard;

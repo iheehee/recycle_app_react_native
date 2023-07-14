@@ -17,12 +17,12 @@ const Text = styled.Text`
   justify-content: "center";
   fontsize: 14;
 `;
-
+/* challengeApply(id, null, jwt) */
 const Btn = ({ id, text }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   const onPress = () =>
     api
-      .challengeApply(id, null, jwt)
+      .profile(jwt)
       .then((response) => {
         const result = response.data.result;
         return Alert.alert(result, "", [
@@ -38,7 +38,7 @@ const Btn = ({ id, text }) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Button>
-        <Text>{text}</Text>
+        <Text>{"오늘부터 시작"}</Text>
       </Button>
     </TouchableOpacity>
   );

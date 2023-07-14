@@ -37,11 +37,16 @@ export default ({ challenges }) => {
                   id={challenge.id}
                   banner={challenge.title_banner}
                   title={challenge.title}
+                  description={challenge.challenge_description}
+                  summery={challenge.challenge_summery}
+                  notice={challenge.certification_notice}
                   owner={challenge.owner}
                   start_day={challenge.start_day}
                   duration={challenge.duration}
                   frequency={challenge.frequency}
+                  count_member={challenge.number_of_applied_member}
                   max_member={challenge.max_member}
+                  success_example={challenge.certification_photo_example}
                 />
               </Container>
             ))}

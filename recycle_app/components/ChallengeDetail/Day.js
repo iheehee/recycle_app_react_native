@@ -51,6 +51,7 @@ const Day = ({ id, start_day, duration, frequency }) => {
     };
     return setPeriod(startDay() + " - " + endDay());
   };
+
   useEffect(() => {
     challengePeriod(start_day, duration);
   }, []);

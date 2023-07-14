@@ -10,16 +10,15 @@ const callApi = async (method_type, path, data, jwt) => {
   if (method_type === "get" || method_type === "delete") {
     return axios({
       method: method_type,
-      headers: headers,
       url: fullUrl,
-      data: data,
+      headers: headers,
     });
   } else {
     return axios({
       method: method_type,
-      headers: headers,
-      data: data,
       url: fullUrl,
+      data: data,
+      headers: headers,
     });
   }
 };
@@ -27,9 +26,9 @@ const callApi = async (method_type, path, data, jwt) => {
 export default {
   createAccount: (form) => callApi("post", "/users/", form),
   login: (form) => callApi("post", "/users/login/", form),
-  challenges: () => callApi("get", "/challenges/", ""),
+  challenges: (page) => callApi("get", "/challenges/", page),
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
   challengeApply: (form, data, jwt) =>
     callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
-  profile: (form) => callApi("get", `/users/${form}/profile/`, form),
+  profile: (jwt) => callApi("post", "/users/profile/", "", jwt),
 };

@@ -42,14 +42,20 @@ const TimeContainer = styled.View`
 `;
 
 const ChallengeCard = ({
-  banner,
+  id,
   title,
-  owner,
-  start_day,
+  banner,
   duration,
   frequency,
+  member,
+  count_member,
   max_member,
-  id,
+  applied_member,
+  start_day,
+  summery,
+  description,
+  notice,
+  success_example,
 }) => {
   const navigation = useNavigation();
   return (
@@ -58,10 +64,20 @@ const ChallengeCard = ({
         navigation.navigate("ChallengeDetailCard", {
           screen: "ChallengeDetailCard",
           params: {
-            challengeId: id,
-            start_day: start_day,
+            id: id,
+            title: title,
+            banner: banner,
             duration: duration,
             frequency: frequency,
+            member: member,
+            count_member: count_member,
+            max_member: max_member,
+            applied_member: applied_member,
+            start_day: start_day,
+            summery: summery,
+            description: description,
+            notice: notice,
+            success_example: success_example,
           },
         });
       }}
