@@ -8,7 +8,7 @@ const Button = styled.View`
   border-radius: 10px;
   padding: 14px 0px;
   width: 195px;
-  background-color: green;
+  background-color: ${(props) => (!props.exist ? "green" : "#AFB42B")};
   align-items: center;
   justify-content: center;
 `;
@@ -17,12 +17,15 @@ const Text = styled.Text`
   justify-content: "center";
   fontsize: 14;
 `;
-/* challengeApply(id, null, jwt) */
 const Btn = ({ id, text }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
+  const myChallenge = useSelector(
+    (state) => state.usersReducer.profile.myChallenge
+  );
+  const exist = myChallenge.find((appliedChallenge) => appliedChallenge === id);
   const onPress = () =>
     api
-      .profile(jwt)
+      .challengeApply(id, null, jwt)
       .then((response) => {
         const result = response.data.result;
         return Alert.alert(result, "", [
@@ -35,10 +38,11 @@ const Btn = ({ id, text }) => {
       .catch((error) => {
         console.log(error);
       });
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Button>
-        <Text>{"오늘부터 시작"}</Text>
+      <Button exist={exist}>
+        <Text>{!exist ? "오늘부터 시작" : "인증하기"}</Text>
       </Button>
     </TouchableOpacity>
   );

@@ -40,7 +40,7 @@ const ChallengeStackNavi = () => {
         }}
       />
       <ChallengeNavi.Screen
-        name="ChallengeDetailCard"
+        name="ChallengeDetail"
         component={ChallengeDetailTapNavi}
         options={{
           title: null,

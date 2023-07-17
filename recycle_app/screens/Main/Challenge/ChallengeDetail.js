@@ -24,7 +24,8 @@ export default ({ route }) => {
     <Container>
       {challengeDetail.map((challenge) => (
         <ChallengeDetailCard
-          key={challenge.id}
+          key={challenge}
+          id={challenge.id}
           title={challenge.title}
           banner={challenge.title_banner}
           start_day={challenge.start_day}

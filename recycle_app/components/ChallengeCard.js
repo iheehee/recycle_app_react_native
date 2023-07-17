@@ -61,7 +61,7 @@ const ChallengeCard = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate("ChallengeDetailCard", {
+        navigation.navigate("ChallengeDetail", {
           screen: "ChallengeDetailCard",
           params: {
             id: id,

@@ -20,7 +20,7 @@ const userSlice = createSlice({
       state.token = null;
     },
     userProfile(state, action) {
-      state.profile.myChallenge = action.payload.profile;
+      state.profile.myChallenge = action.payload.profile.my_challenges;
     },
   },
 });
@@ -38,9 +38,9 @@ export const userLogin = (form) => async (dispatch) => {
     alert("Wrong user/password");
   }
 };
-export const getProfile = (userId) => async (dispatch) => {
+export const getProfile = (jwt) => async (dispatch) => {
   try {
-    const { data } = await api.profile(userId);
+    const { data } = await api.profile(jwt);
     dispatch(userProfile({ profile: data }));
   } catch (e) {
     console.warn(e);

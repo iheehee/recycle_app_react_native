@@ -7,7 +7,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getChallenges: (page) => dispatch(getChallenges(page)),
     increasePage: () => dispatch(increasePage()),
-    getProfile: (userId) => dispatch(getProfile(userId)),
+    getProfile: (jwt) => dispatch(getProfile(jwt)),
   };
 }
 

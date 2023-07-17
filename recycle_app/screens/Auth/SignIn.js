@@ -59,7 +59,6 @@ export default ({ route: { params } }) => {
         password: password,
       })
     );
-    dispatch(userProfile(user_id));
   };
   const onPress = () => Keyboard.dismiss();
   return (
