@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import index from "../screens/Main/Challenge/index";
+import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
@@ -12,8 +13,9 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
-const ChallengeNavi = createStackNavigator();
+const Stack = createStackNavigator();
 const ChallengeDetailTap = createBottomTabNavigator();
+const ChallengeCertiStack = createStackNavigator();
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -25,34 +27,67 @@ const TabIcon = ({ name, size, color }) => {
 
 const ChallengeStackNavi = () => {
   return (
-    <ChallengeNavi.Navigator
+    <Stack.Navigator
       presentation="card"
       screenOptions={{
         headerBackTitleVisible: false,
         headerMode: "screen",
       }}
     >
-      <ChallengeNavi.Screen
-        name="ChallengeCard"
+      <Stack.Screen
+        name="MainScreen"
         component={TabNavigation}
         options={{
           title: null,
         }}
       />
-      <ChallengeNavi.Screen
+      <Stack.Screen
         name="ChallengeDetail"
         component={ChallengeDetailTapNavi}
         options={{
           title: null,
         }}
       />
-    </ChallengeNavi.Navigator>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="ChallengeCerti"
+          component={ChallengeCertiTapNavi}
+          options={{
+            title: null,
+          }}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
+
+const ChallengeCertiTapNavi = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="ChallengeCertification"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          paddingBottom: 5,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="ChallengeCertification"
+        component={ChallengeCertification}
+        options={({ route }) => ({
+          headerShown: false,
+          tabBarButton: (props) => <Text></Text>,
+        })}
+      />
+    </Tab.Navigator>
   );
 };
 
 const ChallengeDetailTapNavi = () => {
   return (
-    <ChallengeDetailTap.Navigator
+    <Tab.Navigator
       initialRouteName="ChallengeDetailCard"
       screenOptions={{
         headerShown: false,
@@ -62,7 +97,7 @@ const ChallengeDetailTapNavi = () => {
         },
       }}
     >
-      <ChallengeDetailTap.Screen
+      <Tab.Screen
         name="ChallengeDetailCard"
         component={ChallengeDetailCard}
         options={({ route }) => ({
@@ -79,7 +114,14 @@ const ChallengeDetailTapNavi = () => {
           ),
         })}
       />
-    </ChallengeDetailTap.Navigator>
+      <Tab.Screen
+        name="ChallengeCertification"
+        component={ChallengeCertification}
+        options={({ route }) => ({
+          tabBarButton: (props) => <Text></Text>,
+        })}
+      />
+    </Tab.Navigator>
   );
 };
 
