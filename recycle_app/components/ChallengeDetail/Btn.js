@@ -1,8 +1,9 @@
 import React from "react";
 import { TouchableOpacity, Alert } from "react-native";
 import styled from "styled-components/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { getProfile } from "../../modules/userSlice";
 import api from "../../api";
 
 const Button = styled.View`
@@ -21,6 +22,7 @@ const Text = styled.Text`
 const Btn = ({ id }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const myChallenge = useSelector(
     (state) => state.usersReducer.profile.myChallenge
   );
@@ -33,12 +35,51 @@ const Btn = ({ id }) => {
         return Alert.alert(result, "", [
           {
             text: "확인",
-            onPress: () => console.log("확인"),
+            onPress: () => {
+              dispatch(getProfile(jwt));
+              return navigation.navigate("ChallengeCerti");
+            },
           },
         ]);
       })
       .catch((error) => {
         console.log(error);
+        if (error.message === "Network Error") {
+          return Alert.alert(
+            "네트워크 연결이 유실되었습니다. 다시 시도 하시겠습니까?",
+            "",
+            [
+              {
+                text: "다시 시도",
+                onPress: () => {
+                  ApplyChallenge();
+                },
+              },
+              {
+                text: "취소",
+                style: "destructive",
+              },
+            ]
+          );
+        } else {
+          return Alert.alert(
+            "연결이 실패했습니다.",
+            "다시 시도 하시겠습니까?",
+            [
+              {
+                text: "다시 시도",
+                onPress: () => {
+                  console.log("redirection");
+                },
+              },
+              {
+                text: "취소",
+                onPress: () => console.log("redirection"),
+                style: "destructive",
+              },
+            ]
+          );
+        }
       });
   const Certification = () => navigation.navigate("ChallengeCerti");
 

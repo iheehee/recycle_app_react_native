@@ -48,7 +48,7 @@ const ChallengeStackNavi = () => {
           title: null,
         }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{ presentation: "card" }}>
         <Stack.Screen
           name="ChallengeCerti"
           component={ChallengeCertiTapNavi}

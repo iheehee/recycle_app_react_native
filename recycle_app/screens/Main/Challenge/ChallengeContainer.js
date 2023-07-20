@@ -13,7 +13,7 @@ export default ({
   useEffect(() => {
     getChallenges(1);
     getProfile(jwt);
-  }, []);
+  }, [jwt]);
   useEffect(() => {
     getChallenges(page);
   }, [page]);
