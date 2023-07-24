@@ -8,6 +8,7 @@ import Recycle from "../screens/Main/Recycle";
 import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
+import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Text } from "react-native";
@@ -78,7 +79,11 @@ const ChallengeCertiTapNavi = () => {
         component={ChallengeCertification}
         options={({ route }) => ({
           headerShown: false,
-          tabBarButton: (props) => <Text></Text>,
+          tabBarButton: (props) => (
+            <Text>
+              <CertiBtn />
+            </Text>
+          ),
         })}
       />
     </Tab.Navigator>
@@ -104,12 +109,7 @@ const ChallengeDetailTapNavi = () => {
           headerShown: false,
           tabBarButton: (props) => (
             <Text>
-              <Day
-                id={route.params.id}
-                start_day={route.params.start_day}
-                duration={route.params.duration}
-                frequency={route.params.frequency}
-              />
+              <Day params={route.params} />
             </Text>
           ),
         })}

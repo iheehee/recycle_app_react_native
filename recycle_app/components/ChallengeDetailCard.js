@@ -2,7 +2,6 @@ import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
 

@@ -7,28 +7,23 @@ import { getProfile } from "../../modules/userSlice";
 import api from "../../api";
 
 const Button = styled.View`
+  margin: 10px 0px 0px 68px;
   border-radius: 10px;
-  padding: 14px 0px;
-  width: 195px;
-  background-color: ${(props) => (!props.exist ? "green" : "#AFB42B")};
+  padding: 16px 0px;
+  width: 300px;
+  background-color: black;
   align-items: center;
-  justify-content: center;
 `;
 const Text = styled.Text`
   color: white;
   justify-content: "center";
-  font-size: 14px;
+  font-size: 15px;
 `;
-const Btn = ({ params }) => {
+const CertiBtn = ({ params }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const myChallenge = useSelector(
-    (state) => state.usersReducer.profile.myChallenge
-  );
-  const exist = myChallenge.find(
-    (appliedChallenge) => appliedChallenge === params.id
-  );
+
   const ApplyChallenge = () =>
     api
       .challengeApply(params.id, null, jwt)
@@ -83,18 +78,13 @@ const Btn = ({ params }) => {
           );
         }
       });
-  const Certification = () =>
-    navigation.navigate("ChallengeCerti", {
-      screen: "ChallengeCertification",
-      params: params,
-    });
 
   return (
-    <TouchableOpacity onPress={!exist ? ApplyChallenge : Certification}>
-      <Button exist={exist}>
-        <Text>{!exist ? "오늘부터 시작" : "인증하기"}</Text>
+    <TouchableOpacity onPress={ApplyChallenge}>
+      <Button>
+        <Text>{"인증하기"}</Text>
       </Button>
     </TouchableOpacity>
   );
 };
-export default Btn;
+export default CertiBtn;

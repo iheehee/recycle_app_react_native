@@ -31,7 +31,8 @@ const BtnContainer = styled.View`
 `;
 const fontSize = 14;
 
-const Day = ({ id, start_day, duration, frequency }) => {
+const Day = ({ params }) => {
+  const { id, start_day, duration, frequency } = params;
   const [period, setPeriod] = useState("");
   const challengePeriod = (start_day, duration) => {
     let dt = new Date(start_day);
@@ -70,7 +71,7 @@ const Day = ({ id, start_day, duration, frequency }) => {
           </DurationContainer>
         </PeriodContainer>
         <BtnContainer>
-          <Btn id={id} text={"오늘부터 시작"} />
+          <Btn params={params} />
         </BtnContainer>
       </ObjectContainer>
     </Container>
