@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
+import { Overlay } from "@rneui/themed";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -29,6 +30,14 @@ const TitleContainer = styled.Text`
 
 const BannerContainer = styled.View`
   align-items: center;
+`;
+const BlurContainer = styled.View`
+  background-color: gray;
+  opacity: 20;
+  display: none;
+  overflow-x: hidden;
+  width: ${width / 1};
+  height: ${height / 3.6};
 `;
 const DurationContainer = styled.View`
   width: 16%;
@@ -116,15 +125,17 @@ export default ({ route }) => {
   return (
     <ScrollView>
       <BgContainer>
-        <BannerContainer>
+        <BannerContainer style={{ backgroundColor: "black" }}>
           <Image
             source={{ uri: banner }}
             style={{
               width: width / 1,
               height: height / 3.6,
               position: "relative",
+              opacity: 0.3,
             }}
           />
+
           <TitleContainer
             style={{
               position: "absolute",
