@@ -84,7 +84,7 @@ const Btn = ({ params }) => {
         }
       });
   const Certification = () =>
-    navigation.navigate("ChallengeCerti", {
+    navigation.navigate("ChallengeCertiStatusTab", {
       screen: "ChallengeCertification",
       params: params,
     });

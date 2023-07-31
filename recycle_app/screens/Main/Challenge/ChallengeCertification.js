@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 import CertiDay from "../../../components/ChallengeCerti/CertiDay";
 import Certi from "../../../components/Certi";
+import CertiExample from "../../../components/ChallengeCerti/CertiExample";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -37,20 +38,11 @@ const DurationContainer = styled.View`
   width: 100%;
   flex-direction: row;
 `;
-const PeriodText = styled.Text``;
 
-const DFContainer = styled.View`
+const CertiExampleContainer = styled.View`
+  width: 100%;
   flex-direction: row;
-  margin: 0px 0px 6px 6px;
-`;
-const MemberContainer = styled.View`
-  flex-direction: row;
-  margin: 16px 0px 5px 6px;
-  align-items: center;
-`;
-const MemberText = styled.Text`
-  margin-left: 5px;
-  font-size: 15px;
+  margin-top: 35px;
 `;
 
 const DescriptionContainer = styled.View`
@@ -83,19 +75,9 @@ const NoticeDescription = styled.Text`
   color: white;
 `;
 
-const ChallengeSummery = styled.Text`
-  margin-top: 15px;
-  line-height: 20px;
-`;
-
-const ChallengeDescription = styled.Text`
-  margin-top: 25px;
-  line-height: 20px;
-`;
-
 export default ({ route }) => {
+  console.log(route);
   const {
-    id,
     title,
     banner,
     duration,
@@ -134,15 +116,16 @@ export default ({ route }) => {
           </TitleContainer>
         </BannerContainer>
         <HeaderContainer>
-          <DFContainer>
-            <DurationContainer>
-              <CertiDay
-                start_day={start_day}
-                duration={duration}
-                frequency={frequency}
-              />
-            </DurationContainer>
-          </DFContainer>
+          <DurationContainer>
+            <CertiDay
+              start_day={start_day}
+              duration={duration}
+              frequency={frequency}
+            />
+          </DurationContainer>
+          <CertiExampleContainer>
+            <CertiExample />
+          </CertiExampleContainer>
         </HeaderContainer>
         <DivisionLine></DivisionLine>
         <DescriptionContainer>
