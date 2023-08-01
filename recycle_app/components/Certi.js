@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 import Profile from "../screens/Main/Profile";
 
 const Container = styled.View`
@@ -13,7 +13,7 @@ const StyledText = styled.Text`
 `;
 
 export default () => {
-  const TopTab = createMaterialTopTabNavigator();
+  
   return (
     <Container>
       <TopTab.Navigator>

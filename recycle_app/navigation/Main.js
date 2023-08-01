@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import Certi from "./Certi";
 import index from "../screens/Main/Challenge/index";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
@@ -16,7 +16,6 @@ import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-const TopTab = createMaterialTopTabNavigator();
 
 const TabIcon = ({ name, size, color }) => {
   return name === "user-circle-o" ? (
@@ -61,17 +60,7 @@ const ChallengeStackNavi = () => {
     </Stack.Navigator>
   );
 };
-const ChallengeCertiStatusTab = () => {
-  return (
-    <TopTab.Navigator initialRouteName="ChallengeCertification">
-      <TopTab.Screen
-        name="ChallengeCertification"
-        component={ChallengeCertification}
-      />
-      <TopTab.Screen name="Settings" component={Profile} />
-    </TopTab.Navigator>
-  );
-};
+
 const ChallengeCertiTapNavi = () => {
   return (
     <Tab.Navigator
@@ -86,7 +75,7 @@ const ChallengeCertiTapNavi = () => {
     >
       <Tab.Screen
         name="ChallengeCertiStatus"
-        component={ChallengeCertiStatusTab}
+        component={Certi}
         options={({ route }) => ({
           headerShown: false,
           tabBarButton: (props) => (
@@ -164,7 +153,7 @@ const TabNavigation = () => {
           tabBarStyle: { display: route.params },
         })}
       />
-      <Tab.Screen name="Recycle" component={ChallengeCertiStatusTab} />
+      <Tab.Screen name="Recycle" component={Certi} />
       <Tab.Screen name="Store" component={Store} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

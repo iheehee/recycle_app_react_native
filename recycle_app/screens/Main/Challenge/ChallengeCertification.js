@@ -76,8 +76,7 @@ const NoticeDescription = styled.Text`
 `;
 
 export default ({ route }) => {
-  console.log(route);
-  const {
+  /* const {
     title,
     banner,
     duration,
@@ -91,11 +90,11 @@ export default ({ route }) => {
     description,
     notice,
     success_example,
-  } = route.params;
+  } = route.params; */
   return (
     <ScrollView>
       <BgContainer>
-        <BannerContainer>
+        {/* <BannerContainer>
           <Image
             source={{ uri: banner }}
             style={{
@@ -114,15 +113,15 @@ export default ({ route }) => {
           >
             {title}
           </TitleContainer>
-        </BannerContainer>
+        </BannerContainer> */}
         <HeaderContainer>
-          <DurationContainer>
+          {/* <DurationContainer>
             <CertiDay
               start_day={start_day}
               duration={duration}
               frequency={frequency}
             />
-          </DurationContainer>
+          </DurationContainer> */}
           <CertiExampleContainer>
             <CertiExample />
           </CertiExampleContainer>
@@ -136,7 +135,7 @@ export default ({ route }) => {
         <NoticeContainer>
           <NoticeTitle>{"이렇게 인증 해주세요"}</NoticeTitle>
           <NoticeDescriptionBox>
-            <NoticeDescription>{notice}</NoticeDescription>
+            {/* <NoticeDescription>{notice}</NoticeDescription> */}
           </NoticeDescriptionBox>
         </NoticeContainer>
       </BgContainer>
