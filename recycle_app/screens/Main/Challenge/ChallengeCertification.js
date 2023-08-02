@@ -94,7 +94,7 @@ export default ({ route }) => {
   return (
     <ScrollView>
       <BgContainer>
-        {/* <BannerContainer>
+        <BannerContainer>
           <Image
             source={{ uri: banner }}
             style={{
@@ -113,15 +113,15 @@ export default ({ route }) => {
           >
             {title}
           </TitleContainer>
-        </BannerContainer> */}
+        </BannerContainer>
         <HeaderContainer>
-          {/* <DurationContainer>
+          <DurationContainer>
             <CertiDay
               start_day={start_day}
               duration={duration}
               frequency={frequency}
             />
-          </DurationContainer> */}
+          </DurationContainer>
           <CertiExampleContainer>
             <CertiExample />
           </CertiExampleContainer>

@@ -1,10 +1,16 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Profile from "../screens/Main/Profile";
 import styled from "styled-components/native";
+import CertiHeader from "../components/ChallengeCerti/CertiHeader";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
-import { Animated, View, TouchableOpacity } from "react-native";
+import { Animated, View, TouchableOpacity, ScrollView } from "react-native";
 
 const TopTab = createMaterialTopTabNavigator();
+
+const Container = styled.View`
+  flex: 2;
+`;
+const TabContainer = styled.View``;
 
 const TabButton = styled.TouchableOpacity`
   flex: 1;
@@ -21,65 +27,73 @@ const TabText = styled.Text`
   color: ${(props) => (props.isFocused ? "#5d004a" : "#000000")};
 `;
 
-function MyTabBar({ state, descriptors, navigation }) {
+function MyTabBar({ state, descriptors, navigation, params }) {
   return (
-    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+    <Container>
+      <CertiHeader route={params} />
+      <TabContainer
+        style={{ flexDirection: "row", justifyContent: "space-between" }}
+      >
+        {state.routes.map((route, index) => {
+          const { options } = descriptors[route.key];
+          const label =
+            options.tabBarLabel !== undefined
+              ? options.tabBarLabel
+              : options.title !== undefined
+              ? options.title
+              : route.name;
 
-        const isFocused = state.index === index;
+          const isFocused = state.index === index;
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: "tabPress",
-            target: route.key,
-            canPreventDefault: true,
-          });
+          const onPress = () => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            });
 
-          if (!isFocused && !event.defaultPrevented) {
-            // The `merge: true` option makes sure that the params inside the tab screen are preserved
-            navigation.navigate({ name: route.name, merge: true });
-          }
-        };
-        const onLongPress = () => {
-          navigation.emit({
-            type: "tabLongPress",
-            target: route.key,
-          });
-        };
+            if (!isFocused && !event.defaultPrevented) {
+              // The `merge: true` option makes sure that the params inside the tab screen are preserved
+              navigation.navigate({ name: route.name, merge: true });
+            }
+          };
+          const onLongPress = () => {
+            navigation.emit({
+              type: "tabLongPress",
+              target: route.key,
+            });
+          };
 
-        return (
-          <TabButton
-            isFocused={isFocused}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            key={`tab_${index}`}
-          >
-            <TabText isFocused={isFocused}>{label}</TabText>
-          </TabButton>
-        );
-      })}
-    </View>
+          return (
+            <TabButton
+              isFocused={isFocused}
+              onPress={onPress}
+              onLongPress={onLongPress}
+              key={`tab_${index}`}
+            >
+              <TabText isFocused={isFocused}>{label}</TabText>
+            </TabButton>
+          );
+        })}
+      </TabContainer>
+    </Container>
   );
 }
 
 const ChallengeCertiStatusTab = ({ route }) => {
   console.log(route);
   return (
-    <TopTab.Navigator
-      tabBar={(props) => <MyTabBar {...props} />}
-      initialRouteName="ChallengeCertification"
-      screenOptions={{ swipeEnabled: false }}
-    >
-      <TopTab.Screen name="ChallengeCertification" component={Profile} />
-      <TopTab.Screen name="Settings" component={Profile} />
-    </TopTab.Navigator>
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
+      <TopTab.Navigator
+        tabBar={(props) => <MyTabBar {...props} params={route} />}
+        initialRouteName="ChallengeCertification"
+        screenOptions={{ swipeEnabled: false }}
+        style={{ backgroundColor: "white", marginBottom: 50 }}
+      >
+        <TopTab.Screen name="ChallengeCertification" component={Profile} />
+        <TopTab.Screen name="Settings" component={Profile} />
+      </TopTab.Navigator>
+    </ScrollView>
   );
 };
 
