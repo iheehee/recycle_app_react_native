@@ -135,7 +135,7 @@ export default ({ route }) => {
         <NoticeContainer>
           <NoticeTitle>{"이렇게 인증 해주세요"}</NoticeTitle>
           <NoticeDescriptionBox>
-            {/* <NoticeDescription>{notice}</NoticeDescription> */}
+            <NoticeDescription>{notice}</NoticeDescription>
           </NoticeDescriptionBox>
         </NoticeContainer>
       </BgContainer>

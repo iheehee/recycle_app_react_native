@@ -20,11 +20,11 @@ const TabButton = styled.TouchableOpacity`
   margin: 0px 16px;
   border-bottom-width: 2px;
   border-bottom-color: ${(props) =>
-    props.isFocused ? "#5d004a" : "transparent"};
+    props.isFocused ? "black" : "transparent"};
 `;
 const TabText = styled.Text`
   font-weight: 500;
-  color: ${(props) => (props.isFocused ? "#5d004a" : "#000000")};
+  color: ${(props) => (props.isFocused ? "black" : "gray")};
 `;
 
 function MyTabBar({ state, descriptors, navigation, params }) {
@@ -69,6 +69,7 @@ function MyTabBar({ state, descriptors, navigation, params }) {
               isFocused={isFocused}
               onPress={onPress}
               onLongPress={onLongPress}
+              activeOpacity={1}
               key={`tab_${index}`}
             >
               <TabText isFocused={isFocused}>{label}</TabText>
@@ -81,14 +82,20 @@ function MyTabBar({ state, descriptors, navigation, params }) {
 }
 
 const ChallengeCertiStatusTab = ({ route }) => {
-  console.log(route);
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
       <TopTab.Navigator
         tabBar={(props) => <MyTabBar {...props} params={route} />}
         initialRouteName="ChallengeCertification"
-        screenOptions={{ swipeEnabled: false }}
-        style={{ backgroundColor: "white", marginBottom: 50 }}
+        screenOptions={{
+          swipeEnabled: false,
+          animationEnabled: true,
+          tabBarPressOpacity: 1,
+        }}
+        style={{
+          backgroundColor: "white",
+          marginBottom: 50,
+        }}
       >
         <TopTab.Screen name="ChallengeCertification" component={Profile} />
         <TopTab.Screen name="Settings" component={Profile} />
