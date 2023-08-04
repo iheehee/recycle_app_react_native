@@ -15,7 +15,7 @@ const StyledText = styled.Text`
 export default () => {
   return (
     <Container>
-      <Text>dddd</Text>
+      <Text>Profile</Text>
     </Container>
   );
 };

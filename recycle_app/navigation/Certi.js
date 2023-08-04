@@ -3,20 +3,30 @@ import Profile from "../screens/Main/Profile";
 import styled from "styled-components/native";
 import CertiHeader from "../components/ChallengeCerti/CertiHeader";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
-import { Animated, View, TouchableOpacity, ScrollView } from "react-native";
+import {
+  Animated,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  Text,
+} from "react-native";
 
 const TopTab = createMaterialTopTabNavigator();
 
+const { width, height } = Dimensions.get("screen");
+
 const Container = styled.View`
-  flex: 2;
+  flex: 1;
 `;
 const TabContainer = styled.View``;
+const CertiContainer = styled.View``;
 
 const TabButton = styled.TouchableOpacity`
   flex: 1;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 35px;
   margin: 0px 16px;
   border-bottom-width: 2px;
   border-bottom-color: ${(props) =>
@@ -30,7 +40,9 @@ const TabText = styled.Text`
 function MyTabBar({ state, descriptors, navigation, params }) {
   return (
     <Container>
-      <CertiHeader route={params} />
+      <CertiContainer>
+        <CertiHeader route={params} />
+      </CertiContainer>
       <TabContainer
         style={{ flexDirection: "row", justifyContent: "space-between" }}
       >
@@ -83,24 +95,28 @@ function MyTabBar({ state, descriptors, navigation, params }) {
 
 const ChallengeCertiStatusTab = ({ route }) => {
   return (
-    <ScrollView contentContainerStyle={{ flex: 1 }}>
-      <TopTab.Navigator
-        tabBar={(props) => <MyTabBar {...props} params={route} />}
-        initialRouteName="ChallengeCertification"
-        screenOptions={{
-          swipeEnabled: false,
-          animationEnabled: true,
-          tabBarPressOpacity: 1,
-        }}
-        style={{
-          backgroundColor: "white",
-          marginBottom: 50,
-        }}
-      >
-        <TopTab.Screen name="ChallengeCertification" component={Profile} />
-        <TopTab.Screen name="Settings" component={Profile} />
-      </TopTab.Navigator>
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <TopTab.Navigator
+          tabBar={(props) => <MyTabBar {...props} params={route} />}
+          initialRouteName="ChallengeCertification"
+          tabBarPosition="top"
+          screenOptions={{
+            swipeEnabled: false,
+            animationEnabled: true,
+          }}
+          style={{ backgroundColor: "white" }}
+        >
+          <TopTab.Screen
+            name="ChallengeCertification"
+            component={ChallengeCertification}
+          />
+          <TopTab.Screen name="Settings" component={Profile} />
+        </TopTab.Navigator>
+        {/* <CertiHeader route={route} /> */}
+        {/* <ChallengeCertification /> */}
+      </ScrollView>
+    </View>
   );
 };
 
