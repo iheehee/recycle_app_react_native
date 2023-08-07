@@ -7,10 +7,10 @@ import { getProfile } from "../../modules/userSlice";
 import api from "../../api";
 
 const Button = styled.View`
-  margin: 10px 0px 0px 68px;
+  margin: 10px 0px 0px 50px;
   border-radius: 10px;
   padding: 16px 0px;
-  width: 300px;
+  width: 77%;
   background-color: black;
   align-items: center;
 `;

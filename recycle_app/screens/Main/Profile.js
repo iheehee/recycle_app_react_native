@@ -15,7 +15,19 @@ const StyledText = styled.Text`
 export default () => {
   return (
     <Container>
-      <Text>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Profile</Text>
     </Container>
   );
 };

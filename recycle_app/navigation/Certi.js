@@ -1,5 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Profile from "../screens/Main/Profile";
+import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import styled from "styled-components/native";
 import CertiHeader from "../components/ChallengeCerti/CertiHeader";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
@@ -20,7 +22,10 @@ const Container = styled.View`
   flex: 1;
 `;
 const TabContainer = styled.View``;
-const CertiContainer = styled.View``;
+const CertiContainer = styled.View`
+  background-color: white;
+  padding-bottom: 20px;
+`;
 
 const TabButton = styled.TouchableOpacity`
   flex: 1;
@@ -40,9 +45,6 @@ const TabText = styled.Text`
 function MyTabBar({ state, descriptors, navigation, params }) {
   return (
     <Container>
-      <CertiContainer>
-        <CertiHeader route={params} />
-      </CertiContainer>
       <TabContainer
         style={{ flexDirection: "row", justifyContent: "space-between" }}
       >
@@ -96,8 +98,18 @@ function MyTabBar({ state, descriptors, navigation, params }) {
 const ChallengeCertiStatusTab = ({ route }) => {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <TopTab.Navigator
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        disableIntervalMomentum={true}
+      >
+        <CertiContainer>
+          <CertiHeader route={route} />
+        </CertiContainer>
+        <CertiContainer>
+          <CertiBtn />
+        </CertiContainer>
+        <Profile />
+        {/* <TopTab.Navigator
           tabBar={(props) => <MyTabBar {...props} params={route} />}
           initialRouteName="ChallengeCertification"
           tabBarPosition="top"
@@ -112,7 +124,7 @@ const ChallengeCertiStatusTab = ({ route }) => {
             component={ChallengeCertification}
           />
           <TopTab.Screen name="Settings" component={Profile} />
-        </TopTab.Navigator>
+        </TopTab.Navigator> */}
         {/* <CertiHeader route={route} /> */}
         {/* <ChallengeCertification /> */}
       </ScrollView>
