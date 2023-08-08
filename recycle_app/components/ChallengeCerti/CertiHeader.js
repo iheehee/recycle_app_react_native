@@ -10,11 +10,12 @@ const BgContainer = styled.View`
   width: 100%;
   flex: 1;
   background-color: white;
+  margin-bottom: -18px;
 `;
 
 const DivisionLine = styled.View`
   background-color: #e5e5e5;
-  padding: 3px;
+  padding: 5px;
 `;
 
 const HeaderContainer = styled.View`

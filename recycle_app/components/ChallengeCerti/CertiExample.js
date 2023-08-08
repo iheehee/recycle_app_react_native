@@ -14,7 +14,6 @@ const TextContainer = styled.Text`
   font-weight: 500;
 `;
 const CameraIconContainer = styled.View`
-  flex: 1;
   align-items: center;
   flex-direction: row;
 `;
