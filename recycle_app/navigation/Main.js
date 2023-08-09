@@ -10,6 +10,7 @@ import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
+import ImagePicker from "../util/Camera/ImagePicker";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Text } from "react-native";
@@ -56,6 +57,13 @@ const ChallengeStackNavi = () => {
             title: null,
           }}
         />
+        <Stack.Screen
+          name="ImagePicker"
+          component={ImagePicker}
+          options={{
+            title: null,
+          }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -69,7 +77,10 @@ const ChallengeCertiTapNavi = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          paddingBottom: 5,
+          paddingTop: 8,
+          paddingBottom: 0,
+          paddingLeft: 65,
+          height: 80,
         },
       }}
     >
@@ -78,6 +89,7 @@ const ChallengeCertiTapNavi = () => {
         component={Certi}
         options={({ route }) => ({
           headerShown: false,
+          tabBarShowLabel: false,
           tabBarButton: (props) => (
             <Text>
               <CertiBtn />
@@ -95,7 +107,6 @@ const ChallengeDetailTapNavi = () => {
       initialRouteName="ChallengeDetailCard"
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
         tabBarStyle: {
           paddingBottom: 5,
         },

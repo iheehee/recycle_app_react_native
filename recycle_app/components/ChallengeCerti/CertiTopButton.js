@@ -11,8 +11,6 @@ import styled from "styled-components/native";
 import ChallengeCertification from "../../screens/Main/Challenge/ChallengeCertification";
 import Profile from "../../screens/Main/Profile";
 
-const { width, height } = Dimensions.get("screen");
-
 const TopButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
@@ -54,55 +52,32 @@ const SecondText = styled.Text`
 `;
 const Separator = () => <View style={styles.separator} />;
 
-const TapButton = () => {
-  const [focused, setFocused] = useState("otherPeople");
-  console.log(focused);
+const TopButton = () => {
+  const [focused, setFocused] = useState("myStatus");
+
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ flexGrow: 1 }}>
-        <TopButtonContainer>
-          <FirstButton
-            onPress={() => setFocused("myStatus")}
-            isFocused={focused}
-            activeOpacity={1}
-          >
-            <FirstText isFocused={focused}>나의 인증 현황</FirstText>
-          </FirstButton>
-          <SecondButton
-            onPress={() => setFocused("otherPeople")}
-            isFocused={focused}
-            activeOpacity={1}
-          >
-            <SecondText isFocused={focused}>참가자 인증 현황</SecondText>
-          </SecondButton>
-        </TopButtonContainer>
-        <View>
-          {focused === "myStatus" ? <Profile /> : <ChallengeCertification />}
-        </View>
+    <View>
+      <TopButtonContainer>
+        <FirstButton
+          onPress={() => setFocused("myStatus")}
+          isFocused={focused}
+          activeOpacity={1}
+        >
+          <FirstText isFocused={focused}>나의 인증 현황</FirstText>
+        </FirstButton>
+        <SecondButton
+          onPress={() => setFocused("otherPeople")}
+          isFocused={focused}
+          activeOpacity={1}
+        >
+          <SecondText isFocused={focused}>참가자 인증 현황</SecondText>
+        </SecondButton>
+      </TopButtonContainer>
+      <View>
+        {focused === "myStatus" ? <Profile /> : <ChallengeCertification />}
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    marginHorizontal: 16,
-  },
-  title: {
-    textAlign: "center",
-    marginVertical: 8,
-  },
-  fixToText: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-});
-
-export default TapButton;
+export default TopButton;

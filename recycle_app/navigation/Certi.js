@@ -42,10 +42,7 @@ const TabText = styled.Text`
 const ChallengeCertiStatusTab = ({ route }) => {
   return (
     <View style={{ flex: 1 }}>
-      <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
-        disableIntervalMomentum={true}
-      >
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <CertiContainer>
           <CertiHeader route={route} />
         </CertiContainer>
