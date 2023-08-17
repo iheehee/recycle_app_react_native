@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import ChallengeCertification from "../../screens/Main/Challenge/ChallengeCertification";
-import Profile from "../../screens/Main/Profile";
+import Test from "../../screens/Main/Test";
 
 const TopButtonContainer = styled.View`
   flex-direction: row;
@@ -74,7 +74,7 @@ const TopButton = () => {
         </SecondButton>
       </TopButtonContainer>
       <View>
-        {focused === "myStatus" ? <Profile /> : <ChallengeCertification />}
+        {focused === "myStatus" ? <Test /> : <ChallengeCertification />}
       </View>
     </View>
   );

@@ -162,7 +162,7 @@ const ChallengeDetailCard = ({ route }) => {
           </NoticeDescriptionBox>
         </NoticeContainer>
         <View style={{ alignItems: "center" }}>
-          <Swiper
+          {/*  <Swiper
             height={height * 0.33}
             width={width * 0.9}
             controlsProps={{
@@ -177,7 +177,7 @@ const ChallengeDetailCard = ({ route }) => {
                 style={{
                   flex: 1,
                   alignItems: "center",
-                  justifyContent: "end",
+                  justifyContent: "flex-end",
                   backgroundColor: "rgba(20,20,200,0.3)",
                 }}
               >
@@ -220,7 +220,7 @@ const ChallengeDetailCard = ({ route }) => {
                 />
               </View>
             ))}
-          </Swiper>
+          </Swiper> */}
         </View>
       </BgContainer>
     </ScrollView>

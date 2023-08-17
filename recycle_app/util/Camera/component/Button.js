@@ -7,11 +7,11 @@ export default ({ title, onPress, icon, color }) => {
     <View>
       <TouchableOpacity
         onPress={onPress}
-        style={styles.button}
+        style={title ? styles.button : styles.topbutton}
         activeOpacity={0.2}
       >
-        <Entypo name={icon} size={28} color={"white"} />
-        <Text style={styles.text}>{title}</Text>
+        <Entypo name={icon} size={28} color={color ? color : "white"} />
+        {title ? <Text style={styles.text}>{title}</Text> : null}
       </TouchableOpacity>
     </View>
   );
@@ -20,12 +20,19 @@ export default ({ title, onPress, icon, color }) => {
 const styles = StyleSheet.create({
   button: {
     height: 40,
-
     marginBottom: 50,
     backgroundColor: "black",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+  },
+  topbutton: {
+    paddingHorizontal: 7,
+    height: 43,
+    borderRadius: 30,
+    backgroundColor: "black",
+    flexDirection: "row",
+    alignItems: "center",
+    opacity: 0.5,
   },
   text: {
     fontWeight: "bold",

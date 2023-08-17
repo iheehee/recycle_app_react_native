@@ -39,6 +39,7 @@ export const { setChallenges, increasePage } = challengesSlice.actions;
 export const getChallenges = (page) => async (dispatch) => {
   try {
     const { data } = await api.challenges();
+
     dispatch(
       setChallenges({
         challenges: data,

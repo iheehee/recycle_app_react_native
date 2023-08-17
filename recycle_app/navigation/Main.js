@@ -10,7 +10,7 @@ import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
-import ImagePicker from "../util/Camera/ImagePicker";
+import ImagePicker from "../util/Camera/Camera";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Text } from "react-native";

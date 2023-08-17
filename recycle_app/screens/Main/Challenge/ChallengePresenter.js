@@ -31,9 +31,8 @@ export default ({ challenges }) => {
         >
           <ChallengeBox>
             {challenges.map((challenge) => (
-              <Container>
+              <Container key={challenge.id}>
                 <ChallengeCard
-                  key={challenge}
                   id={challenge.id}
                   banner={challenge.title_banner}
                   title={challenge.title}

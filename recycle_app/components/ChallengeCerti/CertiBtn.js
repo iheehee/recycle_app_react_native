@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { getProfile } from "../../modules/userSlice";
 import api from "../../api";
-import ImagePicker from "../../util/Camera/ImagePicker";
+import ImagePicker from "../../util/Camera/Camera";
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;

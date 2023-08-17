@@ -1,4 +1,3 @@
-import Profile from "../screens/Main/Profile";
 import styled from "styled-components/native";
 import CertiHeader from "../components/ChallengeCerti/CertiHeader";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";

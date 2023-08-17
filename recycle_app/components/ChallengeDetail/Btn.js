@@ -16,7 +16,7 @@ const Button = styled.View`
 `;
 const Text = styled.Text`
   color: white;
-  justify-content: "center";
+
   font-size: 14px;
 `;
 const Btn = ({ params }) => {
