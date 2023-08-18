@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
-import CertiHeader from "../components/ChallengeCerti/CertiHeader";
-import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
-import CertiTopButton from "../components/ChallengeCerti/CertiTopButton";
+import CertiHeader from "../../../../components/ChallengeCerti/CertiHeader";
+import ChallengeCertification from "../ChallengeCertification";
+import CertiTopButton from "../../../../components/ChallengeCerti/CertiTopButton";
 import {
   Animated,
   View,

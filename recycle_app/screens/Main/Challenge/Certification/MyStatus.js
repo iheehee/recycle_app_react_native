@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import ImagePicker from "../../util/Camera/ImagePicker";
+import ImagePicker from "../../../../util/Camera/ImagePicker";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 
 const Container = styled.View`

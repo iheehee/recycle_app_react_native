@@ -99,3 +99,4 @@ export default ({ route }) => {
     </BgContainer>
   );
 };
+

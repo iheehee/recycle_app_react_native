@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Certi from "./Certi";
+import ChallengeCertiDetail from "../screens/Main/Challenge/Certification/ChallengeCertiDetail";
 import index from "../screens/Main/Challenge/index";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
@@ -86,7 +86,7 @@ const ChallengeCertiTapNavi = () => {
     >
       <Tab.Screen
         name="ChallengeCertiStatus"
-        component={Certi}
+        component={ChallengeCertiDetail}
         options={({ route }) => ({
           headerShown: false,
           tabBarShowLabel: false,
@@ -164,7 +164,7 @@ const TabNavigation = () => {
           tabBarStyle: { display: route.params },
         })}
       />
-      <Tab.Screen name="Recycle" component={Certi} />
+      <Tab.Screen name="Recycle" component={Recycle} />
       <Tab.Screen name="Store" component={Store} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>

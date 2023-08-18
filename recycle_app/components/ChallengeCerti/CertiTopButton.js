@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import ChallengeCertification from "../../screens/Main/Challenge/ChallengeCertification";
-import Test from "../../screens/Main/Test";
+import Test from "../../screens/Main/Challenge/Certification/MyStatus";
+import MyStatus from "../../screens/Main/Challenge/Certification/MyStatus";
 
 const TopButtonContainer = styled.View`
   flex-direction: row;
@@ -50,7 +51,6 @@ const SecondText = styled.Text`
   font-weight: 500;
   color: ${(props) => (props.isFocused === "otherPeople" ? "black" : "grey")};
 `;
-const Separator = () => <View style={styles.separator} />;
 
 const TopButton = () => {
   const [focused, setFocused] = useState("myStatus");
@@ -74,7 +74,7 @@ const TopButton = () => {
         </SecondButton>
       </TopButtonContainer>
       <View>
-        {focused === "myStatus" ? <Test /> : <ChallengeCertification />}
+        {focused === "myStatus" ? <MyStatus /> : <ChallengeCertification />}
       </View>
     </View>
   );
