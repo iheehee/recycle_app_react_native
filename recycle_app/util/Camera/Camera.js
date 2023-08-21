@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
+import { useSelector } from "react-redux";
 import { Camera, CameraType } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
+import axios from "axios";
 
 export default () => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -32,11 +34,23 @@ export default () => {
     }
   };
 
+  const jwt = useSelector((state) => state.usersReducer.token);
   const saveImage = async () => {
     if (image) {
       try {
-        await MediaLibrary.createAssetAsync(image);
+        MediaLibrary.createAssetAsync(image);
         alert("Picture save!");
+        const formData = new FormData();
+        formData.append("image", image);
+        axios({
+          method: "post",
+          url: "http://192.168.0.55:8080/challenges/1/certification/",
+          data: formData,
+          headers: {
+            Authorization: jwt,
+            "Content-Type": "multipart/form-data",
+          },
+        });
         setImage(null);
       } catch (e) {
         console.log(e);

@@ -80,8 +80,8 @@ export default ({ route: { params } }) => {
               value={password}
               onChangeText={(text) => setPassword(text)}
             />
+            <Btn text={"Sign In"} onPress={handleSubmit} />
           </InputContainer>
-          <Btn text={"Sign In"} onPress={handleSubmit} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

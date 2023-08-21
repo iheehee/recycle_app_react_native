@@ -48,25 +48,6 @@ const ChallengeCertiStatusTab = ({ route }) => {
         <CertiContainer>
           <CertiTopButton />
         </CertiContainer>
-
-        {/* <TopTab.Navigator
-          tabBar={(props) => <MyTabBar {...props} params={route} />}
-          initialRouteName="ChallengeCertification"
-          tabBarPosition="top"
-          screenOptions={{
-            swipeEnabled: false,
-            animationEnabled: true,
-          }}
-          style={{ backgroundColor: "white" }}
-        >
-          <TopTab.Screen
-            name="ChallengeCertification"
-            component={ChallengeCertification}
-          />
-          <TopTab.Screen name="Settings" component={Profile} />
-        </TopTab.Navigator> */}
-        {/* <CertiHeader route={route} /> */}
-        {/* <ChallengeCertification /> */}
       </ScrollView>
     </View>
   );
