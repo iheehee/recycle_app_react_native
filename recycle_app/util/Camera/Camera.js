@@ -6,13 +6,13 @@ import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
 
-export default () => {
+export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
-
+  console.log(route);
   useEffect(() => {
     (async () => {
       MediaLibrary.requestPermissionsAsync();
@@ -41,7 +41,11 @@ export default () => {
         MediaLibrary.createAssetAsync(image);
         alert("Picture save!");
         const formData = new FormData();
-        formData.append("image", image);
+        formData.append("file", {
+          name: `${route.params.id}.jpeg`,
+          type: "image/jpeg",
+          uri: image,
+        });
         axios({
           method: "post",
           url: "http://192.168.0.55:8080/challenges/1/certification/",

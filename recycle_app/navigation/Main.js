@@ -10,7 +10,7 @@ import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
-import ImagePicker from "../util/Camera/Camera";
+import Camera from "../util/Camera/Camera";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Text } from "react-native";
@@ -58,8 +58,8 @@ const ChallengeStackNavi = () => {
           }}
         />
         <Stack.Screen
-          name="ImagePicker"
-          component={ImagePicker}
+          name="Camera"
+          component={Camera}
           options={{
             title: null,
           }}
@@ -92,7 +92,7 @@ const ChallengeCertiTapNavi = () => {
           tabBarShowLabel: false,
           tabBarButton: (props) => (
             <Text>
-              <CertiBtn />
+              <CertiBtn id={route.params.id} />
             </Text>
           ),
         })}

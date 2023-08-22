@@ -39,6 +39,7 @@ const TabText = styled.Text`
 `;
 
 const ChallengeCertiStatusTab = ({ route }) => {
+  console.log(route);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

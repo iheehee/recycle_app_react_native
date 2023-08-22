@@ -1,12 +1,10 @@
 import React from "react";
 import { Alert } from "react-native";
 import styled from "styled-components/native";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
 import { getProfile } from "../../modules/userSlice";
-import api from "../../api";
-import ImagePicker from "../../util/Camera/Camera";
+import Camera from "../../util/Camera/Camera";
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
@@ -27,12 +25,12 @@ const PeriodContainer = styled.View`
   padding: 0px 0px 0px 0px;
   align-items: center;
 `;
-const CertiBtn = () => {
+const CertiBtn = ({ id }) => {
   const navigation = useNavigation();
-  const ImagePicker = () => navigation.navigate("ImagePicker");
+  const Camera = () => navigation.navigate("Camera", { id: id });
 
   return (
-    <Button onPress={ImagePicker}>
+    <Button onPress={Camera}>
       <Text>{"인증하기"}</Text>
     </Button>
   );
