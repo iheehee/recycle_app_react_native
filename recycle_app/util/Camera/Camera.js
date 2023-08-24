@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Alert } from "react-native";
 import { useSelector } from "react-redux";
 import { Camera, CameraType } from "expo-camera";
+import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
+import ChallengeCertiDetail from "../../screens/Main/Challenge/Certification/ChallengeCertiDetail";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -12,7 +14,8 @@ export default ({ route }) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
-  console.log(route);
+  const [certificationImage, setCertificationImage] = useState([]);
+  const navigation = useNavigation();
   useEffect(() => {
     (async () => {
       MediaLibrary.requestPermissionsAsync();
@@ -39,14 +42,13 @@ export default ({ route }) => {
     if (image) {
       try {
         MediaLibrary.createAssetAsync(image);
-        alert("Picture save!");
         const formData = new FormData();
         formData.append("file", {
           name: `${route.params.id}.jpeg`,
           type: "image/jpeg",
           uri: image,
         });
-        axios({
+        await axios({
           method: "post",
           url: "http://192.168.0.55:8080/challenges/1/certification/",
           data: formData,
@@ -54,6 +56,29 @@ export default ({ route }) => {
             Authorization: jwt,
             "Content-Type": "multipart/form-data",
           },
+        }).then((response) => {
+          const { result } = response.data;
+          Alert.alert(result, "", [
+            {
+              text: "확인",
+              onPress: () => {
+                axios({
+                  method: "get",
+                  url: "http://192.168.0.55:8080/challenges/1/certification/",
+                  headers: {
+                    Authorization: jwt,
+                  },
+                }).then((response) => {
+                  const data = response.data;
+                  return setCertificationImage([data]);
+                });
+                navigation.navigate("ChallengeCerti", {
+                  screen: "ChallengeCertiStatus",
+                  params: { certiImage: certificationImage },
+                });
+              },
+            },
+          ]);
         });
         setImage(null);
       } catch (e) {

@@ -9,13 +9,13 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import ChallengeCertification from "../../screens/Main/Challenge/ChallengeCertification";
-import Test from "../../screens/Main/Challenge/Certification/MyStatus";
 import MyStatus from "../../screens/Main/Challenge/Certification/MyStatus";
+import Test from "../../screens/Main/Challenge/Certification/MyStatus";
 
 const TopButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
-  flex: 1;
+  margin-bottom: 5px;
 `;
 const FirstButton = styled.TouchableOpacity`
   border-bottom-color: ${(props) =>
@@ -56,7 +56,7 @@ const TopButton = () => {
   const [focused, setFocused] = useState("myStatus");
 
   return (
-    <View>
+    <>
       <TopButtonContainer>
         <FirstButton
           onPress={() => setFocused("myStatus")}
@@ -76,7 +76,7 @@ const TopButton = () => {
       <View>
         {focused === "myStatus" ? <MyStatus /> : <ChallengeCertification />}
       </View>
-    </View>
+    </>
   );
 };
 

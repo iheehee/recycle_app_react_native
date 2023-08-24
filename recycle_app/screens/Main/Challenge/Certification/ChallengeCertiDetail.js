@@ -16,11 +16,14 @@ const { width, height } = Dimensions.get("screen");
 const Container = styled.View`
   flex: 1;
 `;
-const TabContainer = styled.View``;
-const CertiContainer = styled.View`
+const HeaderContainer = styled.View`
   background-color: white;
   flex: 1;
   padding-bottom: 20px;
+`;
+const TabContainer = styled.View`
+  background-color: white;
+  flex: 1;
 `;
 
 const TabButton = styled.TouchableOpacity`
@@ -33,25 +36,21 @@ const TabButton = styled.TouchableOpacity`
   border-bottom-color: ${(props) =>
     props.isFocused ? "black" : "transparent"};
 `;
-const TabText = styled.Text`
-  font-weight: 500;
-  color: ${(props) => (props.isFocused ? "black" : "gray")};
-`;
 
-const ChallengeCertiStatusTab = ({ route }) => {
+const ChallengeCertiDetail = ({ route }) => {
   console.log(route);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <CertiContainer>
+        <HeaderContainer>
           <CertiHeader route={route} />
-        </CertiContainer>
-        <CertiContainer>
+        </HeaderContainer>
+        <TabContainer>
           <CertiTopButton />
-        </CertiContainer>
+        </TabContainer>
       </ScrollView>
     </View>
   );
 };
 
-export default ChallengeCertiStatusTab;
+export default ChallengeCertiDetail;

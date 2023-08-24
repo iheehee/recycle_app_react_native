@@ -5,7 +5,6 @@ import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 
 const Container = styled.View`
   flex: 1;
-  justify-content: center;
   align-items: center;
 `;
 const StyledText = styled.Text`
@@ -15,20 +14,14 @@ const StyledText = styled.Text`
 export default () => {
   return (
     <Container>
-      <ImagePicker />
       <Text style={{ fontSize: 34 }}>Test</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
-      <Text style={{ fontSize: 34 }}>Profile</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
+      <Text style={{ fontSize: 34 }}>Test</Text>
     </Container>
   );
 };
