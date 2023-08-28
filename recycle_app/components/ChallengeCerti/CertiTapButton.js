@@ -52,7 +52,7 @@ const SecondText = styled.Text`
   color: ${(props) => (props.isFocused === "otherPeople" ? "black" : "grey")};
 `;
 
-const TopButton = () => {
+const TopButton = ({ route }) => {
   const [focused, setFocused] = useState("myStatus");
 
   return (

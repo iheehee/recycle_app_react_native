@@ -86,7 +86,7 @@ const Btn = ({ params }) => {
   const Certification = () =>
     navigation.navigate("ChallengeCerti", {
       screen: "ChallengeCertiStatus",
-      params: params,
+      params: { dataTag: "challengeDatail", ...params },
     });
 
   return (

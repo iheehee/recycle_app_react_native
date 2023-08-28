@@ -70,11 +70,14 @@ export default ({ route }) => {
                   },
                 }).then((response) => {
                   const data = response.data;
-                  return setCertificationImage([data]);
+                  return setCertificationImage([...data]);
                 });
                 navigation.navigate("ChallengeCerti", {
                   screen: "ChallengeCertiStatus",
-                  params: { certiImage: certificationImage },
+                  params: {
+                    dataTag: "certificationImage",
+                    image: 3,
+                  },
                 });
               },
             },

@@ -64,7 +64,7 @@ const CertiDay = ({ start_day, duration, frequency }) => {
   };
   useEffect(() => {
     challengePeriod(start_day, duration);
-  }, []);
+  }, [start_day, duration]);
   return (
     <Container>
       <FontAwesome5 name="calendar-check" size={24} color="black" />

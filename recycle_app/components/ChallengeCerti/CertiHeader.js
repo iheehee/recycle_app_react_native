@@ -60,7 +60,8 @@ export default ({ route }) => {
     description,
     notice,
     success_example,
-  } = route.params;
+  } = route;
+
   return (
     <BgContainer>
       <BannerContainer>
@@ -99,4 +100,3 @@ export default ({ route }) => {
     </BgContainer>
   );
 };
-

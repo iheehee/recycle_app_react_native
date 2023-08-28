@@ -1,17 +1,9 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import CertiHeader from "../../../../components/ChallengeCerti/CertiHeader";
 import ChallengeCertification from "../ChallengeCertification";
-import CertiTopButton from "../../../../components/ChallengeCerti/CertiTopButton";
-import {
-  Animated,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-  Text,
-} from "react-native";
-
-const { width, height } = Dimensions.get("screen");
+import CertiTapButton from "../../../../components/ChallengeCerti/CertiTapButton";
+import { View, ScrollView, Dimensions, Text } from "react-native";
 
 const Container = styled.View`
   flex: 1;
@@ -38,15 +30,24 @@ const TabButton = styled.TouchableOpacity`
 `;
 
 const ChallengeCertiDetail = ({ route }) => {
-  console.log(route);
+  const [headerData, setHeaderData] = useState({});
+  const [certiData, setCertiData] = useState({});
+  const tagData = route.params.dataTag;
+  useEffect(() => {
+    tagData === "challengeDatail"
+      ? setHeaderData({ ...route.params })
+      : setCertiData({ ...route.params });
+  }, [tagData]);
+  console.log(certiData);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <HeaderContainer>
-          <CertiHeader route={route} />
+          <CertiHeader route={headerData} />
+          <Text>{certiData.image}</Text>
         </HeaderContainer>
         <TabContainer>
-          <CertiTopButton />
+          <CertiTapButton route={certiData} />
         </TabContainer>
       </ScrollView>
     </View>
