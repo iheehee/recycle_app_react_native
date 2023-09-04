@@ -31,5 +31,5 @@ export default {
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
   challengeApply: (form, data, jwt) =>
     callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
-  profile: (jwt) => callApi("post", "/users/profile/", "", jwt),
+  profile: (jwt) => callApi("get", "/users/profile/", "", jwt),
 };

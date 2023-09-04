@@ -72,7 +72,7 @@ const ChallengeStackNavi = () => {
 const ChallengeCertiTapNavi = () => {
   return (
     <Tab.Navigator
-      initialRouteName="ChallengeCertiStatus"
+      initialRouteName="ChallengeCertiDetail"
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -85,7 +85,7 @@ const ChallengeCertiTapNavi = () => {
       }}
     >
       <Tab.Screen
-        name="ChallengeCertiStatus"
+        name="ChallengeCertiDetail"
         component={ChallengeCertiDetail}
         options={({ route }) => ({
           headerShown: false,

@@ -3,20 +3,19 @@ import { TouchableOpacity, Alert } from "react-native";
 import styled from "styled-components/native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getProfile } from "../../modules/userSlice";
+import { getMyChallenges } from "../../modules/userSlice";
 import api from "../../api";
 
 const Button = styled.View`
   border-radius: 10px;
   padding: 14px 0px;
   width: 195px;
-  background-color: ${(props) => (!props.exist ? "green" : "#AFB42B")};
+  background-color: ${(props) => (!props.exist ? "green" : "#C0C0C0")};
   align-items: center;
   justify-content: center;
 `;
 const Text = styled.Text`
   color: white;
-
   font-size: 14px;
 `;
 const Btn = ({ params }) => {
@@ -24,10 +23,10 @@ const Btn = ({ params }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const myChallenge = useSelector(
-    (state) => state.usersReducer.profile.myChallenge
+    (state) => state.usersReducer.profile.myChallenges
   );
   const exist = myChallenge.find(
-    (appliedChallenge) => appliedChallenge === params.id
+    (appliedChallenge) => appliedChallenge.id === params.id
   );
   const ApplyChallenge = () =>
     api
@@ -38,8 +37,11 @@ const Btn = ({ params }) => {
           {
             text: "확인",
             onPress: () => {
-              dispatch(getProfile(jwt));
-              return navigation.navigate("ChallengeCerti");
+              dispatch(getMyChallenges(jwt));
+              return navigation.navigate("ChallengeCerti", {
+                screen: "ChallengeCertiDetail",
+                params: params,
+              });
             },
           },
         ]);
@@ -85,14 +87,14 @@ const Btn = ({ params }) => {
       });
   const Certification = () =>
     navigation.navigate("ChallengeCerti", {
-      screen: "ChallengeCertiStatus",
-      params: { dataTag: "challengeDatail", ...params },
+      screen: "ChallengeCertiDetail",
+      params: params,
     });
 
   return (
     <TouchableOpacity onPress={!exist ? ApplyChallenge : Certification}>
       <Button exist={exist}>
-        <Text>{!exist ? "오늘부터 시작" : "인증하기"}</Text>
+        <Text>{!exist ? "오늘부터 시작" : "참여 중인 챌린지 입니다"}</Text>
       </Button>
     </TouchableOpacity>
   );

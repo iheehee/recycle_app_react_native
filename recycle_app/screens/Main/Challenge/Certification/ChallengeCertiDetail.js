@@ -18,36 +18,15 @@ const TabContainer = styled.View`
   flex: 1;
 `;
 
-const TabButton = styled.TouchableOpacity`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  height: 35px;
-  margin: 0px 16px;
-  border-bottom-width: 2px;
-  border-bottom-color: ${(props) =>
-    props.isFocused ? "black" : "transparent"};
-`;
-
 const ChallengeCertiDetail = ({ route }) => {
-  const [headerData, setHeaderData] = useState({});
-  const [certiData, setCertiData] = useState({});
-  const tagData = route.params.dataTag;
-  useEffect(() => {
-    tagData === "challengeDatail"
-      ? setHeaderData({ ...route.params })
-      : setCertiData({ ...route.params });
-  }, [tagData]);
-  console.log(certiData);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <HeaderContainer>
-          <CertiHeader route={headerData} />
-          <Text>{certiData.image}</Text>
+          <CertiHeader route={route.params} />
         </HeaderContainer>
         <TabContainer>
-          <CertiTapButton route={certiData} />
+          <CertiTapButton />
         </TabContainer>
       </ScrollView>
     </View>

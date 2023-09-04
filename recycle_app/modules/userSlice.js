@@ -7,7 +7,7 @@ const userSlice = createSlice({
     isLoggedIn: false,
     token: null,
     profile: {
-      myChallenge: [],
+      myChallenges: [],
     },
   },
   reducers: {
@@ -19,12 +19,12 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
-    userProfile(state, action) {
-      state.profile.myChallenge = action.payload.profile.my_challenges;
+    myChallenges(state, action) {
+      state.profile.myChallenges = action.payload.profile.my_challenges;
     },
   },
 });
-export const { logIn, logOut, userProfile } = userSlice.actions;
+export const { logIn, logOut, myChallenges } = userSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -38,13 +38,18 @@ export const userLogin = (form) => async (dispatch) => {
     alert("Wrong user/password");
   }
 };
-export const getProfile = (jwt) => async (dispatch) => {
+export const getMyChallenges = (jwt) => async (dispatch) => {
   try {
     const { data } = await api.profile(jwt);
-    dispatch(userProfile({ profile: data }));
+    console.log(data);
+    dispatch(myChallenges({ profile: data }));
   } catch (e) {
     console.warn(e);
   }
+};
+export const getMyCertification = (jwt) => async (dispatch) => {
+  const { data } = await api.profile(jwt);
+  dispatch();
 };
 
 export default userSlice.reducer;

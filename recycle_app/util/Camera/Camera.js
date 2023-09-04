@@ -64,7 +64,7 @@ export default ({ route }) => {
               onPress: () => {
                 axios({
                   method: "get",
-                  url: "http://192.168.0.55:8080/challenges/1/certification/",
+                  url: "http://192.168.0.55:8080/users/profile/", //프로필에서 인증 데이터를 불러오는 것으로 리팩토링
                   headers: {
                     Authorization: jwt,
                   },
@@ -75,7 +75,6 @@ export default ({ route }) => {
                 navigation.navigate("ChallengeCerti", {
                   screen: "ChallengeCertiStatus",
                   params: {
-                    dataTag: "certificationImage",
                     image: 3,
                   },
                 });

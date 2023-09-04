@@ -10,10 +10,15 @@ export default ({
   navigation,
 }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
-  useEffect(() => {
-    getChallenges(1);
-    getProfile(jwt);
-  }, [jwt]);
+  useEffect(
+    () => {
+      getChallenges(1);
+      /* getProfile(jwt); */
+    },
+    [
+      /* jwt */
+    ]
+  );
   useEffect(() => {
     getChallenges(page);
   }, [page]);
