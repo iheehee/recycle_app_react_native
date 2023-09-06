@@ -2,39 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import api from "../api";
 
-const challengesSlice = createSlice({
-  name: "challenges",
+const certificationsSlice = createSlice({
+  name: "certifications",
   initialState: {
-    explore: {
-      page: 1,
-      challenges: [],
-    },
+    myCertifications: [],
   },
   reducers: {
-    setChallenges(state, action) {
-      const { explore } = state;
-      const { payload } = action;
-      if (payload.page === 1) {
-        state.explore.challenges = payload.challenges;
-        state.explore.page = 1;
-      } else {
-        payload.challenges.forEach((payloadChallenges) => {
-          const exists = explore.challenges.find(
-            (savedChallenges) => savedChallenges.id === payload.Challenges.id
-          );
-          if (!exists) {
-            explore.challenges.push(payloadChallenges);
-          }
-        });
-      }
-    },
-    increasePage(state) {
-      state.explore.page += 1;
+    myCertifications(state, action) {
+      state.myChallenges = action.payload.my_certifications;
     },
   },
 });
 
-export const { setChallenges, increasePage } = challengesSlice.actions;
+export const { myCertifications } = certificationsSlice.actions;
 
 export const getChallenges = (page) => async (dispatch) => {
   try {
@@ -51,4 +31,4 @@ export const getChallenges = (page) => async (dispatch) => {
   }
 };
 
-export default challengesSlice.reducer;
+export default certificationsSlice.reducer;

@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
-import ChallengeCertiDetail from "../../screens/Main/Challenge/Certification/ChallengeCertiDetail";
+import ChallengeCertiDetail from "../../screens/Main/Certification/ChallengeCertiDetail";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -50,7 +50,7 @@ export default ({ route }) => {
         });
         await axios({
           method: "post",
-          url: "http://192.168.0.55:8080/challenges/1/certification/",
+          url: `http://192.168.0.55:8080/challenges/${route.params.id}/certification/`,
           data: formData,
           headers: {
             Authorization: jwt,

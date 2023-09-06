@@ -1,12 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import ChallengeCertiDetail from "../screens/Main/Challenge/Certification/ChallengeCertiDetail";
-import index from "../screens/Main/Challenge/index";
+import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
+import CertificationContainer from "../screens/Main/Certification/CertificationContainer";
 import Recycle from "../screens/Main/Recycle";
-import Store from "../screens/Main/Store";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
@@ -143,9 +142,9 @@ const TabNavigation = () => {
         tabBarIcon: (props) => {
           let name = "";
           const size = 24;
-          if (route.name === "Challenge") name = "medal-outline";
-          else if (route.name === "Recycle") name = "recycle";
-          else if (route.name === "Store") name = "store";
+          if (route.name === "챌린지") name = "medal-outline";
+          else if (route.name === "인증") name = "camera-outline";
+          else if (route.name === "재활용") name = "recycle";
           else name = "user-circle-o";
           return TabIcon({ ...props, name, size });
         },
@@ -157,16 +156,16 @@ const TabNavigation = () => {
       })}
     >
       <Tab.Screen
-        name="Challenge"
-        component={index}
+        name="챌린지"
+        component={ChallengeIndex}
         options={(route) => ({
           headerShown: false,
           tabBarStyle: { display: route.params },
         })}
       />
-      <Tab.Screen name="Recycle" component={Recycle} />
-      <Tab.Screen name="Store" component={Store} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="인증" component={CertificationContainer} />
+      <Tab.Screen name="재활용" component={Recycle} />
+      <Tab.Screen name="프로필" component={Profile} />
     </Tab.Navigator>
   );
 };

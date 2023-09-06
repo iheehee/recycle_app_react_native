@@ -28,75 +28,98 @@ const Btn = ({ params }) => {
   const exist = myChallenge.find(
     (appliedChallenge) => appliedChallenge.id === params.id
   );
-  const ApplyChallenge = () =>
-    api
-      .challengeApply(params.id, null, jwt)
-      .then((response) => {
-        const result = response.data.result;
-        return Alert.alert(result, "", [
-          {
-            text: "확인",
-            onPress: () => {
+  const ApplyChallenge = () => {
+    Alert.alert("챌린지에 가입하시겠습니까?", "", [
+      {
+        text: "확인",
+        onPress: () => {
+          return api
+            .challengeApply(params.id, null, jwt)
+            .then((response) => {
               dispatch(getMyChallenges(jwt));
-              return navigation.navigate("ChallengeCerti", {
-                screen: "ChallengeCertiDetail",
-                params: params,
-              });
-            },
-          },
-        ]);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.message === "Network Error") {
-          return Alert.alert(
-            "네트워크 연결이 유실되었습니다. 다시 시도 하시겠습니까?",
-            "",
-            [
-              {
-                text: "다시 시도",
-                onPress: () => {
-                  ApplyChallenge();
+              const result = response.data.result;
+              return Alert.alert(result, "", [
+                {
+                  text: "확인",
+                  onPress: () => {
+                    return Alert.alert("인증화면으로 가시겠습니까?", "", [
+                      {
+                        text: "이동",
+                        onPress: () => {
+                          return navigation.navigate("ChallengeCerti", {
+                            screen: "ChallengeCertiDetail",
+                            params: params,
+                          });
+                        },
+                      },
+                      {
+                        text: "취소",
+                      },
+                    ]);
+                  },
                 },
-              },
-              {
-                text: "취소",
-                style: "destructive",
-              },
-            ]
-          );
-        } else {
-          return Alert.alert(
-            "연결이 실패했습니다.",
-            "다시 시도 하시겠습니까?",
-            [
-              {
-                text: "다시 시도",
-                onPress: () => {
-                  console.log("redirection");
-                },
-              },
-              {
-                text: "취소",
-                onPress: () => console.log("redirection"),
-                style: "destructive",
-              },
-            ]
-          );
-        }
-      });
+              ]);
+            })
+            .catch((error) => {
+              console.log(error);
+              if (error.message === "Network Error") {
+                return Alert.alert(
+                  "네트워크 연결이 유실되었습니다. 다시 시도 하시겠습니까?",
+                  "",
+                  [
+                    {
+                      text: "다시 시도",
+                      onPress: () => {
+                        ApplyChallenge();
+                      },
+                    },
+                    {
+                      text: "취소",
+                      style: "destructive",
+                    },
+                  ]
+                );
+              } else {
+                return Alert.alert(
+                  "연결이 실패했습니다.",
+                  "다시 시도 하시겠습니까?",
+                  [
+                    {
+                      text: "다시 시도",
+                      onPress: () => {
+                        console.log("redirection");
+                      },
+                    },
+                    {
+                      text: "취소",
+                      onPress: () => console.log("redirection"),
+                      style: "destructive",
+                    },
+                  ]
+                );
+              }
+            });
+        },
+      },
+      { text: "취소", style: "destructive" },
+    ]);
+  };
   const Certification = () =>
     navigation.navigate("ChallengeCerti", {
       screen: "ChallengeCertiDetail",
       params: params,
     });
 
-  return (
-    <TouchableOpacity onPress={!exist ? ApplyChallenge : Certification}>
+  return !exist ? (
+    <TouchableOpacity onPress={ApplyChallenge}>
       <Button exist={exist}>
-        <Text>{!exist ? "오늘부터 시작" : "참여 중인 챌린지 입니다"}</Text>
+        <Text>{"오늘부터 시작"}</Text>
       </Button>
     </TouchableOpacity>
+  ) : (
+    <Button exist={exist}>
+      <Text>{"참여 중인 챌린지 입니다."}</Text>
+    </Button>
   );
 };
 export default Btn;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
-import CertiHeader from "../../../../components/ChallengeCerti/CertiHeader";
-import ChallengeCertification from "../ChallengeCertification";
-import CertiTapButton from "../../../../components/ChallengeCerti/CertiTapButton";
+import CertiHeader from "../../../components/ChallengeCerti/CertiHeader";
+import ChallengeCertification from "../Challenge/ChallengeCertification";
+import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
 import { View, ScrollView, Dimensions, Text } from "react-native";
 
 const Container = styled.View`
@@ -20,7 +20,7 @@ const TabContainer = styled.View`
 
 const ChallengeCertiDetail = ({ route }) => {
   return (
-    <View style={{ flex: 1 }}>
+    /*  <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <HeaderContainer>
           <CertiHeader route={route.params} />
@@ -29,7 +29,8 @@ const ChallengeCertiDetail = ({ route }) => {
           <CertiTapButton />
         </TabContainer>
       </ScrollView>
-    </View>
+    </View> */
+    null
   );
 };
 
