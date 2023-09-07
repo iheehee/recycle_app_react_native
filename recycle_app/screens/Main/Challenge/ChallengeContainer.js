@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 export default ({
   getChallenges,
   challenges,
-  getProfile,
   page,
   navigation,
 }) => {

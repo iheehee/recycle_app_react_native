@@ -1,6 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useNavigationState } from "@react-navigation/native";
 import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
@@ -35,8 +36,8 @@ const ChallengeStackNavi = () => {
       }}
     >
       <Stack.Screen
-        name="MainScreen"
-        component={TabNavigation}
+        name="ChallengeIndex"
+        component={ChallengeIndex}
         options={{
           title: null,
         }}
@@ -133,11 +134,22 @@ const ChallengeDetailTapNavi = () => {
     </Tab.Navigator>
   );
 };
+const getVisibility = (selectedIndex) => {
+  const routeName = useNavigationState(
+    (state) => state.routes[selectedIndex].state
+  );
+
+  if (routeName.index === selectedIndex) return null;
+  if (routeName.index !== selectedIndex) {
+    return "none";
+  }
+  return null;
+};
 
 const TabNavigation = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Challenge"
+      initialRouteName="챌린지"
       screenOptions={({ route }) => ({
         tabBarIcon: (props) => {
           let name = "";
@@ -153,21 +165,25 @@ const TabNavigation = () => {
           marginBottom: -5,
           headerShown: false,
         },
+        tabBarStyle: { display: getVisibility(0) },
       })}
     >
       <Tab.Screen
         name="챌린지"
-        component={ChallengeIndex}
+        component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: { display: route.params },
         })}
       />
-      <Tab.Screen name="인증" component={CertificationContainer} />
+      <Tab.Screen
+        name="인증"
+        component={CertificationContainer}
+        options={() => ({ headerShown: false })}
+      />
       <Tab.Screen name="재활용" component={Recycle} />
       <Tab.Screen name="프로필" component={Profile} />
     </Tab.Navigator>
   );
 };
 
-export default ChallengeStackNavi;
+export default TabNavigation;
