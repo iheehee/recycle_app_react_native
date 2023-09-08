@@ -135,15 +135,20 @@ const ChallengeDetailTapNavi = () => {
   );
 };
 const getVisibility = (selectedIndex) => {
-  const routeName = useNavigationState(
-    (state) => state.routes[selectedIndex].state
-  );
+  const navigationState = useNavigationState((state) => state);
+  !navigationState ? console.log("기다려야죠") : console.log("끝났어요");
+  /* const routeIndex = navigationState.routes[selectedIndex].state; //스택 내비게이션의 인덱스 선택
 
-  if (routeName.index === selectedIndex) return null;
-  if (routeName.index !== selectedIndex) {
-    return "none";
+  let routeStatus;
+  if (!routeIndex) {
+    routeStatus = null; //값이 비어있다면 null
+  } else {
+    if (routeIndex.index !== selectedIndex) {
+      routeStatus = "none";
+    }
   }
-  return null;
+
+  return routeStatus; */
 };
 
 const TabNavigation = () => {
@@ -165,7 +170,6 @@ const TabNavigation = () => {
           marginBottom: -5,
           headerShown: false,
         },
-        tabBarStyle: { display: getVisibility(0) },
       })}
     >
       <Tab.Screen
@@ -173,12 +177,13 @@ const TabNavigation = () => {
         component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: false,
+          tabBarStyle: { display: getVisibility(0) },
         })}
       />
       <Tab.Screen
         name="인증"
         component={CertificationContainer}
-        options={() => ({ headerShown: false })}
+        options={() => ({ headerShown: true })}
       />
       <Tab.Screen name="재활용" component={Recycle} />
       <Tab.Screen name="프로필" component={Profile} />

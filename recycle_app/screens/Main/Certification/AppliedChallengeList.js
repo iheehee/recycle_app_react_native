@@ -1,34 +1,36 @@
 import styled from "styled-components/native";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
-import ChallengeCard from "../../../components/ChallengeCard";
+import AppliedChallengeCard from "../../../components/ChallengeCerti/AppliedChallengeCard";
 
-const ChallengeContainer = styled.View`
+const MainContainer = styled.View`
   flex: 1;
-  justify-content: center;
-  align-items: center;
   background-color: white;
 `;
-const Container = styled.View`
-  width: 48%;
-  margin: 3px;
+const ChallengeContainer = styled.View`
+  justify-content: center;
+  align-items: center;
 `;
-const ChallengeBox = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
+const Container = styled.View`
+  width: 90%;
+  margin: 3px;
 `;
 
 export default ({ myChallenges }) => {
   console.log(myChallenges);
   return (
-    <ChallengeContainer>
+    <MainContainer>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{ width: "100%" }}
-        contentContainerStyle={{ paddingTop: 30 }}
       >
-        <ChallengeBox></ChallengeBox>
+        <ChallengeContainer>
+          {myChallenges.map((challenge) => (
+            <Container key={challenge.id}>
+              <AppliedChallengeCard challenge={challenge} />
+            </Container>
+          ))}
+        </ChallengeContainer>
       </ScrollView>
-    </ChallengeContainer>
+    </MainContainer>
   );
 };

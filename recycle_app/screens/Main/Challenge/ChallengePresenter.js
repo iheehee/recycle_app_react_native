@@ -19,6 +19,7 @@ const ChallengeBox = styled.View`
 `;
 
 export default ({ challenges }) => {
+  console.log(challenges);
   return (
     <ChallengeContainer>
       {challenges.length === 0 ? (
