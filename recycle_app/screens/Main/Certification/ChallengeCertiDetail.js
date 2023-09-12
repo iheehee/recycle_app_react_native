@@ -19,6 +19,7 @@ const TabContainer = styled.View`
 `;
 
 const ChallengeCertiDetail = ({ route }) => {
+  
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

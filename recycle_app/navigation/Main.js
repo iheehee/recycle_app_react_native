@@ -163,7 +163,7 @@ const ChallengeCertiStackNavi = () => {
   );
 };
 
-const getVisibility = (route, selectedTabIndex, blockIndex) => {
+const getVisibility = (selectedTabIndex, blockIndex) => {
   const routeIndex = useNavigationState((state) => state);
 
   let stackScreenIndex;
@@ -215,7 +215,7 @@ const TabNavigation = () => {
         component={ChallengeCertiStackNavi}
         options={(route) => ({
           headerShown: "none",
-          tabBarStyle: { display: getVisibility(route, 1, 1) },
+          tabBarStyle: { display: getVisibility(1, 1) },
         })}
       />
       <Tab.Screen name="재활용" component={Recycle} />

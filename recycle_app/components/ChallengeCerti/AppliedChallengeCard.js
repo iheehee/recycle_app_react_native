@@ -79,9 +79,11 @@ export default ({ challenge }) => {
       screen: "ChallengeCertiDetail",
       params: challenge,
     });
-  const localIp = "http://192.168.0.55:8080/";
+  //const localIp = "http://192.168.0.55:8080/";
+  const localIp = "http://192.168.35.73:8080/";
   let dt = new Date(start_day);
-  const startDay = () => `${dt.getFullYear()}.${dt.getMonth()}.${dt.getDate()}`;
+  const startDay = () =>
+    `${dt.getFullYear()}. ${dt.getMonth()}. ${dt.getDate()}`;
   return (
     <BgContainer
       style={{
