@@ -20,7 +20,7 @@ const TabContainer = styled.View`
 
 const ChallengeCertiDetail = ({ route }) => {
   return (
-    /*  <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <HeaderContainer>
           <CertiHeader route={route.params} />
@@ -29,8 +29,7 @@ const ChallengeCertiDetail = ({ route }) => {
           <CertiTapButton />
         </TabContainer>
       </ScrollView>
-    </View> */
-    null
+    </View>
   );
 };
 

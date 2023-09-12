@@ -15,7 +15,7 @@ const BgContainer = styled.View`
 
 const DivisionLine = styled.View`
   background-color: #e5e5e5;
-  padding: 5px;
+  padding: 2px;
 `;
 
 const HeaderContainer = styled.View`
@@ -48,7 +48,7 @@ const CertiExampleContainer = styled.View`
 export default ({ route }) => {
   const {
     title,
-    banner,
+    title_banner,
     duration,
     frequency,
     member,
@@ -61,12 +61,13 @@ export default ({ route }) => {
     notice,
     success_example,
   } = route;
+  const localIp = "http://192.168.0.55:8080";
 
   return (
     <BgContainer>
       <BannerContainer>
         <Image
-          source={{ uri: banner }}
+          source={{ uri: `${localIp}${title_banner}` }}
           style={{
             width: width / 1,
             height: height / 3.6,

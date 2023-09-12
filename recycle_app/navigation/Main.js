@@ -6,6 +6,7 @@ import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
 import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import CertificationContainer from "../screens/Main/Certification/CertificationContainer";
+import ChallengeCertiDetail from "../screens/Main/Certification/ChallengeCertiDetail";
 import Recycle from "../screens/Main/Recycle";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
@@ -69,38 +70,6 @@ const ChallengeStackNavi = () => {
   );
 };
 
-const ChallengeCertiTapNavi = () => {
-  return (
-    <Tab.Navigator
-      initialRouteName="ChallengeCertiDetail"
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          paddingTop: 8,
-          paddingBottom: 0,
-          paddingLeft: 65,
-          height: 80,
-        },
-      }}
-    >
-      <Tab.Screen
-        name="ChallengeCertiDetail"
-        component={ChallengeCertiDetail}
-        options={({ route }) => ({
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarButton: (props) => (
-            <Text>
-              <CertiBtn id={route.params.id} />
-            </Text>
-          ),
-        })}
-      />
-    </Tab.Navigator>
-  );
-};
-
 const ChallengeDetailTapNavi = () => {
   return (
     <Tab.Navigator
@@ -134,21 +103,82 @@ const ChallengeDetailTapNavi = () => {
     </Tab.Navigator>
   );
 };
-const getVisibility = (selectedIndex) => {
-  const navigationState = useNavigationState((state) => state);
-  !navigationState ? console.log("기다려야죠") : console.log("끝났어요");
-  /* const routeIndex = navigationState.routes[selectedIndex].state; //스택 내비게이션의 인덱스 선택
 
-  let routeStatus;
-  if (!routeIndex) {
-    routeStatus = null; //값이 비어있다면 null
+const ChallengeCertiTapNavi = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="ChallengeCertiDetail"
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          paddingTop: 8,
+          paddingBottom: 0,
+          paddingLeft: 65,
+          height: 80,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="ChallengeCertiDetail"
+        component={ChallengeCertiDetail}
+        options={({ route }) => ({
+          headerShown: false,
+          tabBarShowLabel: false,
+          tabBarButton: (props) => (
+            <Text>
+              <CertiBtn id={route.params.id} />
+            </Text>
+          ),
+        })}
+      />
+    </Tab.Navigator>
+  );
+};
+const ChallengeCertiStackNavi = () => {
+  return (
+    <Stack.Navigator
+      presentation="card"
+      screenOptions={{
+        headerBackTitleVisible: false,
+        headerMode: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="MyChallenge"
+        component={CertificationContainer}
+        options={{
+          title: null,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CertificationDetail"
+        component={ChallengeCertiTapNavi}
+        options={{
+          title: null,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const getVisibility = (route, selectedTabIndex, blockIndex) => {
+  const routeIndex = useNavigationState((state) => state);
+
+  let stackScreenIndex;
+  !routeIndex
+    ? console.log("준비중")
+    : (stackScreenIndex = routeIndex.routes[selectedTabIndex].state);
+  //스택 내비게이션의 인덱스 선택
+  if (!stackScreenIndex) {
+    return null; //값이 비어있다면 null
   } else {
-    if (routeIndex.index !== selectedIndex) {
-      routeStatus = "none";
+    if (stackScreenIndex.index == blockIndex) {
+      return "none";
     }
   }
-
-  return routeStatus; */
+  return null;
 };
 
 const TabNavigation = () => {
@@ -177,13 +207,16 @@ const TabNavigation = () => {
         component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: { display: getVisibility(0) },
+          tabBarStyle: { display: getVisibility(0, 1) },
         })}
       />
       <Tab.Screen
         name="인증"
-        component={CertificationContainer}
-        options={() => ({ headerShown: true })}
+        component={ChallengeCertiStackNavi}
+        options={(route) => ({
+          headerShown: "none",
+          tabBarStyle: { display: getVisibility(route, 1, 1) },
+        })}
       />
       <Tab.Screen name="재활용" component={Recycle} />
       <Tab.Screen name="프로필" component={Profile} />
