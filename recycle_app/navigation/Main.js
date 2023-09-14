@@ -50,22 +50,13 @@ const ChallengeStackNavi = () => {
           title: null,
         }}
       />
-      <Stack.Group>
-        <Stack.Screen
-          name="ChallengeCerti"
-          component={ChallengeCertiTapNavi}
-          options={{
-            title: null,
-          }}
-        />
-        <Stack.Screen
-          name="Camera"
-          component={Camera}
-          options={{
-            title: null,
-          }}
-        />
-      </Stack.Group>
+      <Stack.Screen
+        name="ChallengeCerti"
+        component={ChallengeCertiTapNavi}
+        options={{
+          title: null,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -127,7 +118,7 @@ const ChallengeCertiTapNavi = () => {
           tabBarShowLabel: false,
           tabBarButton: (props) => (
             <Text>
-              <CertiBtn id={route.params.id} />
+              <CertiBtn challengeId={route.params.id} />
             </Text>
           ),
         })}
@@ -159,26 +150,50 @@ const ChallengeCertiStackNavi = () => {
           title: null,
         }}
       />
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
+        options={{
+          title: null,
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
-const getVisibility = (selectedTabIndex, blockIndex) => {
+const getVisibility = (selectedTabIndex, blockIndexArray) => {
   const routeIndex = useNavigationState((state) => state);
 
   let stackScreenIndex;
   !routeIndex
-    ? console.log("준비중")
+    ? null
     : (stackScreenIndex = routeIndex.routes[selectedTabIndex].state);
   //스택 내비게이션의 인덱스 선택
   if (!stackScreenIndex) {
     return null; //값이 비어있다면 null
   } else {
-    if (stackScreenIndex.index == blockIndex) {
+    if (blockIndexArray.includes(stackScreenIndex.index)) {
       return "none";
     }
   }
   return null;
+};
+const headerVisibility = (selectedTabIndex, blockIndexArray) => {
+  const routeIndex = useNavigationState((state) => state);
+  let stackScreenIndex;
+  !routeIndex
+    ? null
+    : (stackScreenIndex = routeIndex.routes[selectedTabIndex].state);
+  //스택 내비게이션의 인덱스 선택
+
+  if (!stackScreenIndex) {
+    return true;
+  } else {
+    if (blockIndexArray.includes(stackScreenIndex.index)) {
+      return false;
+    }
+  }
+  return true;
 };
 
 const TabNavigation = () => {
@@ -207,15 +222,15 @@ const TabNavigation = () => {
         component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: { display: getVisibility(0, 1) },
+          tabBarStyle: { display: getVisibility(0, [1]) },
         })}
       />
       <Tab.Screen
         name="인증"
         component={ChallengeCertiStackNavi}
         options={(route) => ({
-          headerShown: "none",
-          tabBarStyle: { display: getVisibility(1, 1) },
+          headerShown: headerVisibility(1, [1, 2]),
+          tabBarStyle: { display: getVisibility(1, [1, 2]) },
         })}
       />
       <Tab.Screen name="재활용" component={Recycle} />

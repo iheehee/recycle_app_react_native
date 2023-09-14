@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     Authorization: jwt,
   };
 
-  const baseUrl = "http://192.168.35.73:8080/";
+  const baseUrl = "http://192.168.0.55:8080/";
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
     return axios({

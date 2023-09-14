@@ -25,9 +25,10 @@ const PeriodContainer = styled.View`
   padding: 0px 0px 0px 0px;
   align-items: center;
 `;
-const CertiBtn = ({ id }) => {
+const CertiBtn = ({ challengeId }) => {
   const navigation = useNavigation();
-  const Camera = () => navigation.navigate("Camera", { id: id });
+  const Camera = () =>
+    navigation.navigate("Camera", { challengeId: challengeId });
 
   return (
     <Button onPress={Camera}>

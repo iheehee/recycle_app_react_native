@@ -59,6 +59,7 @@ const TextBox = styled.Text`
 
 export default ({ challenge }) => {
   const {
+    id,
     title,
     title_banner,
     duration,
@@ -73,14 +74,15 @@ export default ({ challenge }) => {
     notice,
     success_example,
   } = challenge;
+
   const navigation = useNavigation();
   const Certification = () =>
     navigation.navigate("CertificationDetail", {
       screen: "ChallengeCertiDetail",
       params: challenge,
     });
-  //const localIp = "http://192.168.0.55:8080/";
-  const localIp = "http://192.168.35.73:8080/";
+  const localIp = "http://192.168.0.55:8080/";
+  //const localIp = "http://192.168.35.73:8080/";
   let dt = new Date(start_day);
   const startDay = () =>
     `${dt.getFullYear()}. ${dt.getMonth()}. ${dt.getDate()}`;
@@ -126,7 +128,7 @@ export default ({ challenge }) => {
             </IconContainer>
           </ChallengeInfoContainer>
           <BottonContainer>
-            <CertiBtn />
+            <CertiBtn challengeId={id} />
           </BottonContainer>
         </MainContainer>
       </HeaderContainer>

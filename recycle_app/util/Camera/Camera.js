@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
-import ChallengeCertiDetail from "../../screens/Main/Certification/ChallengeCertiDetail";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -23,6 +22,7 @@ export default ({ route }) => {
       setHasCameraPermission(cameraStatus.status === "granted");
     })();
   }, []);
+  const { challengeId } = route.params;
 
   const takePicture = async () => {
     if (cameraRef) {
@@ -50,7 +50,7 @@ export default ({ route }) => {
         });
         await axios({
           method: "post",
-          url: `http://192.168.0.55:8080/challenges/${route.params.id}/certification/`,
+          url: `http://192.168.0.55:8080/challenges/${challengeId}/certification/`,
           data: formData,
           headers: {
             Authorization: jwt,
@@ -72,12 +72,7 @@ export default ({ route }) => {
                   const data = response.data;
                   return setCertificationImage([...data]);
                 });
-                navigation.navigate("ChallengeCerti", {
-                  screen: "ChallengeCertiStatus",
-                  params: {
-                    image: 3,
-                  },
-                });
+                navigation.navigate("CertificationDetail"); //카메라 인증 후 디테일 페이지로 이동
               },
             },
           ]);
@@ -118,7 +113,7 @@ export default ({ route }) => {
             />
             <Button
               icon={"flash"}
-              color={flash === Camera.Constants.FlashMode.off ? "grey" : false}
+              color={flash === Camera.Constants.FlashMode.off ? "gray" : false}
               onPress={() => {
                 setFlash(
                   flash === Camera.Constants.FlashMode.off

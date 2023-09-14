@@ -18,13 +18,13 @@ const TabContainer = styled.View`
   flex: 1;
 `;
 
-const ChallengeCertiDetail = ({ route }) => {
-  
+export default ({ route }) => {
+  const [screenProps, setScreenProps] = useState(route.params);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <HeaderContainer>
-          <CertiHeader route={route.params} />
+          <CertiHeader route={screenProps} />
         </HeaderContainer>
         <TabContainer>
           <CertiTapButton />
@@ -33,5 +33,3 @@ const ChallengeCertiDetail = ({ route }) => {
     </View>
   );
 };
-
-export default ChallengeCertiDetail;
