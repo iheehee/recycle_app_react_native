@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Image, Alert } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Camera, CameraType } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
+import { getMyCertifications } from "../../modules/certificationSlice";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -13,8 +14,8 @@ export default ({ route }) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
-  const [certificationImage, setCertificationImage] = useState([]);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       MediaLibrary.requestPermissionsAsync();
@@ -22,7 +23,7 @@ export default ({ route }) => {
       setHasCameraPermission(cameraStatus.status === "granted");
     })();
   }, []);
-  const { challengeId } = route.params;
+  const { id } = route.params.challenge;
 
   const takePicture = async () => {
     if (cameraRef) {
@@ -38,19 +39,21 @@ export default ({ route }) => {
   };
 
   const jwt = useSelector((state) => state.usersReducer.token);
+  //const localIp = "192.168.35.94:8080";
+  const localIp = "192.168.0.55:8080";
   const saveImage = async () => {
     if (image) {
       try {
         MediaLibrary.createAssetAsync(image);
         const formData = new FormData();
         formData.append("file", {
-          name: `${route.params.id}.jpeg`,
+          name: `${id}.jpeg`,
           type: "image/jpeg",
           uri: image,
         });
         await axios({
           method: "post",
-          url: `http://192.168.0.55:8080/challenges/${challengeId}/certification/`,
+          url: `http://${localIp}/challenges/${id}/certification/`,
           data: formData,
           headers: {
             Authorization: jwt,
@@ -62,21 +65,18 @@ export default ({ route }) => {
             {
               text: "확인",
               onPress: () => {
-                axios({
-                  method: "get",
-                  url: "http://192.168.0.55:8080/users/profile/", //프로필에서 인증 데이터를 불러오는 것으로 리팩토링
-                  headers: {
-                    Authorization: jwt,
+                dispatch(getMyCertifications(jwt));
+                navigation.navigate("CertificationDetail", {
+                  screen: "ChallengeCertiDetail",
+                  params: {
+                    challenge: route.params.challenge,
                   },
-                }).then((response) => {
-                  const data = response.data;
-                  return setCertificationImage([...data]);
-                });
-                navigation.navigate("CertificationDetail"); //카메라 인증 후 디테일 페이지로 이동
+                }); //카메라 인증 후 디테일 페이지로 이동
               },
             },
           ]);
         });
+
         setImage(null);
       } catch (e) {
         console.log(e);

@@ -14,6 +14,7 @@ import MyStatus from "../../screens/Main/Certification/MyStatus";
 const TopButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
+  margin-top: 10px;
   margin-bottom: 5px;
 `;
 const FirstButton = styled.TouchableOpacity`
@@ -72,7 +73,13 @@ const TopButton = ({ route }) => {
           <SecondText isFocused={focused}>참가자 인증 현황</SecondText>
         </SecondButton>
       </TopButtonContainer>
-      <View>{focused === "myStatus" ? <MyStatus /> : <Test />}</View>
+      <View>
+        {focused === "myStatus" ? (
+          <MyStatus challengeId={route.id} />
+        ) : (
+          <Test />
+        )}
+      </View>
     </>
   );
 };

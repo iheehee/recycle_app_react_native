@@ -6,5 +6,6 @@ export default ({}) => {
   const myChallenges = useSelector(
     (state) => state.usersReducer.profile.myChallenges
   );
+
   return <AppliedChallengeList myChallenges={myChallenges} />;
 };

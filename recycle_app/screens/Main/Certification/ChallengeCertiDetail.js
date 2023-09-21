@@ -5,8 +5,8 @@ import ChallengeCertification from "../Challenge/ChallengeCertification";
 import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
 import { View, ScrollView, Dimensions, Text } from "react-native";
 
-const Container = styled.View`
-  flex: 1;
+const BodyContainer = styled.View`
+  align-items: flex-start;
 `;
 const HeaderContainer = styled.View`
   background-color: white;
@@ -19,16 +19,17 @@ const TabContainer = styled.View`
 `;
 
 export default ({ route }) => {
-  const [screenProps, setScreenProps] = useState(route.params);
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <HeaderContainer>
-          <CertiHeader route={screenProps} />
-        </HeaderContainer>
-        <TabContainer>
-          <CertiTapButton />
-        </TabContainer>
+        <BodyContainer>
+          <HeaderContainer>
+            <CertiHeader route={route.params.challenge} />
+          </HeaderContainer>
+          <TabContainer>
+            <CertiTapButton route={route.params.challenge} />
+          </TabContainer>
+        </BodyContainer>
       </ScrollView>
     </View>
   );

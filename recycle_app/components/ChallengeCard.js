@@ -58,6 +58,7 @@ const ChallengeCard = ({
   success_example,
 }) => {
   const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       onPress={() => {

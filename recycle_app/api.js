@@ -5,8 +5,9 @@ const callApi = async (method_type, path, data, jwt) => {
     "Content-Type": "application/json",
     Authorization: jwt,
   };
-
   const baseUrl = "http://192.168.0.55:8080/";
+  //const baseUrl = "http://192.168.35.94:8080";
+
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
     return axios({
@@ -31,5 +32,7 @@ export default {
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
   challengeApply: (form, data, jwt) =>
     callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
+  myCertifications: (jwt) =>
+    callApi("get", "/challenges/my_certifications/", null, jwt),
   profile: (jwt) => callApi("get", "/users/profile/", "", jwt),
 };

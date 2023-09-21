@@ -118,7 +118,7 @@ const ChallengeCertiTapNavi = () => {
           tabBarShowLabel: false,
           tabBarButton: (props) => (
             <Text>
-              <CertiBtn challengeId={route.params.id} />
+              <CertiBtn challenge={route.params.challenge} />
             </Text>
           ),
         })}

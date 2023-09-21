@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import api from "../api";
+import axios from "axios";
 
 const certificationsSlice = createSlice({
   name: "certifications",
@@ -8,22 +9,21 @@ const certificationsSlice = createSlice({
     myCertifications: [],
   },
   reducers: {
-    myCertifications(state, action) {
-      state.myChallenges = action.payload.my_certifications;
+    setMyCertifications(state, action) {
+      state.myCertifications = action.payload.my_certifications;
     },
   },
 });
 
-export const { myCertifications } = certificationsSlice.actions;
+export const { setMyCertifications } = certificationsSlice.actions;
 
-export const getChallenges = (page) => async (dispatch) => {
+export const getMyCertifications = (jwt) => async (dispatch) => {
   try {
-    const { data } = await api.challenges();
+    const { data } = await api.myCertifications(jwt);
 
     dispatch(
-      setChallenges({
-        challenges: data,
-        page,
+      setMyCertifications({
+        my_certifications: data,
       })
     );
   } catch (e) {
