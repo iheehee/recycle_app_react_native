@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     Authorization: jwt,
   };
   const baseUrl = "http://192.168.0.55:8080/";
-  //const baseUrl = "http://192.168.35.94:8080";
+  //const baseUrl = "http://192.168.35.169:8080";
 
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {
@@ -35,4 +35,11 @@ export default {
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
   profile: (jwt) => callApi("get", "/users/profile/", "", jwt),
+  removeCertification: (id, certificationId, jwt) =>
+    callApi(
+      "delete",
+      `/challenges/${id}/certification?certification_id=${certificationId}`,
+      null,
+      jwt
+    ),
 };

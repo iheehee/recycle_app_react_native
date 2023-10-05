@@ -5,6 +5,10 @@ import ChallengeCertification from "../Challenge/ChallengeCertification";
 import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
 import { View, ScrollView, Dimensions, Text } from "react-native";
 
+const BgContainer = styled.View`
+  flex: 1;
+  background-color: white;
+`;
 const BodyContainer = styled.View`
   align-items: flex-start;
 `;
@@ -20,7 +24,7 @@ const TabContainer = styled.View`
 
 export default ({ route }) => {
   return (
-    <View style={{ flex: 1 }}>
+    <BgContainer>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <BodyContainer>
           <HeaderContainer>
@@ -31,6 +35,6 @@ export default ({ route }) => {
           </TabContainer>
         </BodyContainer>
       </ScrollView>
-    </View>
+    </BgContainer>
   );
 };

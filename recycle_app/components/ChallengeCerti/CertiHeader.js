@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { Dimensions, Image } from "react-native";
 import CertiDay from "./CertiDay";
 import CertiExample from "./CertiExample";
+import Ip from "../../util/Ip";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -61,13 +62,12 @@ export default ({ route }) => {
     notice,
     success_example,
   } = route;
-  const localIp = "http://192.168.0.55:8080";
-  //const localIp = "http://192.168.35.94:8080/";
+
   return (
     <BgContainer>
       <BannerContainer>
         <Image
-          source={{ uri: `${localIp}${title_banner}` }}
+          source={{ uri: `${Ip.localIp}${title_banner}` }}
           style={{
             width: width / 1,
             height: height / 3.6,

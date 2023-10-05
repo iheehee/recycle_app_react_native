@@ -4,6 +4,7 @@ import { Dimensions, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import CertiBtn from "../../components/ChallengeCerti/CertiBtn";
 import { Feather } from "@expo/vector-icons";
+import Ip from "../../util/Ip";
 
 const BgContainer = styled.View`
   flex: 1;
@@ -80,8 +81,7 @@ export default ({ challenge, myCertifications }) => {
       screen: "ChallengeCertiDetail",
       params: { challenge: challenge, myCertifications: myCertifications },
     });
-  const localIp = "http://192.168.0.55:8080/";
-  //const localIp = "http://192.168.35.94:8080";
+
   let dt = new Date(start_day);
   const startDay = () =>
     `${dt.getFullYear()}. ${dt.getMonth()}. ${dt.getDate()}`;
@@ -101,7 +101,7 @@ export default ({ challenge, myCertifications }) => {
       <HeaderContainer>
         <ImageContainer>
           <Image
-            source={{ uri: localIp + title_banner }}
+            source={{ uri: Ip.localIp + title_banner }}
             style={{
               width: 50,
               height: 50,

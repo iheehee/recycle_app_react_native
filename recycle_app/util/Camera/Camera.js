@@ -39,7 +39,7 @@ export default ({ route }) => {
   };
 
   const jwt = useSelector((state) => state.usersReducer.token);
-  //const localIp = "192.168.35.94:8080";
+  //const localIp = "192.168.35.169:8080";
   const localIp = "192.168.0.55:8080";
   const saveImage = async () => {
     if (image) {
