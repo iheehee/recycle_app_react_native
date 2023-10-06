@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Dimensions, Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import CertiBtn from "../../components/ChallengeCerti/CertiBtn";
-import { Feather } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Ip from "../../util/Ip";
 
 const BgContainer = styled.View`
@@ -17,20 +16,19 @@ const ImageContainer = styled.View`
   align-content: start;
 `;
 const HeaderContainer = styled.View`
-  margin: 10px;
+  margin: 15px;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 `;
 const ChallengeInfoContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  width: 100%;
 `;
-
 const MainContainer = styled.View`
   margin-left: 15px;
   align-items: left;
   flex-direction: column;
+  width: 71%;
 `;
 const DurationContainer = styled.View`
   margin-top: 5px;
@@ -39,21 +37,20 @@ const DurationContainer = styled.View`
   flex-direction: row;
 `;
 const InfoContainer = styled.View`
-  width: 85%;
+  width: 88%;
 `;
 const IconContainer = styled.View`
-  align-items: center;
+  margin-left: 20px;
 `;
-const BottonContainer = styled.View`
-  margin-top: 30px;
-`;
+
 const Title = styled.Text`
   font-size: 17px;
   font-weight: 400;
   color: #222222;
 `;
 const TextBox = styled.Text`
-  font-size: 15px;
+  font-size: 13px;
+  margin-bottom: 2px;
   font-weight: 400;
   color: gray;
 `;
@@ -111,7 +108,7 @@ export default ({ challenge, myCertifications }) => {
         </ImageContainer>
         <MainContainer>
           <ChallengeInfoContainer>
-            <InfoContainer>
+            <TouchableOpacity onPress={() => Certification()}>
               <Title>{title}</Title>
               <DurationContainer>
                 <TextBox>{`${frequency}, `}</TextBox>
@@ -119,17 +116,16 @@ export default ({ challenge, myCertifications }) => {
               </DurationContainer>
               <TextBox>{"인증시간:" + " " + "00:00:00 ~ 23:59:59"}</TextBox>
               <TextBox>{"시작일:" + "    " + startDay()}</TextBox>
-            </InfoContainer>
-            <IconContainer>
-              <TouchableOpacity onPress={() => Certification()}>
-                <Feather name="chevron-right" size={24} color="#222222" />
-              </TouchableOpacity>
-            </IconContainer>
+            </TouchableOpacity>
           </ChallengeInfoContainer>
-          <BottonContainer>
-            <CertiBtn challenge={challenge} />
-          </BottonContainer>
         </MainContainer>
+        <IconContainer>
+          <MaterialCommunityIcons
+            name="dots-vertical"
+            size={24}
+            color="black"
+          />
+        </IconContainer>
       </HeaderContainer>
     </BgContainer>
   );

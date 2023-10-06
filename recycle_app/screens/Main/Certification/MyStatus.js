@@ -9,13 +9,11 @@ const Container = styled.View`
   flex: 1;
 `;
 const CertificationContainer = styled.View`
+  margin: 10px 20px;
   flex-direction: row;
 `;
 const CardContainer = styled.View`
   margin: 0px 5px;
-`;
-const StyledText = styled.Text`
-  font-size: 30px;
 `;
 
 export default ({ challengeId }) => {
@@ -32,6 +30,7 @@ export default ({ challengeId }) => {
             certification.challenge_id === challengeId ? (
               <CardContainer>
                 <CertificationCard
+                  key={certification.certification_id}
                   challengeId={challengeId}
                   certificationId={certification.certification_id}
                   banner={certification.certification_photo}

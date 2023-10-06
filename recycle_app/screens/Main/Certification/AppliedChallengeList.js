@@ -24,8 +24,8 @@ export default ({ myChallenges }) => {
       >
         <ChallengeContainer>
           {myChallenges.map((challenge) => (
-            <Container key={challenge.id}>
-              <AppliedChallengeCard challenge={challenge} />
+            <Container key={"challengeContainer_" + challenge.id}>
+              <AppliedChallengeCard key={challenge.id} challenge={challenge} />
             </Container>
           ))}
         </ChallengeContainer>

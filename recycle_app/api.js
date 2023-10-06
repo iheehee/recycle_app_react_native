@@ -1,12 +1,13 @@
 import axios from "axios";
+import Ip from "./util/Ip";
 
 const callApi = async (method_type, path, data, jwt) => {
   const headers = {
     "Content-Type": "application/json",
     Authorization: jwt,
   };
-  const baseUrl = "http://192.168.0.55:8080/";
-  //const baseUrl = "http://192.168.35.169:8080";
+
+  const baseUrl = Ip.localIp;
 
   const fullUrl = `${baseUrl}${path}`;
   if (method_type === "get" || method_type === "delete") {

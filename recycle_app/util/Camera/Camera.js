@@ -7,6 +7,7 @@ import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
 import { getMyCertifications } from "../../modules/certificationSlice";
+import Ip from "../Ip";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -39,8 +40,8 @@ export default ({ route }) => {
   };
 
   const jwt = useSelector((state) => state.usersReducer.token);
-  //const localIp = "192.168.35.169:8080";
-  const localIp = "192.168.0.55:8080";
+  const baseUrl = Ip.localIp;
+
   const saveImage = async () => {
     if (image) {
       try {
@@ -53,7 +54,7 @@ export default ({ route }) => {
         });
         await axios({
           method: "post",
-          url: `http://${localIp}/challenges/${id}/certification/`,
+          url: `${baseUrl}/challenges/${id}/certification/`,
           data: formData,
           headers: {
             Authorization: jwt,
