@@ -4,6 +4,7 @@ import { Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Ip from "../../util/Ip";
+import PopUpMenu from "./PopUpMenu";
 
 const BgContainer = styled.View`
   flex: 1;
@@ -18,7 +19,6 @@ const ImageContainer = styled.View`
 const HeaderContainer = styled.View`
   margin: 15px;
   flex-direction: row;
-  align-items: flex-start;
 `;
 const ChallengeInfoContainer = styled.View`
   flex-direction: row;
@@ -26,7 +26,6 @@ const ChallengeInfoContainer = styled.View`
 `;
 const MainContainer = styled.View`
   margin-left: 15px;
-  align-items: left;
   flex-direction: column;
   width: 71%;
 `;
@@ -40,7 +39,10 @@ const InfoContainer = styled.View`
   width: 88%;
 `;
 const IconContainer = styled.View`
-  margin-left: 20px;
+  width: 29%;
+
+  position: relative;
+  right: 50px;
 `;
 
 const Title = styled.Text`
@@ -55,7 +57,7 @@ const TextBox = styled.Text`
   color: gray;
 `;
 
-export default ({ challenge, myCertifications }) => {
+export default ({ challenge }) => {
   const {
     id,
     title,
@@ -76,7 +78,7 @@ export default ({ challenge, myCertifications }) => {
   const Certification = () =>
     navigation.navigate("CertificationDetail", {
       screen: "ChallengeCertiDetail",
-      params: { challenge: challenge, myCertifications: myCertifications },
+      params: { challenge: challenge },
     });
 
   let dt = new Date(start_day);
@@ -110,6 +112,7 @@ export default ({ challenge, myCertifications }) => {
           <ChallengeInfoContainer>
             <TouchableOpacity onPress={() => Certification()}>
               <Title>{title}</Title>
+
               <DurationContainer>
                 <TextBox>{`${frequency}, `}</TextBox>
                 <TextBox>{duration}</TextBox>
@@ -120,11 +123,7 @@ export default ({ challenge, myCertifications }) => {
           </ChallengeInfoContainer>
         </MainContainer>
         <IconContainer>
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={24}
-            color="black"
-          />
+          <PopUpMenu />
         </IconContainer>
       </HeaderContainer>
     </BgContainer>

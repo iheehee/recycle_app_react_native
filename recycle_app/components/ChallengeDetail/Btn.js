@@ -48,7 +48,7 @@ const Btn = ({ params }) => {
                         onPress: () => {
                           return navigation.navigate("ChallengeCerti", {
                             screen: "ChallengeCertiDetail",
-                            params: params,
+                            params: { challenge: params },
                           });
                         },
                       },

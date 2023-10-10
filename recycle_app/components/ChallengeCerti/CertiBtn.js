@@ -1,8 +1,6 @@
 import React from "react";
-import { Alert } from "react-native";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
-
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
@@ -17,12 +15,7 @@ const Text = styled.Text`
   justify-content: "center";
   font-size: 15px;
 `;
-const PeriodContainer = styled.View`
-  width: 100%;
-  flex: 1;
-  padding: 0px 0px 0px 0px;
-  align-items: center;
-`;
+
 const CertiBtn = ({ challenge }) => {
   const navigation = useNavigation();
   const Camera = () => navigation.navigate("Camera", { challenge });

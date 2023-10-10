@@ -24,14 +24,14 @@ const HeaderContainer = styled.View`
 `;
 
 const TitleContainer = styled.Text`
-  margin: 16px 0px 0px 6px;
+  margin: 16px 0px 0px 30px;
   font-size: 22px;
   font-weight: 600;
   color: white;
 `;
 
 const BannerContainer = styled.View`
-  align-items: center;
+  align-items: flex-start;
   background-color: black;
 `;
 

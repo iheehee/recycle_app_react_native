@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 import AppliedChallengeCard from "../../../components/ChallengeCerti/AppliedChallengeCard";
+import PopUpMenu from "../../../components/ChallengeCerti/PopUpMenu";
 
 const MainContainer = styled.View`
   flex: 1;

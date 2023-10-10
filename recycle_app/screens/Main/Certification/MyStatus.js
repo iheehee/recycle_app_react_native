@@ -28,7 +28,9 @@ export default ({ challengeId }) => {
         <CertificationContainer>
           {myCertifications.map((certification) =>
             certification.challenge_id === challengeId ? (
-              <CardContainer>
+              <CardContainer
+                key={"cardContainer_" + certification.certification_id}
+              >
                 <CertificationCard
                   key={certification.certification_id}
                   challengeId={challengeId}
