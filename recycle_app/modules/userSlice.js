@@ -41,7 +41,6 @@ export const userLogin = (form) => async (dispatch) => {
 export const getMyChallenges = (jwt) => async (dispatch) => {
   try {
     const { data } = await api.profile(jwt);
-    console.log(data);
     dispatch(myChallenges({ profile: data }));
   } catch (e) {
     console.warn(e);

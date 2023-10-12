@@ -1,83 +1,88 @@
-/* import React from "react";
-import { Text, TouchableWithoutFeedback } from "react-native";
-import {
-  Menu,
-  MenuProvider,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from "react-native-popup-menu";
+import React, { useState } from "react";
+import { BottomSheet, Button, ListItem } from "@rneui/themed";
+import { StyleSheet, TouchableOpacity, Dimensions, Alert } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import api from "../../api";
+import Ip from "../../util/Ip";
+import axios from "axios";
+import { getMyChallenges } from "../../modules/userSlice";
 
-const PopUpMenu = () => (
-  <TouchableWithoutFeedback onPress={() => null}>
-    <MenuProvider
-      style={{
-        flexDirection: "column",
-        alignItems: "flex-end",
-      }}
-    >
-      <Menu onSelect={(value) => alert(`Selected number: ${value}`)}>
-        <MenuTrigger>
-          <MaterialCommunityIcons
-            name="dots-vertical"
-            size={24}
-            color="black"
-          />
-        </MenuTrigger>
-        <MenuOptions
-          customStyles={{
-            optionsWrapper: {
-              backgroundColor: "yellow",
-            },
-          }}
-        >
-          <MenuOption value={1} text="One" />
-          <MenuOption value={2}>
-            <Text style={{ color: "red" }}>Two</Text>
-          </MenuOption>
-          <MenuOption value={3} disabled={true} text="Three" />
-        </MenuOptions>
-      </Menu>
-    </MenuProvider>
-  </TouchableWithoutFeedback>
-);
+const { width, height } = Dimensions.get("screen");
 
-export default PopUpMenu; */
-import * as React from "react";
-import { View } from "react-native";
-import { Button, Menu, Divider, PaperProvider } from "react-native-paper";
-
-const MyComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
+const BottomSheetMenu = (params) => {
+  const { challengeId } = params;
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const dispatch = useDispatch();
+  const [isVisible, setIsVisible] = useState(false);
+  const contentStyle = {
+    width: width,
+    alignItems: "center",
+  };
+  const list = [
+    {
+      title: "채린지 탈퇴하기",
+      contentStyle: contentStyle,
+    },
+    {
+      title: "Cancel",
+      containerStyle: {
+        backgroundColor: "red",
+      },
+      contentStyle: contentStyle,
+      titleStyle: { color: "white" },
+      onPress: () => setIsVisible(false),
+    },
+  ];
+  const aa = (challengeId, jwt) => {
+    console.log(jwt);
+    return axios({
+      method: "delete",
+      url:
+        "http://192.168.0.55:8080/challenges/leave_challenge/?challenge_id=" +
+        challengeId,
+      headers: {
+        Authorization: jwt,
+        "Content-Type": "application/json",
+      },
+    }).then(
+      (response) => dispatch(getMyChallenges(jwt))
+      /* () => setIsVisible(true) */
+    );
+  };
 
   return (
-    <PaperProvider>
-      <View
-        style={{
-          paddingTop: 50,
-          flexDirection: "row",
-          justifyContent: "center",
-          position: "relative",
-        }}
+    <SafeAreaProvider>
+      <TouchableOpacity onPress={() => aa(challengeId, jwt)}>
+        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
+      </TouchableOpacity>
+      <BottomSheet
+        containerStyle={{ marginBottom: 20 }}
+        onBackdropPress={() => setIsVisible(false)}
+        modalProps={{}}
+        isVisible={isVisible}
       >
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={<Button onPress={openMenu}>Show menu</Button>}
-        >
-          <Menu.Item onPress={() => {}} title="Item 1" />
-          <Menu.Item onPress={() => {}} title="Item 2" />
-          <Divider />
-          <Menu.Item onPress={() => {}} title="Item 3" />
-        </Menu>
-      </View>
-    </PaperProvider>
+        {/* {list.map((l, i) => (
+          <ListItem
+            key={i}
+            containerStyle={l.containerStyle}
+            onPress={l.onPress}
+          >
+            <ListItem.Content style={l.contentStyle}>
+              <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+            </ListItem.Content>
+          </ListItem>
+        ))} */}
+      </BottomSheet>
+    </SafeAreaProvider>
   );
 };
 
-export default MyComponent;
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+  },
+});
+
+export default BottomSheetMenu;

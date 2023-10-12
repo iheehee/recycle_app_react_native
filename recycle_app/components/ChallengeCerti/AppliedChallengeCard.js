@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import { Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Ip from "../../util/Ip";
-import PopUpMenu from "./PopUpMenu";
+import BottomSheetMenu from "./PopUpMenu";
 
 const BgContainer = styled.View`
   flex: 1;
@@ -35,14 +34,10 @@ const DurationContainer = styled.View`
   width: 100%;
   flex-direction: row;
 `;
-const InfoContainer = styled.View`
-  width: 88%;
-`;
+
 const IconContainer = styled.View`
   width: 29%;
-
-  position: relative;
-  right: 50px;
+  margin-left: 20px;
 `;
 
 const Title = styled.Text`
@@ -74,6 +69,7 @@ export default ({ challenge }) => {
     notice,
     success_example,
   } = challenge;
+
   const navigation = useNavigation();
   const Certification = () =>
     navigation.navigate("CertificationDetail", {
@@ -87,13 +83,13 @@ export default ({ challenge }) => {
   return (
     <BgContainer
       style={{
-        shadowColor: "#000",
+        /* shadowColor: "#000",
         shadowOffset: {
           width: 1,
           height: 1,
         },
         shadowOpacity: 0.1,
-        shadowRadius: 4,
+        shadowRadius: 4, */
         borderRadius: 15,
       }}
     >
@@ -123,7 +119,7 @@ export default ({ challenge }) => {
           </ChallengeInfoContainer>
         </MainContainer>
         <IconContainer>
-          <PopUpMenu />
+          <BottomSheetMenu challengeId={id} />
         </IconContainer>
       </HeaderContainer>
     </BgContainer>

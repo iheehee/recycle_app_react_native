@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     "Content-Type": "application/json",
     Authorization: jwt,
   };
-
+  
   const baseUrl = Ip.localIp;
 
   const fullUrl = `${baseUrl}${path}`;
@@ -33,6 +33,14 @@ export default {
   challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
   challengeApply: (form, data, jwt) =>
     callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
+  leaveChallenge: (challengeId, jwt) => {
+    callApi(
+      "delete",
+      `/challenges/3/leave_challenge?challenge_id=${challengeId}`,
+      null,
+      jwt
+    );
+  },
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
   profile: (jwt) => callApi("get", "/users/profile/", "", jwt),
