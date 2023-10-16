@@ -83,13 +83,13 @@ export default ({ challenge }) => {
   return (
     <BgContainer
       style={{
-        /* shadowColor: "#000",
+        shadowColor: "#000",
         shadowOffset: {
           width: 1,
           height: 1,
         },
         shadowOpacity: 0.1,
-        shadowRadius: 4, */
+        shadowRadius: 4,
         borderRadius: 15,
       }}
     >

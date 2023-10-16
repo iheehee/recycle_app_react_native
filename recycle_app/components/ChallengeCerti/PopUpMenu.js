@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { BottomSheet, Button, ListItem } from "@rneui/themed";
-import { StyleSheet, TouchableOpacity, Dimensions, Alert } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  Alert,
+  SafeAreaView,
+  Text,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -24,6 +31,7 @@ const BottomSheetMenu = (params) => {
     {
       title: "채린지 탈퇴하기",
       contentStyle: contentStyle,
+      onPress: () => leaveChallenge(challengeId, jwt),
     },
     {
       title: "Cancel",
@@ -35,8 +43,7 @@ const BottomSheetMenu = (params) => {
       onPress: () => setIsVisible(false),
     },
   ];
-  const aa = (challengeId, jwt) => {
-    console.log(jwt);
+  const leaveChallenge = (challengeId, jwt) => {
     return axios({
       method: "delete",
       url:
@@ -47,14 +54,17 @@ const BottomSheetMenu = (params) => {
         "Content-Type": "application/json",
       },
     }).then(
-      (response) => dispatch(getMyChallenges(jwt))
-      /* () => setIsVisible(true) */
+      (response) => {
+        dispatch(getMyChallenges(jwt));
+        return console.log(response.data);
+      }
+      /* () => aa(challengeId, jwt) */
     );
   };
 
   return (
-    <SafeAreaProvider>
-      <TouchableOpacity onPress={() => aa(challengeId, jwt)}>
+    <SafeAreaView>
+      <TouchableOpacity onPress={() => setIsVisible(true)}>
         <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
       </TouchableOpacity>
       <BottomSheet
@@ -63,26 +73,20 @@ const BottomSheetMenu = (params) => {
         modalProps={{}}
         isVisible={isVisible}
       >
-        {/* {list.map((l, i) => (
+        {list.map((l, i) => (
           <ListItem
             key={i}
             containerStyle={l.containerStyle}
             onPress={l.onPress}
           >
             <ListItem.Content style={l.contentStyle}>
-              <ListItem.Title style={l.titleStyle}>{l.title}</ListItem.Title>
+              <Text style={l.titleStyle}>{l.title}</Text>
             </ListItem.Content>
           </ListItem>
-        ))} */}
+        ))}
       </BottomSheet>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 10,
-  },
-});
 
 export default BottomSheetMenu;

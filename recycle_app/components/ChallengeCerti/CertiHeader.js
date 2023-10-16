@@ -62,7 +62,6 @@ export default ({ route }) => {
     notice,
     success_example,
   } = route;
-
   return (
     <BgContainer>
       <BannerContainer>

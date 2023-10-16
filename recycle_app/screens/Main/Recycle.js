@@ -1,19 +1,19 @@
-import React from 'react';
-import styled from 'styled-components/native';
+import React from "react";
+import styled from "styled-components/native";
 
 const Container = styled.View`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 const StyledText = styled.Text`
-    font-size: 30px;
-`
+  font-size: 30px;
+`;
 
 export default () => {
-    return(
+  return (
     <Container>
-        <StyledText>Recycle</StyledText>
+      <StyledText>Recycle</StyledText>
     </Container>
-    );
-}
+  );
+};

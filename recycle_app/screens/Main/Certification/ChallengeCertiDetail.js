@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import CertiHeader from "../../../components/ChallengeCerti/CertiHeader";
-import ChallengeCertification from "../Challenge/ChallengeCertification";
 import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
-import { View, ScrollView, Dimensions, Text } from "react-native";
+import { ScrollView } from "react-native";
 
 const BgContainer = styled.View`
   flex: 1;
