@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigationState } from "@react-navigation/native";
@@ -7,14 +8,16 @@ import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertifica
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import CertificationContainer from "../screens/Main/Certification/CertificationContainer";
 import ChallengeCertiDetail from "../screens/Main/Certification/ChallengeCertiDetail";
+import ChallengeCreate from "../screens/Main/Challenge/ChallengeCreate";
 import Recycle from "../screens/Main/Recycle";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
+import HeaderButton from "../components/ChallengeDetail/HeaderButton";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -41,6 +44,10 @@ const ChallengeStackNavi = () => {
         component={ChallengeIndex}
         options={{
           title: null,
+          headerRightContainerStyle: { paddingRight: 10 },
+          headerRight: () => (
+            <HeaderButton shape={"plus"} onPress={"ChallengeCreate"} />
+          ),
         }}
       />
       <Stack.Screen
@@ -53,6 +60,13 @@ const ChallengeStackNavi = () => {
       <Stack.Screen
         name="ChallengeCerti"
         component={ChallengeCertiTapNavi}
+        options={{
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="ChallengeCreate"
+        component={ChallengeCreate}
         options={{
           title: null,
         }}
