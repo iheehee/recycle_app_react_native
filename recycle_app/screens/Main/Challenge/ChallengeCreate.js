@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import styled from "styled-components/native";
-import { Text, Button } from "@rneui/themed";
+import { Text, Button, ButtonGroup } from "@rneui/themed";
+import TimeButton from "../../../components/ChallengeCreate/TimeButton";
 
 const BgContainer = styled.View`
   width: 100%;
@@ -82,6 +83,8 @@ export default () => {
           ))}
         </ScrollView>
       </DurationContainer>
+      <Text h4>인증 가능 시간</Text>
+      <TimeButton />
     </BgContainer>
   );
 };
