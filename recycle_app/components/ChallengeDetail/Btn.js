@@ -46,10 +46,8 @@ const Btn = ({ params }) => {
                       {
                         text: "이동",
                         onPress: () => {
-                          return navigation.navigate("ChallengeCerti", {
-                            screen: "ChallengeCertiDetail",
-                            params: { challenge: params },
-                          });
+                          navigation.navigate("ChallengeIndex");
+                          return navigation.navigate("MyChallenge");
                         },
                       },
                       {
