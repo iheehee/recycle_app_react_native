@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { BottomSheet, Button, ListItem } from "@rneui/themed";
+import { BottomSheet, ListItem } from "@rneui/themed";
 import {
-  StyleSheet,
+  SafeAreaView,
   TouchableOpacity,
   Dimensions,
   Alert,
-  SafeAreaView,
   Text,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import api from "../../api";
 import Ip from "../../util/Ip";
 import axios from "axios";
 import { getMyChallenges } from "../../modules/userSlice";
@@ -44,22 +42,38 @@ const BottomSheetMenu = (params) => {
     },
   ];
   const leaveChallenge = (challengeId, jwt) => {
-    return axios({
-      method: "delete",
-      url:
-        "http://192.168.0.55:8080/challenges/leave_challenge/?challenge_id=" +
-        challengeId,
-      headers: {
-        Authorization: jwt,
-        "Content-Type": "application/json",
+    return Alert.alert("챌린지를 탈퇴 하시겠습니까?", "", [
+      {
+        text: "확인",
+        onPress: () => {
+          axios({
+            method: "delete",
+            url:
+              Ip.localIp +
+              "/challenges/leave_challenge/?challenge_id=" +
+              challengeId,
+            headers: {
+              Authorization: jwt,
+              "Content-Type": "application/json",
+            },
+          }).then((response) => {
+            const { result } = response.data;
+            Alert.alert(result, "", [
+              {
+                text: "확인",
+                onPress: () => {
+                  dispatch(getMyChallenges(jwt));
+                },
+              },
+            ]);
+          });
+        },
       },
-    }).then(
-      (response) => {
-        dispatch(getMyChallenges(jwt));
-        return console.log(response.data);
-      }
-      /* () => aa(challengeId, jwt) */
-    );
+      {
+        text: "취소",
+        style: "destructive",
+      },
+    ]);
   };
 
   return (

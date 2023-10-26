@@ -7,9 +7,12 @@ import {
   ImagePickerIOS,
 } from "react-native";
 import styled from "styled-components/native";
-import { Text, Button, Divider } from "@rneui/themed";
+import { Text, Button, Divider, Tile } from "@rneui/themed";
 import TimeButton from "../../../components/ChallengeCreate/TimeButton";
 import ImagePicker from "../../../util/Camera/ImagePicker";
+import InputSpinner from "react-native-input-spinner";
+import { round } from "react-native-reanimated";
+import CertificationExampleCard from "../../../components/ChallengeCreate/CertificationExampleCard";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -39,7 +42,16 @@ const Input = styled.TextInput`
   margin-bottom: 10px;
   font-weight: 500;
 `;
-
+const styles = StyleSheet.create({
+  subHeader: {
+    backgroundColor: "gray",
+    color: "white",
+    textAlign: "center",
+    paddingVertical: 5,
+    marginBottom: 10,
+    width: 200,
+  },
+});
 export default ({ route }) => {
   console.log(route);
   let data = [0, 1, 2, 3, 4];
@@ -55,6 +67,8 @@ export default ({ route }) => {
     dt.setDate(Plusdate);
     return `${dt.getMonth() + 1}.${dt.getDate()}`;
   };
+  const [num, setNum] = useState(null);
+
   return (
     <ScrollView>
       <BgContainer>
@@ -148,7 +162,10 @@ export default ({ route }) => {
           style={{ height: 200, textAlignVertical: "top" }}
         />
         <Text h4>인증샷 예시</Text>
-        <ImagePicker />
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <CertificationExampleCard />
+          <ImagePicker />
+        </ScrollView>
         <Text h4>챌린지 소개</Text>
         <Input
           multiline={true}
@@ -156,6 +173,16 @@ export default ({ route }) => {
           placeholder="INPUT WITH ERROR MESSAGE"
           maxLength={500}
           style={{ height: 200, textAlignVertical: "top" }}
+        />
+        <Text h4>챌린지 최대인원</Text>
+        <InputSpinner
+          style={{ width: 200 }}
+          buttonStyle={{ borderRadius: 5 }}
+          max={20}
+          min={1}
+          onChange={(num) => {
+            setNum(num);
+          }}
         />
       </BgContainer>
     </ScrollView>
