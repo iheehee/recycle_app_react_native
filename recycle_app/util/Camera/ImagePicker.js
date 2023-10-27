@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Platform } from "react-native";
+import { Image, View, Platform } from "react-native";
+import { Text, Button, Divider, Tile } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
+import { Feather } from "@expo/vector-icons";
 
-export default function ImagePickerExample() {
+export default ({ title }) => {
   const [image, setImage] = useState(null);
 
   const pickImage = async () => {
@@ -22,14 +24,38 @@ export default function ImagePickerExample() {
 
   return (
     <TouchableOpacity
-      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       onPress={pickImage}
     >
-      <View>
-        {image ? (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        ) : null}
-      </View>
+      {!image ? (
+        <>
+          <Feather name="camera" size={35} color="white" />
+
+          {title === "인증 성공" ? (
+            <Text style={{ color: "gray", marginTop: 10 }}>
+              인증 성공 예시를 추가해주세요.
+            </Text>
+          ) : (
+            <Text style={{ color: "gray", marginTop: 10 }}>
+              인증 실패 예시를 추가해주세요.
+            </Text>
+          )}
+        </>
+      ) : (
+        <Image
+          source={{ uri: image }}
+          style={{
+            width: 200,
+            height: 200,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+          }}
+        />
+      )}
     </TouchableOpacity>
   );
-}
+};

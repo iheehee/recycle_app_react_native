@@ -3,40 +3,47 @@ import { TouchableOpacity, Alert, View, StyleSheet } from "react-native";
 import { Text, Button, ButtonGroup } from "@rneui/themed";
 import ImagePicker from "../../util/Camera/ImagePicker";
 
-export default () => {
+export default ({ title, type }) => {
   const styles = StyleSheet.create({
     subHeader: {
-      backgroundColor: "gray",
       color: "white",
-      textAlign: "center",
-      paddingVertical: 5,
-      marginBottom: 10,
-      width: 200,
+      marginTop: 6,
     },
   });
   return (
     <>
-      <View style={{ height: 230, width: 200, alignItems: "center" }}>
+      <View
+        style={{
+          height: 230,
+          width: 200,
+          alignItems: "center",
+          marginRight: 20,
+        }}
+      >
         <View
           style={{
-            borderColor: "gray",
-            borderWidth: 0.5,
+            borderTopLeftRadius: 15,
+            borderTopRightRadius: 15,
+            backgroundColor: "#EAECEE",
             height: 200,
             width: 200,
           }}
         >
-          <ImagePicker />
+          <ImagePicker title={title} />
         </View>
-        <Text style={styles.subHeader}>인증 성공</Text>
-        {/* <Tile
-              imageSrc={{
-                uri: "https://www.mediastorehouse.com/p/191/sunset-porthmeor-beach-st-ives-cornwall-11702500.jpg.webp",
-              }}
-              titleStyle={{ fontSize: 15 }}
-              featured
-              activeOpacity={1}
-              width={200}
-            /> */}
+        <View
+          style={{
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius: 15,
+            width: 200,
+            height: 30,
+            backgroundColor: "gray",
+
+            alignItems: "center",
+          }}
+        >
+          <Text style={styles.subHeader}>{title}</Text>
+        </View>
       </View>
     </>
   );

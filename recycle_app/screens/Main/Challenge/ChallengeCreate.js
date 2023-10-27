@@ -1,23 +1,19 @@
-import React, { useState } from "react";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  Dimensions,
-  ImagePickerIOS,
-} from "react-native";
+import React, { useState, useRef } from "react";
+import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
 import styled from "styled-components/native";
-import { Text, Button, Divider, Tile } from "@rneui/themed";
+import { Text, Button, Divider, Input } from "@rneui/themed";
 import TimeButton from "../../../components/ChallengeCreate/TimeButton";
-import ImagePicker from "../../../util/Camera/ImagePicker";
 import InputSpinner from "react-native-input-spinner";
-import { round } from "react-native-reanimated";
 import CertificationExampleCard from "../../../components/ChallengeCreate/CertificationExampleCard";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width, height } = Dimensions.get("screen");
-const BgContainer = styled.View`
+const MainContainer = styled.View`
   flex: 1;
   background-color: white;
+`;
+const BgContainer = styled.View`
+  margin: 30px 15px;
 `;
 const FrequencyContainer = styled.View``;
 const DurationContainer = styled.View``;
@@ -33,27 +29,17 @@ const CertificationTimeContainer = styled.View`
   justify-content: space-evenly;
   background-color: #eeeeee;
 `;
-const Input = styled.TextInput`
-  width: 350px;
+/* const inputStyle = {
+  width: 350,
   padding: 12.5px 20px;
   border: 1px solid grey;
   background-color: white;
   border-radius: 10px;
   margin-bottom: 10px;
   font-weight: 500;
-`;
-const styles = StyleSheet.create({
-  subHeader: {
-    backgroundColor: "gray",
-    color: "white",
-    textAlign: "center",
-    paddingVertical: 5,
-    marginBottom: 10,
-    width: 200,
-  },
-});
+}; */
+
 export default ({ route }) => {
-  console.log(route);
   let data = [0, 1, 2, 3, 4];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const activeStyle = { backgroundColor: "gray" };
@@ -68,123 +54,151 @@ export default ({ route }) => {
     return `${dt.getMonth() + 1}.${dt.getDate()}`;
   };
   const [num, setNum] = useState(null);
-
+  const input = useRef(null);
   return (
-    <ScrollView>
-      <BgContainer>
-        <Text h3>챌린지를 만들어주세요!</Text>
-        <Text h4>챌린지 제목</Text>
-        <Input />
-        <FrequencyContainer>
-          <Text h4>인증 빈도</Text>
+    <KeyboardAwareScrollView>
+      <MainContainer>
+        <BgContainer>
+          <Text h3>챌린지를 만들어주세요!</Text>
+          <Text h4>챌린지 제목</Text>
+          <Input style={{ width: 395 }} />
+          <FrequencyContainer>
+            <Text h4>인증 빈도</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {data.map((item, idx) => (
+                <Button
+                  title="버튼입니다."
+                  type="outline"
+                  titleStyle={buttonStyle.title}
+                  containerStyle={{
+                    width: 100,
+                    marginHorizontal: 5,
+                    marginVertical: 5,
+                    borderRadius: 10,
+                    borderWidth: 0.05,
+                  }}
+                  buttonStyle={
+                    idx === selectedIndex ? activeStyle : buttonStyle.button
+                  }
+                  onPress={() => setSelectedIndex(idx)}
+                  activeOpacity={0.9}
+                />
+              ))}
+            </ScrollView>
+          </FrequencyContainer>
+          <DurationContainer>
+            <Text h4>챌린지 기간</Text>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {data.map((item, idx) => (
+                <Button
+                  title="버튼입니다."
+                  type="outline"
+                  titleStyle={buttonStyle.title}
+                  containerStyle={{
+                    width: 100,
+                    marginHorizontal: 5,
+                    marginVertical: 5,
+                    borderRadius: 10,
+                    borderWidth: 0.05,
+                  }}
+                  buttonStyle={
+                    idx === selectedIndex ? activeStyle : buttonStyle.button
+                  }
+                  onPress={() => setSelectedIndex(idx)}
+                  activeOpacity={0.9}
+                />
+              ))}
+            </ScrollView>
+          </DurationContainer>
+          <Text h4>인증 가능 시간</Text>
+          <CertificationTimeContainer>
+            <TimeButton beginEnd="begin" />
+            <Divider orientation="vertical" width={1} style={{ width: 1 }} />
+            <TimeButton beginEnd="end" />
+          </CertificationTimeContainer>
+          <Text h4>시작일</Text>
+          <BeginDayContainer>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {data.map((item, idx) => (
+                <Button
+                  title={<Text>{dateTime(idx)}</Text>}
+                  type="outline"
+                  titleStyle={buttonStyle.title}
+                  containerStyle={{
+                    width: 100,
+                    marginHorizontal: 5,
+                    marginVertical: 5,
+                    borderRadius: 10,
+                    borderWidth: 0.05,
+                  }}
+                  buttonStyle={
+                    idx === selectedIndex ? activeStyle : buttonStyle.button
+                  }
+                  onPress={() => setSelectedIndex(idx)}
+                  activeOpacity={0.9}
+                />
+              ))}
+            </ScrollView>
+          </BeginDayContainer>
+
+          <Text h4>챌린지 소개</Text>
+
+          <Input
+            multiline={true}
+            numberOfLines={10}
+            placeholder="INPUT WITH ERROR MESSAGE"
+            maxLength={500}
+            style={{
+              height: 200,
+              width: 395,
+              textAlignVertical: "top",
+            }}
+            ref={input}
+            onFocus={(e) => console.log(e)}
+            isFocused={true}
+          />
+
+          <Text h4>인증 방법</Text>
+          <Input
+            multiline={true}
+            numberOfLines={10}
+            placeholder="INPUT WITH ERROR MESSAGE"
+            maxLength={500}
+            style={{ height: 200, textAlignVertical: "top", width: 395 }}
+            disabledInputStyle={{ backgroundColor: "gray" }}
+            onBlur={(e) => console.log(e)}
+          />
+          <Text h4>인증샷 예시</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {data.map((item, idx) => (
-              <Button
-                title="버튼입니다."
-                type="outline"
-                titleStyle={buttonStyle.title}
-                containerStyle={{
-                  width: 100,
-                  marginHorizontal: 5,
-                  marginVertical: 5,
-                  borderRadius: 10,
-                  borderWidth: 0.05,
-                }}
-                buttonStyle={
-                  idx === selectedIndex ? activeStyle : buttonStyle.button
-                }
-                onPress={() => setSelectedIndex(idx)}
-                activeOpacity={0.9}
-              />
-            ))}
+            <CertificationExampleCard title={"인증 성공"} />
+            <CertificationExampleCard title={"인증 실패"} />
           </ScrollView>
-        </FrequencyContainer>
-        <DurationContainer>
-          <Text h4>챌린지 기간</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {data.map((item, idx) => (
-              <Button
-                title="버튼입니다."
-                type="outline"
-                titleStyle={buttonStyle.title}
-                containerStyle={{
-                  width: 100,
-                  marginHorizontal: 5,
-                  marginVertical: 5,
-                  borderRadius: 10,
-                  borderWidth: 0.05,
-                }}
-                buttonStyle={
-                  idx === selectedIndex ? activeStyle : buttonStyle.button
-                }
-                onPress={() => setSelectedIndex(idx)}
-                activeOpacity={0.9}
-              />
-            ))}
-          </ScrollView>
-        </DurationContainer>
-        <Text h4>인증 가능 시간</Text>
-        <CertificationTimeContainer>
-          <TimeButton beginEnd="begin" />
-          <Divider orientation="vertical" width={1} style={{ width: 1 }} />
-          <TimeButton beginEnd="end" />
-        </CertificationTimeContainer>
-        <Text h4>시작일</Text>
-        <BeginDayContainer>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {data.map((item, idx) => (
-              <Button
-                title={<Text>{dateTime(idx)}</Text>}
-                type="outline"
-                titleStyle={buttonStyle.title}
-                containerStyle={{
-                  width: 100,
-                  marginHorizontal: 5,
-                  marginVertical: 5,
-                  borderRadius: 10,
-                  borderWidth: 0.05,
-                }}
-                buttonStyle={
-                  idx === selectedIndex ? activeStyle : buttonStyle.button
-                }
-                onPress={() => setSelectedIndex(idx)}
-                activeOpacity={0.9}
-              />
-            ))}
-          </ScrollView>
-        </BeginDayContainer>
-        <Text h4>인증 방법</Text>
-        <Input
-          multiline={true}
-          numberOfLines={10}
-          placeholder="INPUT WITH ERROR MESSAGE"
-          maxLength={500}
-          style={{ height: 200, textAlignVertical: "top" }}
-        />
-        <Text h4>인증샷 예시</Text>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <CertificationExampleCard />
-          <ImagePicker />
-        </ScrollView>
-        <Text h4>챌린지 소개</Text>
-        <Input
-          multiline={true}
-          numberOfLines={10}
-          placeholder="INPUT WITH ERROR MESSAGE"
-          maxLength={500}
-          style={{ height: 200, textAlignVertical: "top" }}
-        />
-        <Text h4>챌린지 최대인원</Text>
-        <InputSpinner
-          style={{ width: 200 }}
-          buttonStyle={{ borderRadius: 5 }}
-          max={20}
-          min={1}
-          onChange={(num) => {
-            setNum(num);
-          }}
-        />
-      </BgContainer>
-    </ScrollView>
+          <Text h4>챌린지 최대인원</Text>
+          <InputSpinner
+            style={{
+              width: 200,
+              shadowOpacity: 0,
+              borderWidth: 1,
+              borderColor: "gray",
+            }}
+            skin="clean"
+            max={20}
+            min={1}
+            onChange={(num) => {
+              setNum(num);
+            }}
+          />
+        </BgContainer>
+      </MainContainer>
+    </KeyboardAwareScrollView>
   );
 };
