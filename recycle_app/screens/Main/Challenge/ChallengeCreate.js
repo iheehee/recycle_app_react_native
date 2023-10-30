@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { Text, Button, Divider, Input } from "@rneui/themed";
 import TimeButton from "../../../components/ChallengeCreate/TimeButton";
 import InputSpinner from "react-native-input-spinner";
 import CertificationExampleCard from "../../../components/ChallengeCreate/CertificationExampleCard";
+import FrequencyButtonGroup from "../../../components/ChallengeCreate/FrequencyButtonGroup";
+import DurationButtonGroup from "../../../components/ChallengeCreate/DurationButtonGroup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width, height } = Dimensions.get("screen");
@@ -40,6 +42,8 @@ const CertificationTimeContainer = styled.View`
 }; */
 
 export default ({ route }) => {
+  /* const { durationsData, frequencyData } = route.params; */
+
   let data = [0, 1, 2, 3, 4];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const activeStyle = { backgroundColor: "gray" };
@@ -53,68 +57,38 @@ export default ({ route }) => {
     dt.setDate(Plusdate);
     return `${dt.getMonth() + 1}.${dt.getDate()}`;
   };
+  const [title, setTitle] = useState(null);
+  const [startDay, setStartDay] = useState(null);
+  const [frequency, setFrequency] = useState(null);
+  const [durations, setDurations] = useState(null);
   const [num, setNum] = useState(null);
-  const input = useRef(null);
+  /* useEffect(() => {
+    if (route.params.durationsData) {
+      setDurations(route.params.durationsData);
+    }
+    if (route.params.frequencyData) {
+      setFrequency(route.params.frequencyData);
+    }
+  }, [durationsData, frequencyData]); */
+  console.log(frequency);
   return (
     <KeyboardAwareScrollView>
       <MainContainer>
         <BgContainer>
           <Text h3>챌린지를 만들어주세요!</Text>
           <Text h4>챌린지 제목</Text>
-          <Input style={{ width: 395 }} />
+          <Input
+            style={{ width: 395 }}
+            value={title}
+            onChangeText={(text) => setTitle(text)}
+          />
           <FrequencyContainer>
             <Text h4>인증 빈도</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {data.map((item, idx) => (
-                <Button
-                  title="버튼입니다."
-                  type="outline"
-                  titleStyle={buttonStyle.title}
-                  containerStyle={{
-                    width: 100,
-                    marginHorizontal: 5,
-                    marginVertical: 5,
-                    borderRadius: 10,
-                    borderWidth: 0.05,
-                  }}
-                  buttonStyle={
-                    idx === selectedIndex ? activeStyle : buttonStyle.button
-                  }
-                  onPress={() => setSelectedIndex(idx)}
-                  activeOpacity={0.9}
-                />
-              ))}
-            </ScrollView>
+            <FrequencyButtonGroup />
           </FrequencyContainer>
           <DurationContainer>
             <Text h4>챌린지 기간</Text>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {data.map((item, idx) => (
-                <Button
-                  title="버튼입니다."
-                  type="outline"
-                  titleStyle={buttonStyle.title}
-                  containerStyle={{
-                    width: 100,
-                    marginHorizontal: 5,
-                    marginVertical: 5,
-                    borderRadius: 10,
-                    borderWidth: 0.05,
-                  }}
-                  buttonStyle={
-                    idx === selectedIndex ? activeStyle : buttonStyle.button
-                  }
-                  onPress={() => setSelectedIndex(idx)}
-                  activeOpacity={0.9}
-                />
-              ))}
-            </ScrollView>
+            <DurationButtonGroup />
           </DurationContainer>
           <Text h4>인증 가능 시간</Text>
           <CertificationTimeContainer>
@@ -162,9 +136,6 @@ export default ({ route }) => {
               width: 395,
               textAlignVertical: "top",
             }}
-            ref={input}
-            onFocus={(e) => console.log(e)}
-            isFocused={true}
           />
 
           <Text h4>인증 방법</Text>
@@ -174,8 +145,6 @@ export default ({ route }) => {
             placeholder="INPUT WITH ERROR MESSAGE"
             maxLength={500}
             style={{ height: 200, textAlignVertical: "top", width: 395 }}
-            disabledInputStyle={{ backgroundColor: "gray" }}
-            onBlur={(e) => console.log(e)}
           />
           <Text h4>인증샷 예시</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

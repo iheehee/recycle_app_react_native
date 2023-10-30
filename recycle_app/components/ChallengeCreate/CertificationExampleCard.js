@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { TouchableOpacity, Alert, View, StyleSheet } from "react-native";
-import { Text, Button, ButtonGroup } from "@rneui/themed";
+import { View, StyleSheet } from "react-native";
+import { Text } from "@rneui/themed";
 import ImagePicker from "../../util/Camera/ImagePicker";
 
-export default ({ title, type }) => {
+export default ({ title }) => {
   const styles = StyleSheet.create({
     subHeader: {
       color: "white",
