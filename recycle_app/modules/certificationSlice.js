@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import React, { useState } from "react";
 import api from "../api";
-import axios from "axios";
 
 const certificationsSlice = createSlice({
   name: "certifications",

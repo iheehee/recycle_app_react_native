@@ -22,6 +22,7 @@ export default ({}) => {
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       {data.map((item, idx) => (
         <Button
+          key={"duration_" + idx}
           title={item}
           type="outline"
           titleStyle={buttonStyle.title}

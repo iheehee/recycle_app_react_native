@@ -7,6 +7,8 @@ import InputSpinner from "react-native-input-spinner";
 import CertificationExampleCard from "../../../components/ChallengeCreate/CertificationExampleCard";
 import FrequencyButtonGroup from "../../../components/ChallengeCreate/FrequencyButtonGroup";
 import DurationButtonGroup from "../../../components/ChallengeCreate/DurationButtonGroup";
+
+import StartDayButtonGroup from "../../../components/ChallengeCreate/StartDayButtonGroup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const { width, height } = Dimensions.get("screen");
@@ -31,46 +33,14 @@ const CertificationTimeContainer = styled.View`
   justify-content: space-evenly;
   background-color: #eeeeee;
 `;
-/* const inputStyle = {
-  width: 350,
-  padding: 12.5px 20px;
-  border: 1px solid grey;
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-weight: 500;
-}; */
 
 export default ({ route }) => {
-  /* const { durationsData, frequencyData } = route.params; */
-
-  let data = [0, 1, 2, 3, 4];
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const activeStyle = { backgroundColor: "gray" };
-  const buttonStyle = {
-    title: { color: "black" },
-    button: { borderColor: "#BBBBBB" },
-  };
-  const dateTime = (plusDate) => {
-    let dt = new Date();
-    const Plusdate = dt.getDate() + plusDate;
-    dt.setDate(Plusdate);
-    return `${dt.getMonth() + 1}.${dt.getDate()}`;
-  };
   const [title, setTitle] = useState(null);
   const [startDay, setStartDay] = useState(null);
   const [frequency, setFrequency] = useState(null);
   const [durations, setDurations] = useState(null);
-  const [num, setNum] = useState(null);
-  /* useEffect(() => {
-    if (route.params.durationsData) {
-      setDurations(route.params.durationsData);
-    }
-    if (route.params.frequencyData) {
-      setFrequency(route.params.frequencyData);
-    }
-  }, [durationsData, frequencyData]); */
-  console.log(frequency);
+  const [num, setNum] = useState(1);
+
   return (
     <KeyboardAwareScrollView>
       <MainContainer>
@@ -98,30 +68,7 @@ export default ({ route }) => {
           </CertificationTimeContainer>
           <Text h4>시작일</Text>
           <BeginDayContainer>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {data.map((item, idx) => (
-                <Button
-                  title={<Text>{dateTime(idx)}</Text>}
-                  type="outline"
-                  titleStyle={buttonStyle.title}
-                  containerStyle={{
-                    width: 100,
-                    marginHorizontal: 5,
-                    marginVertical: 5,
-                    borderRadius: 10,
-                    borderWidth: 0.05,
-                  }}
-                  buttonStyle={
-                    idx === selectedIndex ? activeStyle : buttonStyle.button
-                  }
-                  onPress={() => setSelectedIndex(idx)}
-                  activeOpacity={0.9}
-                />
-              ))}
-            </ScrollView>
+            <StartDayButtonGroup />
           </BeginDayContainer>
 
           <Text h4>챌린지 소개</Text>

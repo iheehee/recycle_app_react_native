@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { StyleSheet, View, SafeAreaView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View } from "react-native";
 import { Text, Button } from "@rneui/themed";
 import styled from "styled-components/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { createChallenge } from "../../modules/createChallengeSlice";
 
 export default ({ beginEnd }) => {
-  const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [Time, setTime] = useState(beginEnd === "begin" ? "00:00" : "23:59");
+  const [time, setTime] = useState(beginEnd === "begin" ? "00:00" : "23:59");
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -17,7 +18,6 @@ export default ({ beginEnd }) => {
     setDatePickerVisibility(false);
   };
 
-  const Container = styled.View``;
   const makeTime = (dt) => {
     const hour = String(dt.getHours()).padStart(2, "0");
     const minutes = String(dt.getMinutes()).padStart(2, "0");
@@ -27,13 +27,18 @@ export default ({ beginEnd }) => {
   const handleConfirm = (date) => {
     let dt = new Date(date);
     makeTime(dt);
-    navigation.setParams(
-      beginEnd === "begin" ? { beginTime: Time } : { endTime: Time }
-    );
 
     return hideDatePicker();
   };
-
+  useEffect(() => {
+    dispatch(
+      createChallenge(
+        beginEnd === "begin"
+          ? { certificationsStartTime: time }
+          : { certificationsEndTime: time }
+      )
+    );
+  }, [time]);
   return (
     <>
       <DateTimePickerModal
@@ -58,7 +63,7 @@ export default ({ beginEnd }) => {
             ) : (
               <Text>종료 시간</Text>
             )}
-            <Text>{Time}</Text>
+            <Text>{time}</Text>
           </View>
         }
         onPress={showDatePicker}

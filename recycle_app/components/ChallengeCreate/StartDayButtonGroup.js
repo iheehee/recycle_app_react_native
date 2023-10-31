@@ -5,41 +5,35 @@ import { useDispatch } from "react-redux";
 import { createChallenge } from "../../modules/createChallengeSlice";
 
 export default ({}) => {
-  const styles = StyleSheet.create({
-    button: {
-      color: "white",
-      marginTop: 6,
-    },
-  });
-  const dispatch = useDispatch();
-  const data = [
-    "주 1일",
-    "주 2일",
-    "주 3일",
-    "주 4일",
-    "주 5일",
-    "주 6일",
-    "주 7일",
-    "평일 매일",
-    "주말 매일",
-  ];
-
+  let dateGroup = [];
+  const dateTime = (plusDay) => {
+    let dt = new Date();
+    const increasedDate = dt.getDate() + plusDay;
+    dt.setDate(increasedDate);
+    return `${dt.getMonth() + 1}.${dt.getDate()}`;
+  };
+  for (let i = 0; i < 7; i++) {
+    dateGroup.push(dateTime(i));
+  }
+  const [startDay, setStartDay] = useState(dateGroup[0]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [text, setText] = useState("주 1일");
   const activeStyle = { backgroundColor: "gray" };
   const buttonStyle = {
     title: { color: "black" },
     button: { borderColor: "#BBBBBB" },
   };
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(createChallenge({ frequency: text }));
-  }, [text]);
+    dispatch(createChallenge({ startDay: startDay }));
+  }, [startDay]);
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      {data.map((item, idx) => (
+      {dateGroup.map((date, idx) => (
         <Button
-          key={"frequency_" + idx}
-          title={item}
+          key={date}
+          title={date}
           type="outline"
           titleStyle={buttonStyle.title}
           containerStyle={{
@@ -52,7 +46,7 @@ export default ({}) => {
           buttonStyle={idx === selectedIndex ? activeStyle : buttonStyle.button}
           onPress={() => {
             setSelectedIndex(idx);
-            setText(item);
+            setStartDay(date);
           }}
           activeOpacity={0.9}
         />

@@ -2,13 +2,7 @@ import React, { useEffect } from "react";
 import ChallengePresenter from "./ChallengePresenter";
 import { useSelector } from "react-redux";
 
-export default ({
-  getChallenges,
-  challenges,
-  page,
-  navigation,
-}) => {
-  const jwt = useSelector((state) => state.usersReducer.token);
+export default ({ getChallenges, challenges, page, navigation }) => {
   useEffect(() => {
     getChallenges(1);
   }, []);
