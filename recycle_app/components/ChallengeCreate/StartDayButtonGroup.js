@@ -12,6 +12,7 @@ export default ({}) => {
     dt.setDate(increasedDate);
     return `${dt.getMonth() + 1}.${dt.getDate()}`;
   };
+  //초기 값 세팅
   for (let i = 0; i < 7; i++) {
     dateGroup.push(dateTime(i));
   }

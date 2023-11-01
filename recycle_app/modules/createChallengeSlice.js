@@ -13,6 +13,7 @@ const createChallengeSlice = createSlice({
       duration: null,
       certificationsStartTime: null,
       certificationsEndTime: null,
+      certificationNotice: null,
       maxMember: 1,
     },
   },
@@ -21,12 +22,12 @@ const createChallengeSlice = createSlice({
       console.log(action);
       const challengeObject = state.newChallenge;
       Object.entries(action.payload).map(([key, value]) =>
-        aa(challengeObject, key, value)
+        setNewChallengeValue(challengeObject, key, value)
       );
     },
   },
 });
-const aa = (challengeObject, key, value) => {
+const setNewChallengeValue = (challengeObject, key, value) => {
   switch (key) {
     case "title":
       challengeObject.title = value;
@@ -48,6 +49,9 @@ const aa = (challengeObject, key, value) => {
       break;
     case "maxMember":
       challengeObject.maxMember = value;
+      break;
+    case "certificationNotice":
+      challengeObject.certificationNotice = value;
       break;
   }
 };
