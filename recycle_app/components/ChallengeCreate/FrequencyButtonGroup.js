@@ -4,7 +4,7 @@ import { Button } from "@rneui/themed";
 import { useDispatch } from "react-redux";
 import { createChallenge } from "../../modules/createChallengeSlice";
 
-export default ({}) => {
+export default ({ fontSize }) => {
   const styles = StyleSheet.create({
     button: {
       color: "white",
@@ -26,10 +26,12 @@ export default ({}) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [text, setText] = useState("주 1일");
-  const activeStyle = { backgroundColor: "gray" };
+
   const buttonStyle = {
-    title: { color: "black" },
-    button: { borderColor: "#BBBBBB" },
+    activeTitle: { color: "white", fontSize: fontSize },
+    nonActiveTitle: { color: "black", fontSize: fontSize },
+    activeStyle: { backgroundColor: "black" },
+    nonActiveButton: { borderColor: "#BBBBBB" },
   };
   useEffect(() => {
     dispatch(createChallenge({ frequency: text }));
@@ -41,15 +43,23 @@ export default ({}) => {
           key={"frequency_" + idx}
           title={item}
           type="outline"
-          titleStyle={buttonStyle.title}
+          titleStyle={
+            idx === selectedIndex
+              ? buttonStyle.activeTitle
+              : buttonStyle.nonActiveTitle
+          }
           containerStyle={{
             width: 100,
             marginHorizontal: 5,
             marginVertical: 5,
-            borderRadius: 10,
-            borderWidth: 0.05,
+            borderRadius: 18,
+            borderWidth: 0.2,
           }}
-          buttonStyle={idx === selectedIndex ? activeStyle : buttonStyle.button}
+          buttonStyle={
+            idx === selectedIndex
+              ? buttonStyle.activeStyle
+              : buttonStyle.nonActiveButton
+          }
           onPress={() => {
             setSelectedIndex(idx);
             setText(item);

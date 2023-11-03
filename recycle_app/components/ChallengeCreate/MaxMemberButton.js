@@ -12,9 +12,9 @@ export default ({}) => {
   return (
     <InputSpinner
       style={{
-        width: 200,
+        width: 180,
         shadowOpacity: 0,
-        borderWidth: 1,
+        borderWidth: 0.5,
         borderColor: "gray",
       }}
       skin="clean"

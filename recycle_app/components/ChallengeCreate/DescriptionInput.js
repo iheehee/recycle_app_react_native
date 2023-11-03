@@ -6,25 +6,37 @@ import { createChallenge } from "../../modules/createChallengeSlice";
 export default ({}) => {
   const dispatch = useDispatch();
   const [text, setText] = useState(null);
-
+  const [focus, setFocus] = useState(false);
+  const backgroundColorToggle =
+    focus === true
+      ? { backgroundColor: "white" }
+      : { backgroundColor: "#eeeeee" };
+  const inputStyle = {
+    input: { height: 200 },
+    inputContainer: {
+      borderWidth: 0.2,
+      borderRadius: 15,
+      padding: 10,
+      ...backgroundColorToggle,
+    },
+    container: { width: 420, marginLeft: -5 },
+  };
   return (
     <Input
       multiline={true}
       numberOfLines={10}
-      placeholder="INPUT WITH ERROR MESSAGE"
+      placeholder="예) 매일 1만보 걷고 건강해지기! 오늘부터 같이 해봐요 :)"
       maxLength={500}
       inputStyle={inputStyle.input}
       inputContainerStyle={inputStyle.inputContainer}
       containerStyle={inputStyle.container}
       value={text}
       onChangeText={(text) => setText(text)}
-      onBlur={() => dispatch(createChallenge({ description: text }))}
+      onFocus={() => setFocus(true)}
+      onBlur={() => {
+        setFocus(false);
+        dispatch(createChallenge({ description: text }));
+      }}
     />
   );
-};
-
-const inputStyle = {
-  input: { height: 200 },
-  inputContainer: { borderWidth: 0.2, borderRadius: 15, padding: 10 },
-  container: { width: 420, marginLeft: -5 },
 };

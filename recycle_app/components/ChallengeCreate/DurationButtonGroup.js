@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 
-export default ({}) => {
+export default ({ fontSize }) => {
   const navigation = useNavigation();
   const styles = StyleSheet.create({
     button: {
@@ -13,10 +13,11 @@ export default ({}) => {
   });
   let data = ["1주 동안", "2주 동안", "3주 동안", "4주 동안"];
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const activeStyle = { backgroundColor: "gray" };
   const buttonStyle = {
-    title: { color: "black" },
-    button: { borderColor: "#BBBBBB" },
+    activeTitle: { color: "white", fontSize: fontSize },
+    nonActiveTitle: { color: "black", fontSize: fontSize },
+    activeStyle: { backgroundColor: "black" },
+    nonActiveButton: { borderColor: "#BBBBBB" },
   };
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -25,15 +26,23 @@ export default ({}) => {
           key={"duration_" + idx}
           title={item}
           type="outline"
-          titleStyle={buttonStyle.title}
+          titleStyle={
+            idx === selectedIndex
+              ? buttonStyle.activeTitle
+              : buttonStyle.nonActiveTitle
+          }
           containerStyle={{
             width: 100,
             marginHorizontal: 5,
             marginVertical: 5,
-            borderRadius: 10,
+            borderRadius: 18,
             borderWidth: 0.05,
           }}
-          buttonStyle={idx === selectedIndex ? activeStyle : buttonStyle.button}
+          buttonStyle={
+            idx === selectedIndex
+              ? buttonStyle.activeStyle
+              : buttonStyle.nonActiveButton
+          }
           onPress={() => {
             setSelectedIndex(idx);
             return navigation.setParams({ durationsData: data[selectedIndex] });

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@rneui/themed";
+import { useSelector } from "react-redux";
 import ImagePicker from "../../util/Camera/ImagePicker";
 
 export default ({ title }) => {
-  const styles = StyleSheet.create({
-    subHeader: {
-      color: "white",
-      marginTop: 6,
-    },
-  });
+  
+  const photoExist = useSelector(
+    (state) => state.createChallengeReducer.newChallenge.examplePhoto
+  );
   return (
     <>
       <View
@@ -38,7 +37,6 @@ export default ({ title }) => {
             width: 200,
             height: 30,
             backgroundColor: "gray",
-
             alignItems: "center",
           }}
         >
@@ -48,3 +46,9 @@ export default ({ title }) => {
     </>
   );
 };
+const styles = StyleSheet.create({
+  subHeader: {
+    color: "white",
+    marginTop: 6,
+  },
+});

@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import TitleInput from "../../../components/ChallengeCreate/TitleInput";
 
 const { width, height } = Dimensions.get("screen");
+const containerMarginBottomValue = 40;
 const MainContainer = styled.View`
   flex: 1;
   background-color: white;
@@ -21,18 +22,12 @@ const MainContainer = styled.View`
 const BgContainer = styled.View`
   margin: 20px 9px;
 `;
-const FrequencyContainer = styled.View`
-  margin-bottom: 40px;
-`;
-const DurationContainer = styled.View`
-  margin-bottom: 40px;
-`;
-const BeginDayContainer = styled.View`
-  margin-bottom: 40px;
+const Container = styled.View`
+  margin-bottom: ${containerMarginBottomValue}px;
 `;
 const CertificationTimeContainer = styled.View`
+  margin-bottom: ${containerMarginBottomValue}px;
   margin-left: 5px;
-  margin-bottom: 40px;
   border-width: 0.5px;
   border-radius: 10px;
   border-color: #bbbbbb;
@@ -43,58 +38,68 @@ const CertificationTimeContainer = styled.View`
   justify-content: space-evenly;
   background-color: #eeeeee;
 `;
+const CertificationExamplePhotoScroll = styled.ScrollView`
+  margin-bottom: ${containerMarginBottomValue}px;
+`;
+const MainTitle = styled.Text`
+  margin-bottom: 30px;
+  font-size: 30px;
+`;
+const Title = styled.Text`
+  margin-bottom: 9px;
+  font-size: 22px;
+`;
 
 export default ({ route }) => {
+  const buttonFontSize = 15;
   return (
     <KeyboardAwareScrollView>
       <MainContainer>
         <BgContainer>
-          <Text h3 style={style.titleContainerStyle}>
-            챌린지를 만들어주세요!
-          </Text>
-          <Text h4 style={style.titleContainerStyle}>
-            챌린지 제목
-          </Text>
+          <MainTitle>챌린지를 만들어주세요</MainTitle>
+          <Title>챌린지 제목</Title>
           <TitleInput />
-          <FrequencyContainer>
-            <Text h4 style={style.titleContainerStyle}>
-              인증 빈도
-            </Text>
-            <FrequencyButtonGroup />
-          </FrequencyContainer>
-          <DurationContainer>
-            <Text h4 style={style.titleContainerStyle}>
-              챌린지 기간
-            </Text>
-            <DurationButtonGroup />
-          </DurationContainer>
-          <Text h4 style={style.titleContainerStyle}>
-            인증 가능 시간
-          </Text>
+          <Container>
+            <Title>인증 빈도</Title>
+            <FrequencyButtonGroup fontSize={buttonFontSize} />
+          </Container>
+          <Container>
+            <Title>챌린지 기간</Title>
+            <DurationButtonGroup fontSize={buttonFontSize} />
+          </Container>
+          <Title>인증 가능 시간</Title>
           <CertificationTimeContainer>
             <TimeButton beginEnd="begin" />
             <Divider orientation="vertical" width={1} style={{ width: 1 }} />
             <TimeButton beginEnd="end" />
           </CertificationTimeContainer>
-          <Text h4>시작일</Text>
-          <BeginDayContainer>
-            <StartDayButtonGroup />
-          </BeginDayContainer>
-          <Text h4>챌린지 소개</Text>
+          <Title>시작일</Title>
+          <Container>
+            <StartDayButtonGroup fontSize={buttonFontSize} />
+          </Container>
+          <Title>챌린지 소개</Title>
           <DescriptionInput />
-          <Text h4>인증 방법</Text>
+          <Title>인증 방법</Title>
           <CertificationNoticeInput />
-          <Text h4>인증샷 예시</Text>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <Title>인증샷 예시</Title>
+          <CertificationExamplePhotoScroll
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
             <CertificationExampleCard title={"인증 성공"} />
             <CertificationExampleCard title={"인증 실패"} />
-          </ScrollView>
-          <Text h4>챌린지 최대인원</Text>
-          <MaxMemberButton />
+          </CertificationExamplePhotoScroll>
+          <Container>
+            <Title>챌린지 최대인원</Title>
+            <MaxMemberButton />
+          </Container>
         </BgContainer>
       </MainContainer>
     </KeyboardAwareScrollView>
   );
 };
 
-const style = { titleContainerStyle: { marginBottom: 7 } };
+const style = {
+  mainTitleContainerStyle: { marginBottom: 30 },
+  titleContainerStyle: { marginBottom: 7 },
+};
