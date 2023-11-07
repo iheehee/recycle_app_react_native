@@ -46,12 +46,18 @@ const MainTitle = styled.Text`
   font-size: 30px;
 `;
 const Title = styled.Text`
-  margin-bottom: 9px;
+  margin-bottom: 10px;
   font-size: 22px;
+`;
+const SubTitle = styled.Text`
+  margin-top: -7px;
+  font-size: 14px;
+  color: gray;
 `;
 
 export default ({ route }) => {
   const buttonFontSize = 15;
+  console.log(route);
   return (
     <KeyboardAwareScrollView>
       <MainContainer>
@@ -86,20 +92,19 @@ export default ({ route }) => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            <CertificationExampleCard title={"인증 성공"} />
+            <CertificationExampleCard
+              title={"인증 성공"}
+              type={route.params?.type}
+            />
             <CertificationExampleCard title={"인증 실패"} />
           </CertificationExamplePhotoScroll>
           <Container>
             <Title>챌린지 최대인원</Title>
+            <SubTitle>(최소 2명 ~ 최대 100명)</SubTitle>
             <MaxMemberButton />
           </Container>
         </BgContainer>
       </MainContainer>
     </KeyboardAwareScrollView>
   );
-};
-
-const style = {
-  mainTitleContainerStyle: { marginBottom: 30 },
-  titleContainerStyle: { marginBottom: 7 },
 };

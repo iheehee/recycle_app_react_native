@@ -108,16 +108,13 @@ const Btn = ({ params }) => {
       params: params,
     });
 
-  return !exist ? (
+  return (
     <TouchableOpacity onPress={ApplyChallenge}>
       <Button exist={exist}>
         <Text>{"오늘부터 시작"}</Text>
       </Button>
     </TouchableOpacity>
-  ) : (
-    <Button exist={exist}>
-      <Text>{"참여 중인 챌린지 입니다."}</Text>
-    </Button>
+  
   );
 };
 export default Btn;

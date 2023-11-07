@@ -15,6 +15,7 @@ const createChallengeSlice = createSlice({
       certificationsEndTime: null,
       certificationNotice: null,
       maxMember: 1,
+      certificationPhotoExample: [],
     },
   },
   reducers: {
@@ -52,6 +53,9 @@ const setNewChallengeValue = (challengeObject, key, value) => {
       break;
     case "certificationNotice":
       challengeObject.certificationNotice = value;
+      break;
+    case "successPhotoExample":
+      challengeObject.certificationPhotoExample.push(value);
       break;
   }
 };
