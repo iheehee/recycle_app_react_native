@@ -15,8 +15,8 @@ import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
 import HeaderButton from "../components/ChallengeDetail/HeaderButton";
+import BackBtn from "../components/ChallengeCreate/BackBtn";
 import { Feather } from "@expo/vector-icons";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -70,14 +70,7 @@ const ChallengeStackNavi = () => {
         component={ChallengeCreate}
         options={{
           title: null,
-          headerBackImage: () => (
-            <Feather
-              name="x"
-              size={24}
-              color="black"
-              style={{ marginLeft: 9 }}
-            />
-          ),
+          headerBackImage: () => <BackBtn />,
         }}
       />
     </Stack.Navigator>

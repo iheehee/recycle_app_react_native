@@ -20,11 +20,24 @@ const createChallengeSlice = createSlice({
   },
   reducers: {
     createChallenge(state, action) {
-      console.log(action);
       const challengeObject = state.newChallenge;
       Object.entries(action.payload).map(([key, value]) =>
         setNewChallengeValue(challengeObject, key, value)
       );
+    },
+    resetCreateChallenge(state, action) {
+      const challengeObject = state.newChallenge;
+      challengeObject.title = null;
+      challengeObject.summery = null;
+      challengeObject.description = null;
+      challengeObject.startDay = null;
+      challengeObject.frequency = null;
+      challengeObject.duration = null;
+      challengeObject.certificationsStartTime = null;
+      challengeObject.certificationsEndTime = null;
+      challengeObject.certificationNotice = null;
+      challengeObject.maxMember = 1;
+      challengeObject.certificationPhotoExample = [];
     },
   },
 });
@@ -54,13 +67,14 @@ const setNewChallengeValue = (challengeObject, key, value) => {
     case "certificationNotice":
       challengeObject.certificationNotice = value;
       break;
-    case "successPhotoExample":
+    case "certificationPhotoExample":
       challengeObject.certificationPhotoExample.push(value);
       break;
   }
 };
 
-export const { createChallenge } = createChallengeSlice.actions;
+export const { createChallenge, resetCreateChallenge } =
+  createChallengeSlice.actions;
 
 export const getMyCertifications = (jwt) => async (dispatch) => {
   try {

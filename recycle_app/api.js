@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     "Content-Type": "application/json",
     Authorization: jwt,
   };
-  
+
   const baseUrl = Ip.localIp;
 
   const fullUrl = `${baseUrl}${path}`;
@@ -41,6 +41,7 @@ export default {
       jwt
     );
   },
+  createChallenge: (form) => callApi("post", "/challenges/" + form),
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
   profile: (jwt) => callApi("get", "/users/profile/", "", jwt),

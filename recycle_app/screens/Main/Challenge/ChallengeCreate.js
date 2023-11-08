@@ -1,7 +1,7 @@
 import React from "react";
-import { ScrollView, View, StyleSheet, Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
-import { Text, Divider } from "@rneui/themed";
+import { Divider } from "@rneui/themed";
 import TimeButton from "../../../components/ChallengeCreate/TimeButton";
 import CertificationExampleCard from "../../../components/ChallengeCreate/CertificationExampleCard";
 import FrequencyButtonGroup from "../../../components/ChallengeCreate/FrequencyButtonGroup";
@@ -12,6 +12,7 @@ import DescriptionInput from "../../../components/ChallengeCreate/DescriptionInp
 import CertificationNoticeInput from "../../../components/ChallengeCreate/CertificationNoticeInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleInput from "../../../components/ChallengeCreate/TitleInput";
+import CreateBtn from "../../../components/ChallengeCerti/CreateBtn";
 
 const { width, height } = Dimensions.get("screen");
 const containerMarginBottomValue = 40;
@@ -57,7 +58,6 @@ const SubTitle = styled.Text`
 
 export default ({ route }) => {
   const buttonFontSize = 15;
-  console.log(route);
   return (
     <KeyboardAwareScrollView>
       <MainContainer>
@@ -103,6 +103,7 @@ export default ({ route }) => {
             <SubTitle>(최소 2명 ~ 최대 100명)</SubTitle>
             <MaxMemberButton />
           </Container>
+          <CreateBtn />
         </BgContainer>
       </MainContainer>
     </KeyboardAwareScrollView>
