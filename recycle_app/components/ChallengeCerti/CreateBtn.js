@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import api from "../../api";
-import axios from "axios";
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
@@ -24,24 +23,19 @@ const CreateBtn = () => {
   const newChallenge = useSelector(
     (state) => state.createChallengeReducer.newChallenge
   );
+  console.log(newChallenge);
+  const data = {
+    title: newChallenge.title,
+    challenge_summery: newChallenge.summery,
+  };
+
+  const jwt = useSelector((state) => state.usersReducer.token);
   const navigation = useNavigation();
   const createChallenge = () =>
     Alert.alert("챌린지를 개설하시겠습니까?", "", [
       {
         text: "확인",
-        onPress: () =>
-          axios.post("http://192.168.0.55:8080/challenges/", {
-            title: "줍줍줍깅",
-            summery: null,
-            description: null,
-            startDay: null,
-            frequency: null,
-            duration: null,
-            certificationsStartTime: null,
-            certificationsEndTime: null,
-            certificationNotice: null,
-            maxMember: 1,
-          }),
+        onPress: () => api.createChallenge(data, jwt),
       },
       {
         text: "취소",

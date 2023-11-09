@@ -52,6 +52,7 @@ export default ({ route }) => {
           type: "image/jpeg",
           uri: image,
         });
+
         await axios({
           method: "post",
           url: `${baseUrl}/challenges/${id}/certification/`,

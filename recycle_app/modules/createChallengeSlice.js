@@ -8,14 +8,14 @@ const createChallengeSlice = createSlice({
       title: null,
       summery: null,
       description: null,
-      startDay: null,
+      start_day: null,
       frequency: null,
       duration: null,
-      certificationsStartTime: null,
-      certificationsEndTime: null,
-      certificationNotice: null,
-      maxMember: 1,
-      certificationPhotoExample: [],
+      certifications_start_time: null,
+      certifications_end_time: null,
+      certification_notice: null,
+      max_member: 1,
+      certification_photo_example: [],
     },
   },
   reducers: {
@@ -30,14 +30,14 @@ const createChallengeSlice = createSlice({
       challengeObject.title = null;
       challengeObject.summery = null;
       challengeObject.description = null;
-      challengeObject.startDay = null;
+      challengeObject.start_day = null;
       challengeObject.frequency = null;
       challengeObject.duration = null;
-      challengeObject.certificationsStartTime = null;
-      challengeObject.certificationsEndTime = null;
-      challengeObject.certificationNotice = null;
-      challengeObject.maxMember = 1;
-      challengeObject.certificationPhotoExample = [];
+      challengeObject.certifications_start_time = null;
+      challengeObject.certifications_end_time = null;
+      challengeObject.certification_notice = null;
+      challengeObject.max_member = 1;
+      challengeObject.certification_photo_example = [];
     },
   },
 });
@@ -61,14 +61,20 @@ const setNewChallengeValue = (challengeObject, key, value) => {
     case "duration":
       challengeObject.duration = value;
       break;
-    case "maxMember":
-      challengeObject.maxMember = value;
+    case "max_member":
+      challengeObject.max_member = value;
       break;
-    case "certificationNotice":
-      challengeObject.certificationNotice = value;
+    case "certification_notice":
+      challengeObject.certification_notice = value;
       break;
-    case "certificationPhotoExample":
-      challengeObject.certificationPhotoExample.push(value);
+    case "certification_photo_example":
+      const existsPhoto = challengeObject.certification_photo_example.find(
+        (photo) => photo.id === value.id
+      );
+      if (!existsPhoto) {
+        challengeObject.certification_photo_example.push(value);
+      }
+
       break;
   }
 };

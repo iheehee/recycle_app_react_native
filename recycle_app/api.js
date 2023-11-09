@@ -41,7 +41,7 @@ export default {
       jwt
     );
   },
-  createChallenge: (form) => callApi("post", "/challenges/" + form),
+  createChallenge: (data) => callApi("post", "/challenges/", data, jwt),
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
   profile: (jwt) => callApi("get", "/users/profile/", "", jwt),

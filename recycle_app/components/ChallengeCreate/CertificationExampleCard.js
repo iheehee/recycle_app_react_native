@@ -9,6 +9,7 @@ import { createChallenge } from "../../modules/createChallengeSlice";
 
 export default ({ title, type }) => {
   const [image, setImage] = useState(null);
+  const [imageId, setImageId] = useState(null);
   const dispatch = useDispatch();
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -20,6 +21,7 @@ export default ({ title, type }) => {
     });
 
     if (!result.canceled) {
+      setImageId(result.assets[0].assetId);
       setImage(result.assets[0].uri);
     }
   };
@@ -28,8 +30,11 @@ export default ({ title, type }) => {
     if (image) {
       dispatch(
         createChallenge({
-          certificationPhotoExample: image,
-          type: type,
+          certification_photo_example: {
+            id: imageId,
+            uri: image,
+            status: title === "인증 성공" ? 0 : 1,
+          },
         })
       );
     }
