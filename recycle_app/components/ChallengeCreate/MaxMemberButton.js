@@ -24,7 +24,7 @@ export default ({}) => {
         <TextInput
           value={text}
           onChangeText={(text) => setText(text)}
-          onBlur={() => dispatch(createChallenge({ maxMember: text }))}
+          onBlur={() => dispatch(createChallenge({ max_member: text }))}
           placeholder="2"
           keyboardType="numeric"
           style={{ fontSize: 24 }}

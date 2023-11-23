@@ -34,8 +34,8 @@ export default ({ beginEnd }) => {
     dispatch(
       createChallenge(
         beginEnd === "begin"
-          ? { certificationsStartTime: time }
-          : { certificationsEndTime: time }
+          ? { certifications_start_time: time }
+          : { certifications_end_time: time }
       )
     );
   }, [time]);

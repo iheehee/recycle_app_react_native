@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import ChallengePresenter from "./ChallengePresenter";
-import { useSelector } from "react-redux";
 
-export default ({ getChallenges, challenges, page, navigation }) => {
+export default ({ getChallenges, challenges, page }) => {
   useEffect(() => {
     getChallenges(1);
   }, []);
@@ -10,5 +9,5 @@ export default ({ getChallenges, challenges, page, navigation }) => {
     getChallenges(page);
   }, [page]);
 
-  return <ChallengePresenter challenges={challenges} navigaion={navigation} />;
+  return <ChallengePresenter challenges={challenges} />;
 };

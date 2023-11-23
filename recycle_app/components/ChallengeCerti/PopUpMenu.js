@@ -8,7 +8,6 @@ import {
   Text,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Ip from "../../util/Ip";
 import axios from "axios";

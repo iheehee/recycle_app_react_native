@@ -12,7 +12,8 @@ import DescriptionInput from "../../../components/ChallengeCreate/DescriptionInp
 import CertificationNoticeInput from "../../../components/ChallengeCreate/CertificationNoticeInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleInput from "../../../components/ChallengeCreate/TitleInput";
-import CreateBtn from "../../../components/ChallengeCerti/CreateBtn";
+import SummeryInput from "../../../components/ChallengeCreate/SummeryInput";
+import CreateBtn from "../../../components/ChallengeCreate/CreateBtn";
 
 const { width, height } = Dimensions.get("screen");
 const containerMarginBottomValue = 40;
@@ -63,8 +64,14 @@ export default ({ route }) => {
       <MainContainer>
         <BgContainer>
           <MainTitle>챌린지를 만들어주세요</MainTitle>
-          <Title>챌린지 제목</Title>
-          <TitleInput />
+          <Container>
+            <Title>챌린지 제목</Title>
+            <TitleInput />
+          </Container>
+          <Container>
+            <Title>챌린지 요약</Title>
+            <SummeryInput />
+          </Container>
           <Container>
             <Title>인증 빈도</Title>
             <FrequencyButtonGroup fontSize={buttonFontSize} />
@@ -79,25 +86,31 @@ export default ({ route }) => {
             <Divider orientation="vertical" width={1} style={{ width: 1 }} />
             <TimeButton beginEnd="end" />
           </CertificationTimeContainer>
-          <Title>시작일</Title>
           <Container>
+            <Title>시작일</Title>
             <StartDayButtonGroup fontSize={buttonFontSize} />
           </Container>
-          <Title>챌린지 소개</Title>
-          <DescriptionInput />
-          <Title>인증 방법</Title>
-          <CertificationNoticeInput />
-          <Title>인증샷 예시</Title>
-          <CertificationExamplePhotoScroll
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            <CertificationExampleCard
-              title={"인증 성공"}
-              type={route.params?.type}
-            />
-            <CertificationExampleCard title={"인증 실패"} />
-          </CertificationExamplePhotoScroll>
+          <Container>
+            <Title>챌린지 소개</Title>
+            <DescriptionInput />
+          </Container>
+          <Container>
+            <Title>인증 방법</Title>
+            <CertificationNoticeInput />
+          </Container>
+          <Container>
+            <Title>인증샷 예시</Title>
+            <CertificationExamplePhotoScroll
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <CertificationExampleCard
+                title={"인증 성공"}
+                type={route.params?.type}
+              />
+              <CertificationExampleCard title={"인증 실패"} />
+            </CertificationExamplePhotoScroll>
+          </Container>
           <Container>
             <Title>챌린지 최대인원</Title>
             <SubTitle>(최소 2명 ~ 최대 100명)</SubTitle>

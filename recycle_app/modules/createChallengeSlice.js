@@ -15,7 +15,8 @@ const createChallengeSlice = createSlice({
       certifications_end_time: null,
       certification_notice: null,
       max_member: 1,
-      certification_photo_example: [],
+      success_photo_example: null,
+      fail_photo_example: null,
     },
   },
   reducers: {
@@ -37,7 +38,8 @@ const createChallengeSlice = createSlice({
       challengeObject.certifications_end_time = null;
       challengeObject.certification_notice = null;
       challengeObject.max_member = 1;
-      challengeObject.certification_photo_example = [];
+      challengeObject.success_photo_example = null;
+      challengeObject.fail_photo_example = null;
     },
   },
 });
@@ -52,8 +54,8 @@ const setNewChallengeValue = (challengeObject, key, value) => {
     case "description":
       challengeObject.description = value;
       break;
-    case "startDay":
-      challengeObject.startDay = value;
+    case "start_day":
+      challengeObject.start_day = value;
       break;
     case "frequency":
       challengeObject.frequency = value;
@@ -64,17 +66,21 @@ const setNewChallengeValue = (challengeObject, key, value) => {
     case "max_member":
       challengeObject.max_member = value;
       break;
+    case "certifications_start_time":
+      challengeObject.certifications_start_time = value;
+      break;
+    case "certifications_end_time":
+      challengeObject.certifications_end_time = value;
+      break;
     case "certification_notice":
       challengeObject.certification_notice = value;
       break;
-    case "certification_photo_example":
-      const existsPhoto = challengeObject.certification_photo_example.find(
-        (photo) => photo.id === value.id
-      );
-      if (!existsPhoto) {
-        challengeObject.certification_photo_example.push(value);
-      }
+    case "success_photo_example":
+      challengeObject.success_photo_example = value;
 
+      break;
+    case "fail_photo_example":
+      challengeObject.fail_photo_example = value;
       break;
   }
 };

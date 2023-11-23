@@ -5,19 +5,6 @@ import { useDispatch } from "react-redux";
 import { createChallenge } from "../../modules/createChallengeSlice";
 
 export default ({ fontSize }) => {
-  let dateGroup = [];
-  const dateTime = (plusDay) => {
-    let dt = new Date();
-    const increasedDate = dt.getDate() + plusDay;
-    dt.setDate(increasedDate);
-    return `${dt.getMonth() + 1}.${dt.getDate()}`;
-  };
-  //초기 값 세팅
-  for (let i = 0; i < 7; i++) {
-    dateGroup.push(dateTime(i));
-  }
-  const [startDay, setStartDay] = useState(dateGroup[0]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const buttonStyle = {
     activeTitle: { color: "white", fontSize: fontSize },
     nonActiveTitle: { color: "black", fontSize: fontSize },
@@ -25,11 +12,34 @@ export default ({ fontSize }) => {
     nonActiveButton: { borderColor: "#BBBBBB" },
   };
 
+  const dateGroup = [];
+  const rawDateGroup = [];
+  const dateSet = (plusDay) => {
+    let dt = new Date();
+    const increase = dt.getDate() + plusDay;
+    dt.setDate(increase);
+    return `${dt.getMonth() + 1}.${dt.getDate()}`;
+  };
+  const rawDateSet = (plusDay) => {
+    let dt = new Date();
+    const increase = dt.getDate() + plusDay;
+    dt.setDate(increase);
+    return `${dt.getFullYear()}-${dt.getMonth() + 1}-${dt.getDate()}`;
+  };
+  //초기 값 세팅
+  for (let i = 0; i < 7; i++) {
+    dateGroup.push(dateSet(i));
+    rawDateGroup.push(rawDateSet(i));
+  }
+
+  const [startDay, setStartDay] = useState(rawDateGroup[0]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(createChallenge({ startDay: startDay }));
+    dispatch(createChallenge({ start_day: startDay }));
   }, [startDay]);
+
   return (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
       {dateGroup.map((date, idx) => (
@@ -56,7 +66,7 @@ export default ({ fontSize }) => {
           }
           onPress={() => {
             setSelectedIndex(idx);
-            setStartDay(date);
+            setStartDay(rawDateGroup[idx]);
           }}
           activeOpacity={0.9}
         />

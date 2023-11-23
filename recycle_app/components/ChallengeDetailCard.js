@@ -120,6 +120,7 @@ const ChallengeDetailCard = ({ route }) => {
     notice,
     success_example,
   } = route.params;
+
   return (
     <ScrollView>
       <BgContainer>

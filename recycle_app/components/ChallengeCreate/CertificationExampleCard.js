@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, Platform, StyleSheet } from "react-native";
+import { Image, View, Platform, StyleSheet,  } from "react-native";
 import { Text } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "@gorhom/bottom-sheet";
@@ -19,7 +19,6 @@ export default ({ title, type }) => {
       aspect: [4, 3],
       quality: 1,
     });
-
     if (!result.canceled) {
       setImageId(result.assets[0].assetId);
       setImage(result.assets[0].uri);
@@ -29,13 +28,21 @@ export default ({ title, type }) => {
   useEffect(() => {
     if (image) {
       dispatch(
-        createChallenge({
-          certification_photo_example: {
-            id: imageId,
-            uri: image,
-            status: title === "인증 성공" ? 0 : 1,
-          },
-        })
+        createChallenge(
+          title === "인증 성공"
+            ? {
+                success_photo_example: {
+                  id: imageId,
+                  uri: image,
+                },
+              }
+            : {
+                fail_photo_example: {
+                  id: imageId,
+                  uri: image,
+                },
+              }
+        )
       );
     }
   }, [image]);

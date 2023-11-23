@@ -1,120 +1,108 @@
-import React from "react";
-import { TouchableOpacity, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Alert, ActivityIndicator } from "react-native";
+import { useSelector } from "react-redux";
 import styled from "styled-components/native";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { getMyChallenges } from "../../modules/userSlice";
-import api from "../../api";
+import axios from "axios";
+import Ip from "../../util/Ip";
+import LoadingScreen from "./LoadingScreen";
 
-const Button = styled.View`
+const Button = styled.TouchableOpacity`
+  margin: 0px 0px 0px 0px;
   border-radius: 10px;
-  padding: 14px 0px;
-  width: 195px;
-  background-color: ${(props) => (!props.exist ? "green" : "#C0C0C0")};
+  padding: 15px 0px;
+  width: 80%;
+  background-color: black;
   align-items: center;
-  justify-content: center;
 `;
 const Text = styled.Text`
   color: white;
-  font-size: 14px;
+  font-size: 15px;
 `;
-const Btn = ({ params }) => {
-  const jwt = useSelector((state) => state.usersReducer.token);
+
+const CreateBtn = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const myChallenge = useSelector(
-    (state) => state.usersReducer.profile.myChallenges
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const baseUrl = Ip.localIp;
+  const newChallenge = useSelector(
+    (state) => state.createChallengeReducer.newChallenge
   );
-  const exist = myChallenge.find(
-    (appliedChallenge) => appliedChallenge.id === params.id
-  );
-  const ApplyChallenge = () => {
-    Alert.alert("챌린지에 가입하시겠습니까?", "", [
-      {
-        text: "확인",
-        onPress: () => {
-          return api
-            .challengeApply(params.id, null, jwt)
-            .then((response) => {
-              dispatch(getMyChallenges(jwt));
-              const result = response.data.result;
-              return Alert.alert(result, "", [
-                {
-                  text: "확인",
-                  onPress: () => {
-                    return Alert.alert("인증화면으로 가시겠습니까?", "", [
-                      {
-                        text: "이동",
-                        onPress: () => {
-                          navigation.navigate("ChallengeIndex");
-                          return navigation.navigate("MyChallenge");
-                        },
-                      },
-                      {
-                        text: "취소",
-                      },
-                    ]);
-                  },
-                },
-              ]);
-            })
-            .catch((error) => {
-              console.log(error);
-              if (error.message === "Network Error") {
-                return Alert.alert(
-                  "네트워크 연결이 유실되었습니다. 다시 시도 하시겠습니까?",
-                  "",
-                  [
-                    {
-                      text: "다시 시도",
-                      onPress: () => {
-                        ApplyChallenge();
-                      },
-                    },
-                    {
-                      text: "취소",
-                      style: "destructive",
-                    },
-                  ]
-                );
-              } else {
-                return Alert.alert(
-                  "연결이 실패했습니다.",
-                  "다시 시도 하시겠습니까?",
-                  [
-                    {
-                      text: "다시 시도",
-                      onPress: () => {
-                        console.log("redirection");
-                      },
-                    },
-                    {
-                      text: "취소",
-                      onPress: () => console.log("redirection"),
-                      style: "destructive",
-                    },
-                  ]
-                );
-              }
-            });
-        },
-      },
-      { text: "취소", style: "destructive" },
-    ]);
+  const formData = new FormData();
+  const jsonData = {
+    title: newChallenge.title,
+    summery: newChallenge.summery,
+    description: newChallenge.description,
+    start_day: newChallenge.start_day,
+    frequency: newChallenge.frequency,
+    duration: newChallenge.duration,
+    max_member: newChallenge.max_member,
+    certifications_start_time: newChallenge.certifications_start_time,
+    certifications_end_time: newChallenge.certifications_end_time,
+    certification_notice: newChallenge.certification_notice,
   };
-  const Certification = () =>
-    navigation.navigate("ChallengeCerti", {
-      screen: "ChallengeCertiDetail",
-      params: params,
-    });
+
+  formData.append("document", JSON.stringify(jsonData));
+  const successPhotoEx = newChallenge.success_photo_example;
+  const failPhotoEx = newChallenge.fail_photo_example;
+  const photoType = [successPhotoEx, failPhotoEx];
+  for (const type of photoType) {
+    if (type !== null) {
+      formData.append(
+        type === successPhotoEx ? "success_photo" : "fail_photo",
+        {
+          name:
+            type === successPhotoEx
+              ? `${jsonData.title}_` + "success_photo.jpeg"
+              : `${jsonData.title}_` + "fail_photo.jpeg",
+          type: "image/jpeg",
+          uri: type?.uri,
+        }
+      );
+    }
+  }
+  /* formData.append("file", {
+    name: `${jsonData.title}_photo.jpeg`,
+    type: "image/jpeg",
+    uri: successPhotoEx?.uri,
+  }); */
+
+  const createChallenge = () => {
+    try {
+      Alert.alert("챌린지를 개설하시겠습니까?", "", [
+        {
+          text: "확인",
+          onPress: async () =>
+            await axios({
+              method: "post",
+              url: `${baseUrl}/challenges/`,
+              data: formData,
+              headers: {
+                Authorization: jwt,
+                "Content-Type": "multipart/form-data",
+              },
+            }).then((response) => {
+              setlLoadingVisible(true);
+              console.log(response);
+            }),
+        },
+        {
+          text: "취소",
+        },
+      ]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  /* createChallenge */
+  const [loadingVisible, setlLoadingVisible] = useState(false);
 
   return (
-    <TouchableOpacity onPress={ApplyChallenge}>
-      <Button exist={exist}>
-        <Text>{"오늘부터 시작"}</Text>
+    <View style={{ alignItems: "center" }}>
+      {loadingVisible ? <LoadingScreen /> : null}
+      <Button onPress={() => createChallenge()}>
+        <Text>{"챌린지 개설하기"}</Text>
       </Button>
-    </TouchableOpacity>
-  
+    </View>
   );
 };
-export default Btn;
+export default CreateBtn;
