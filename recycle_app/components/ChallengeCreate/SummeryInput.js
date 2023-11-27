@@ -32,7 +32,7 @@ export default ({}) => {
         onFocus={() => setFocus(true)}
         onBlur={() => {
           setFocus(false);
-          dispatch(createChallenge({ title: text }));
+          dispatch(createChallenge({ summery: text }));
         }}
       />
       <TextCounter text={text} maxCount={30} />

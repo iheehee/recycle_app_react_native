@@ -3,7 +3,7 @@ import Pt from "prop-types";
 import styled from "styled-components/native";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
-import Swiper from "react-native-swiper";
+
 
 const { width, height } = Dimensions.get("screen");
 

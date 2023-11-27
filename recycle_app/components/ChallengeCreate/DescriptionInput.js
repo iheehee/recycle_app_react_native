@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Input, Text } from "@rneui/themed";
+import { Input } from "@rneui/themed";
 import { createChallenge } from "../../modules/createChallengeSlice";
 import TextCounter from "./TextCounter";
 

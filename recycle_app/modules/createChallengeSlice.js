@@ -14,7 +14,7 @@ const createChallengeSlice = createSlice({
       certifications_start_time: null,
       certifications_end_time: null,
       certification_notice: null,
-      max_member: 1,
+      max_member: null,
       success_photo_example: null,
       fail_photo_example: null,
     },
@@ -37,7 +37,7 @@ const createChallengeSlice = createSlice({
       challengeObject.certifications_start_time = null;
       challengeObject.certifications_end_time = null;
       challengeObject.certification_notice = null;
-      challengeObject.max_member = 1;
+      challengeObject.max_member = null;
       challengeObject.success_photo_example = null;
       challengeObject.fail_photo_example = null;
     },

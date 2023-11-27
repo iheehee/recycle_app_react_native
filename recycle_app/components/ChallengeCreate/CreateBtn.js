@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Alert, ActivityIndicator } from "react-native";
 import { useSelector } from "react-redux";
 import styled from "styled-components/native";
@@ -12,7 +12,7 @@ const Button = styled.TouchableOpacity`
   border-radius: 10px;
   padding: 15px 0px;
   width: 80%;
-  background-color: black;
+  background-color: ${(props) => (props.focus ? "#DCDCDC" : "black")};
   align-items: center;
 `;
 const Text = styled.Text`
@@ -52,19 +52,14 @@ const CreateBtn = () => {
         {
           name:
             type === successPhotoEx
-              ? `${jsonData.title}_` + "success_photo.jpeg"
-              : `${jsonData.title}_` + "fail_photo.jpeg",
+              ? "success_ex_photo.jpeg"
+              : "fail_ex_photo.jpeg",
           type: "image/jpeg",
           uri: type?.uri,
         }
       );
     }
   }
-  /* formData.append("file", {
-    name: `${jsonData.title}_photo.jpeg`,
-    type: "image/jpeg",
-    uri: successPhotoEx?.uri,
-  }); */
 
   const createChallenge = () => {
     try {
@@ -76,12 +71,12 @@ const CreateBtn = () => {
               method: "post",
               url: `${baseUrl}/challenges/`,
               data: formData,
+              timeout: 2000,
               headers: {
                 Authorization: jwt,
                 "Content-Type": "multipart/form-data",
               },
             }).then((response) => {
-              setlLoadingVisible(true);
               console.log(response);
             }),
         },
@@ -93,13 +88,57 @@ const CreateBtn = () => {
       console.log(e);
     }
   };
-  /* createChallenge */
-  const [loadingVisible, setlLoadingVisible] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [buttonVisible, setButtonVisible] = useState(true);
+  const dataCheck = (data) => {
+    let count = 0;
+    for (const element in data) {
+      if (data[element] === null) {
+        return;
+      }
+      ++count;
+    }
+    count >= 1 ? setButtonVisible(false) : setButtonVisible(true);
+
+    return null;
+  };
+
+  useEffect(() => {
+    dataCheck(newChallenge);
+  }, [newChallenge]);
+
+  useEffect(() => {
+    axios.interceptors.request.use(
+      function (config) {
+        setLoading(true);
+        return config;
+      },
+      function (error) {
+        return Promise.reject(error);
+      }
+    );
+    axios.interceptors.response.use(
+      function (response) {
+        setLoading(false);
+        console.log(response);
+        return response;
+      },
+      function (error) {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
+  }, [axios]);
 
   return (
     <View style={{ alignItems: "center" }}>
-      {loadingVisible ? <LoadingScreen /> : null}
-      <Button onPress={() => createChallenge()}>
+      {loading ? <LoadingScreen /> : null}
+      <Button
+        onPress={() => createChallenge()}
+        focus={buttonVisible}
+        disabled={buttonVisible}
+      >
         <Text>{"챌린지 개설하기"}</Text>
       </Button>
     </View>
