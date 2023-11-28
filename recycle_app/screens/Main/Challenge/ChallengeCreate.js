@@ -14,6 +14,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import TitleInput from "../../../components/ChallengeCreate/TitleInput";
 import SummeryInput from "../../../components/ChallengeCreate/SummeryInput";
 import CreateBtn from "../../../components/ChallengeCreate/CreateBtn";
+import ImagePicker from "../../../util/Camera/ImagePicker";
 
 const { width, height } = Dimensions.get("screen");
 const containerMarginBottomValue = 40;
@@ -71,6 +72,10 @@ export default ({ route }) => {
           <Container>
             <Title>챌린지 요약</Title>
             <SummeryInput />
+          </Container>
+          <Container>
+            <Title>챌린지 대표 이미지</Title>
+            <ImagePicker />
           </Container>
           <Container>
             <Title>인증 빈도</Title>

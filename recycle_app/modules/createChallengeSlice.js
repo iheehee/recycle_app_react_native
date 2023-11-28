@@ -30,6 +30,7 @@ const createChallengeSlice = createSlice({
       const challengeObject = state.newChallenge;
       challengeObject.title = null;
       challengeObject.summery = null;
+      challengeObject.title_banner = null;
       challengeObject.description = null;
       challengeObject.start_day = null;
       challengeObject.frequency = null;
@@ -47,6 +48,9 @@ const setNewChallengeValue = (challengeObject, key, value) => {
   switch (key) {
     case "title":
       challengeObject.title = value;
+      break;
+    case "title_banner":
+      challengeObject.title_banner = value;
       break;
     case "summery":
       challengeObject.summery = value;
@@ -87,19 +91,5 @@ const setNewChallengeValue = (challengeObject, key, value) => {
 
 export const { createChallenge, resetCreateChallenge } =
   createChallengeSlice.actions;
-
-export const getMyCertifications = (jwt) => async (dispatch) => {
-  try {
-    const { data } = await api.myCertifications(jwt);
-
-    dispatch(
-      setMyCertifications({
-        my_certifications: data,
-      })
-    );
-  } catch (e) {
-    console.warn(e);
-  }
-};
 
 export default createChallengeSlice.reducer;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Alert, ActivityIndicator } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Ip from "../../util/Ip";
 import LoadingScreen from "./LoadingScreen";
+import { getMyChallenges } from "../../modules/userSlice";
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
@@ -21,12 +22,11 @@ const Text = styled.Text`
 `;
 
 const CreateBtn = () => {
-  const navigation = useNavigation();
-  const jwt = useSelector((state) => state.usersReducer.token);
   const baseUrl = Ip.localIp;
   const newChallenge = useSelector(
     (state) => state.createChallengeReducer.newChallenge
   );
+  console.log(newChallenge);
   const formData = new FormData();
   const jsonData = {
     title: newChallenge.title,
@@ -60,7 +60,16 @@ const CreateBtn = () => {
       );
     }
   }
-
+  const title_banner = newChallenge.title_banner;
+  formData.append("title_banner", {
+    name: jsonData.title + "title_banner.jpeg",
+    type: "image/jpeg",
+    uri: title_banner,
+  });
+  console.log(formData);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const jwt = useSelector((state) => state.usersReducer.token);
   const createChallenge = () => {
     try {
       Alert.alert("챌린지를 개설하시겠습니까?", "", [
@@ -77,7 +86,27 @@ const CreateBtn = () => {
                 "Content-Type": "multipart/form-data",
               },
             }).then((response) => {
-              console.log(response);
+              const { result } = response.data;
+              dispatch(getMyChallenges(jwt));
+              Alert.alert(result, "", [
+                {
+                  text: "확인",
+                  onPress: () => {
+                    Alert.alert("인증화면으로 이동하시겠습니까?", "", [
+                      {
+                        text: "확인",
+                        onPress: () => {
+                          navigation.navigate("ChallengeIndex");
+                          return navigation.navigate("MyChallenge");
+                        },
+                      },
+                      {
+                        text: "취소",
+                      },
+                    ]);
+                  },
+                },
+              ]);
             }),
         },
         {
@@ -99,7 +128,7 @@ const CreateBtn = () => {
       }
       ++count;
     }
-    count >= 1 ? setButtonVisible(false) : setButtonVisible(true);
+    count >= 12 ? setButtonVisible(false) : setButtonVisible(true);
 
     return null;
   };
@@ -129,7 +158,7 @@ const CreateBtn = () => {
         return Promise.reject(error);
       }
     );
-  }, [axios]);
+  }, []);
 
   return (
     <View style={{ alignItems: "center" }}>
