@@ -7,6 +7,7 @@ import axios from "axios";
 import Ip from "../../util/Ip";
 import LoadingScreen from "./LoadingScreen";
 import { getMyChallenges } from "../../modules/userSlice";
+import { resetCreateChallenge } from "../../modules/createChallengeSlice";
 
 const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
@@ -96,8 +97,10 @@ const CreateBtn = () => {
                       {
                         text: "확인",
                         onPress: () => {
-                          navigation.navigate("ChallengeIndex");
-                          return navigation.navigate("MyChallenge");
+                          dispatch(resetCreateChallenge());
+                          return navigation.navigate("인증", {
+                            screen: "MyChallenge",
+                          });
                         },
                       },
                       {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, Image, Alert } from "react-native";
+import { StyleSheet, View, Image, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import { Input, Text } from "@rneui/themed";
 import { Camera, CameraType } from "expo-camera";
 import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
@@ -8,10 +9,12 @@ import Button from "./component/Button";
 import axios from "axios";
 import { getMyCertifications } from "../../modules/certificationSlice";
 import Ip from "../Ip";
+import TextCounter from "../../components/ChallengeCreate/TextCounter";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
   const [image, setImage] = useState(null);
+  const [comment, setComment] = useState("");
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
@@ -52,7 +55,11 @@ export default ({ route }) => {
           type: "image/jpeg",
           uri: image,
         });
-
+        const document = {
+          comment: comment,
+          challenge_id: id,
+        };
+        formData.append("document", JSON.stringify(document));
         await axios({
           method: "post",
           url: `${baseUrl}/challenges/${id}/certification/`,
@@ -131,19 +138,42 @@ export default ({ route }) => {
       )}
       <View>
         {image ? (
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 80,
-            }}
-          >
-            <Button
-              title={"Re-take"}
-              icon={"retweet"}
-              onPress={() => setImage(null)}
-            />
-            <Button title={"Save"} icon={"check"} onPress={saveImage} />
+          <View>
+            <View style={{ marginBottom: 15 }}>
+              <Text h4 style={{ color: "white", margin: 9 }}>
+                Comment
+              </Text>
+              <Input
+                inputContainerStyle={{
+                  borderColor: "white",
+                  borderRadius: 12,
+                  borderWidth: 0.5,
+                  height: 100,
+                  alignItems: "flex-start",
+                }}
+                multiline={true}
+                numberOfLines={3}
+                maxLength={100}
+                inputStyle={{ color: "white", margin: 9 }}
+                value={comment}
+                onChangeText={(comment) => setComment(comment)}
+              />
+              <TextCounter text={comment} maxCount={100} />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingHorizontal: 80,
+              }}
+            >
+              <Button
+                title={"Re-take"}
+                icon={"retweet"}
+                onPress={() => setImage(null)}
+              />
+              <Button title={"Save"} icon={"check"} onPress={saveImage} />
+            </View>
           </View>
         ) : (
           <View

@@ -1,46 +1,105 @@
-import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
+import React, { useState } from "react";
+import { BottomSheet, ListItem } from "@rneui/themed";
+import {
+  SafeAreaView,
+  TouchableOpacity,
+  Dimensions,
+  Alert,
+  Text,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Ip from "../../util/Ip";
+import axios from "axios";
+import { getMyChallenges } from "../../modules/userSlice";
 
-const BottomSheetMenu = () => {
-  // ref
-  const bottomSheetRef = useRef(null);
+const { width, height } = Dimensions.get("screen");
 
-  // variables
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+const BottomSheetMenu = (params) => {
+  const { challengeId } = params;
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const dispatch = useDispatch();
+  const [isVisible, setIsVisible] = useState(false);
+  const contentStyle = {
+    width: width,
+    alignItems: "center",
+  };
+  const list = [
+    {
+      title: "채린지 탈퇴하기",
+      contentStyle: contentStyle,
+      onPress: () => leaveChallenge(challengeId, jwt),
+    },
+    {
+      title: "Cancel",
+      containerStyle: {
+        backgroundColor: "red",
+      },
+      contentStyle: contentStyle,
+      titleStyle: { color: "white" },
+      onPress: () => setIsVisible(false),
+    },
+  ];
+  const leaveChallenge = (challengeId, jwt) => {
+    return Alert.alert("챌린지를 탈퇴 하시겠습니까?", "", [
+      {
+        text: "확인",
+        onPress: () => {
+          axios({
+            method: "delete",
+            url:
+              Ip.localIp +
+              "/challenges/leave_challenge/?challenge_id=" +
+              challengeId,
+            headers: {
+              Authorization: jwt,
+              "Content-Type": "application/json",
+            },
+          }).then((response) => {
+            const { result } = response.data;
+            Alert.alert(result, "", [
+              {
+                text: "확인",
+                onPress: () => {
+                  dispatch(getMyChallenges(jwt));
+                },
+              },
+            ]);
+          });
+        },
+      },
+      {
+        text: "취소",
+        style: "destructive",
+      },
+    ]);
+  };
 
-  // callbacks
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
-  // renders
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
+      <TouchableOpacity onPress={() => setIsVisible(true)}>
+        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
+      </TouchableOpacity>
       <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
+        containerStyle={{ marginBottom: 20 }}
+        onBackdropPress={() => setIsVisible(false)}
+        modalProps={{}}
+        isVisible={isVisible}
       >
-        <View style={styles.contentContainer}>
-          <Text>Awesome 🎉</Text>
-        </View>
+        {list.map((l, i) => (
+          <ListItem
+            key={i}
+            containerStyle={l.containerStyle}
+            onPress={l.onPress}
+          >
+            <ListItem.Content style={l.contentStyle}>
+              <Text style={l.titleStyle}>{l.title}</Text>
+            </ListItem.Content>
+          </ListItem>
+        ))}
       </BottomSheet>
-    </View>
+    </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-});
 
 export default BottomSheetMenu;

@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Dimensions, View, Image, Text, Alert } from "react-native";
+import { Dimensions, View, Image, TouchableOpacity, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@rneui/themed";
 import { getMyCertifications } from "../../modules/certificationSlice";
 import Ip from "../../util/Ip";
 import api from "../../api";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -39,9 +40,19 @@ const ButtonContainer = styled.View`
   margin-top: 10px;
 `;
 
-export default ({ challengeId, banner, certificationId, num }) => {
+export default ({
+  challengeId,
+  photo,
+  certificationId,
+  comment,
+  nickname,
+  num,
+  avatar,
+  certification_data,
+}) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const deleteCertification = (challengeId, certificationId, jwt) => {
     Alert.alert("인증을 삭제하시겠습니까?", "", [
       {
@@ -83,10 +94,23 @@ export default ({ challengeId, banner, certificationId, num }) => {
           <Num>{num}</Num>
         </DurationContainer>
         <ImageContainer>
-          <Image
-            source={{ uri: Ip.localIp + banner }}
-            style={{ width: 50, height: 50, borderRadius: 20 }}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Feed", {
+                photo: photo,
+                certificationId: certificationId,
+                comment: comment,
+                nickname: nickname,
+                avatar: avatar,
+                certification_data: certification_data,
+              })
+            }
+          >
+            <Image
+              source={{ uri: Ip.localIp + photo }}
+              style={{ width: 50, height: 50, borderRadius: 20 }}
+            />
+          </TouchableOpacity>
         </ImageContainer>
       </CertificationContainer>
       <ButtonContainer>

@@ -35,8 +35,12 @@ export default ({ challengeId }) => {
                   key={certification.certification_id}
                   challengeId={challengeId}
                   certificationId={certification.certification_id}
-                  banner={certification.certification_photo}
+                  photo={certification.certification_photo}
+                  comment={certification.certification_comment}
                   num={++num}
+                  nickname={certification.participant_id.nickname_id}
+                  avatar={certification.participant_id.avatar}
+                  certification_data={certification.certification_date}
                 />
               </CardContainer>
             ) : null

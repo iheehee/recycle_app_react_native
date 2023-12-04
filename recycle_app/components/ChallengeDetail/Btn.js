@@ -46,8 +46,10 @@ const Btn = ({ params }) => {
                       {
                         text: "이동",
                         onPress: () => {
-                          navigation.navigate("ChallengeIndex");
-                          return navigation.navigate("MyChallenge");
+                          //navigation.navigate("ChallengeIndex");
+                          return navigation.navigate("인증", {
+                            screen: "MyChallenge",
+                          });
                         },
                       },
                       {

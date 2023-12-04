@@ -9,6 +9,7 @@ import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import CertificationContainer from "../screens/Main/Certification/CertificationContainer";
 import ChallengeCertiDetail from "../screens/Main/Certification/ChallengeCertiDetail";
 import ChallengeCreate from "../screens/Main/Challenge/ChallengeCreate";
+import CertiFeedList from "../screens/Main/Certification/CertiFeedList";
 import Recycle from "../screens/Main/Recycle";
 import Profile from "../screens/Main/Profile";
 import Day from "../components/ChallengeDetail/Day";
@@ -19,6 +20,7 @@ import BackBtn from "../components/ChallengeCreate/BackBtn";
 import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -162,6 +164,13 @@ const ChallengeCertiStackNavi = () => {
       <Stack.Screen
         name="CertificationDetail"
         component={ChallengeCertiTapNavi}
+        options={{
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="Feed"
+        component={CertiFeedCard}
         options={{
           title: null,
         }}
