@@ -18,6 +18,7 @@ const Container = styled.View`
 `;
 
 export default ({ myChallenges }) => {
+  console.log(myChallenges);
   return (
     <MainContainer>
       <ScrollView

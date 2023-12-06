@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Alert, Dimensions } from "react-native";
 import { Avatar, Text } from "@rneui/themed";
 import styled from "styled-components/native";
 import Ip from "../../util/Ip";
-import BottomSheetMenu from "./BottomSheetMenu";
+import ModalMenu from "./ModalMenu";
 import AmPm from "../../util/Time/AmPm";
 import YearMonthDay from "../../util/Time/YearMonthDay";
 import Time from "../../util/Time/Time";
@@ -26,14 +26,9 @@ const HeaderInfoContainer = styled.View`
 const NameDateContainer = styled.View`
   margin-left: 10px;
 `;
-const TextContainer = styled.Text`
-  margin-left: 15px;
-  font-size: 16px;
-  font-weight: 500;
-`;
-const CameraIconContainer = styled.View`
-  align-items: center;
-  flex-direction: row;
+
+const CommentContainer = styled.View`
+  margin-top: 10px;
 `;
 
 export default ({ route }) => {
@@ -50,20 +45,25 @@ export default ({ route }) => {
             <NameDateContainer>
               <Text h4>{route.params.nickname}</Text>
               <Text>
-                <YearMonthDay DateTime={certification_data} />{" "}
+                <YearMonthDay
+                  DateTime={certification_data}
+                  type={"YearMonthDay"}
+                />{" "}
                 <AmPm DateTime={certification_data} />{" "}
                 <Time DateTime={certification_data} />
               </Text>
             </NameDateContainer>
           </HeaderInfoContainer>
-          <BottomSheetMenu />
+          <ModalMenu />
         </HeadContainer>
         <Text>{route.params.certification_date}</Text>
         <Image
           source={{ uri: baseUrl + photo }}
           style={{ width: width - 20, height: 410 }}
         />
-        <Text>{route.params.comment}</Text>
+        <CommentContainer>
+          <Text>{route.params.comment}</Text>
+        </CommentContainer>
       </Container>
     </BgContainer>
   );

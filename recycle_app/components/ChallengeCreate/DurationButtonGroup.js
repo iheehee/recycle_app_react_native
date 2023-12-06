@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { Button } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { createChallenge } from "../../modules/createChallengeSlice";
 
@@ -12,7 +11,6 @@ export default ({ fontSize }) => {
     activeStyle: { backgroundColor: "black" },
     nonActiveButton: { borderColor: "#BBBBBB" },
   };
-
   let durationGroup = ["1주 동안", "2주 동안", "3주 동안", "4주 동안"];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState(durationGroup[0]);

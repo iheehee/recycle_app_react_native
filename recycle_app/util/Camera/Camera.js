@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, Image, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Alert,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Input, Text } from "@rneui/themed";
 import { Camera, CameraType } from "expo-camera";
@@ -10,6 +18,7 @@ import axios from "axios";
 import { getMyCertifications } from "../../modules/certificationSlice";
 import Ip from "../Ip";
 import TextCounter from "../../components/ChallengeCreate/TextCounter";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -97,99 +106,108 @@ export default ({ route }) => {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={styles.container}>
-      {!image ? (
-        <Camera
-          style={styles.camera}
-          type={type}
-          flashMode={flash}
-          ref={cameraRef}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              padding: 30,
-            }}
-          >
-            <Button
-              icon={"retweet"}
-              onPress={() => {
-                setType(
-                  type === CameraType.back ? CameraType.front : CameraType.back
-                );
-              }}
-            />
-            <Button
-              icon={"flash"}
-              color={flash === Camera.Constants.FlashMode.off ? "gray" : false}
-              onPress={() => {
-                setFlash(
-                  flash === Camera.Constants.FlashMode.off
-                    ? Camera.Constants.FlashMode.torch
-                    : Camera.Constants.FlashMode.off
-                );
-              }}
-            />
-          </View>
-        </Camera>
-      ) : (
-        <Image source={{ uri: image }} style={styles.camera} />
-      )}
-      <View>
-        {image ? (
-          <View>
-            <View style={{ marginBottom: 15 }}>
-              <Text h4 style={{ color: "white", margin: 9 }}>
-                Comment
-              </Text>
-              <Input
-                inputContainerStyle={{
-                  borderColor: "white",
-                  borderRadius: 12,
-                  borderWidth: 0.5,
-                  height: 100,
-                  alignItems: "flex-start",
-                }}
-                multiline={true}
-                numberOfLines={3}
-                maxLength={100}
-                inputStyle={{ color: "white", margin: 9 }}
-                value={comment}
-                onChangeText={(comment) => setComment(comment)}
-              />
-              <TextCounter text={comment} maxCount={100} />
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                paddingHorizontal: 80,
-              }}
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={"padding"}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          {!image ? (
+            <Camera
+              style={styles.camera}
+              type={type}
+              flashMode={flash}
+              ref={cameraRef}
             >
-              <Button
-                title={"Re-take"}
-                icon={"retweet"}
-                onPress={() => setImage(null)}
-              />
-              <Button title={"Save"} icon={"check"} onPress={saveImage} />
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: 30,
+                }}
+              >
+                <Button
+                  icon={"retweet"}
+                  onPress={() => {
+                    setType(
+                      type === CameraType.back
+                        ? CameraType.front
+                        : CameraType.back
+                    );
+                  }}
+                />
+                <Button
+                  icon={"flash"}
+                  color={
+                    flash === Camera.Constants.FlashMode.off ? "gray" : false
+                  }
+                  onPress={() => {
+                    setFlash(
+                      flash === Camera.Constants.FlashMode.off
+                        ? Camera.Constants.FlashMode.torch
+                        : Camera.Constants.FlashMode.off
+                    );
+                  }}
+                />
+              </View>
+            </Camera>
+          ) : (
+            <Image source={{ uri: image }} style={styles.camera} />
+          )}
+
+          <View>
+            {image ? (
+              <View>
+                <View style={{ marginBottom: 15 }}>
+                  <Text h4 style={{ color: "white", margin: 9 }}>
+                    Comment
+                  </Text>
+                  <Input
+                    inputContainerStyle={{
+                      borderColor: "white",
+                      borderRadius: 12,
+                      borderWidth: 0.5,
+                      height: 100,
+                      alignItems: "flex-start",
+                    }}
+                    multiline={true}
+                    numberOfLines={3}
+                    maxLength={100}
+                    inputStyle={{ color: "white", margin: 9 }}
+                    value={comment}
+                    onChangeText={(comment) => setComment(comment)}
+                  />
+                  <TextCounter text={comment} maxCount={100} />
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingHorizontal: 80,
+                  }}
+                >
+                  <Button
+                    title={"Re-take"}
+                    icon={"retweet"}
+                    onPress={() => setImage(null)}
+                  />
+                  <Button title={"Save"} icon={"check"} onPress={saveImage} />
+                </View>
+              </View>
+            ) : (
+              <View
+                style={{
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  title={"Take a picture"}
+                  icon={"camera"}
+                  onPress={takePicture}
+                />
+              </View>
+            )}
           </View>
-        ) : (
-          <View
-            style={{
-              alignItems: "center",
-            }}
-          >
-            <Button
-              title={"Take a picture"}
-              icon={"camera"}
-              onPress={takePicture}
-            />
-          </View>
-        )}
-      </View>
-    </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

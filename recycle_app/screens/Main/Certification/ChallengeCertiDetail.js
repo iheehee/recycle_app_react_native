@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import CertiHeader from "../../../components/ChallengeCerti/CertiHeader";
 import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
 import { ScrollView } from "react-native";
+import { FlatList } from "react-native";
 
 const BgContainer = styled.View`
   flex: 1;
@@ -24,16 +25,23 @@ const TabContainer = styled.View`
 export default ({ route }) => {
   return (
     <BgContainer>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <BodyContainer>
-          <HeaderContainer>
-            <CertiHeader route={route.params.challenge} />
-          </HeaderContainer>
-          <TabContainer>
-            <CertiTapButton route={route.params.challenge} />
-          </TabContainer>
-        </BodyContainer>
-      </ScrollView>
+      <FlatList
+        data={[]}
+        renderItem={null}
+        ListEmptyComponent={
+          <BodyContainer>
+            <HeaderContainer>
+              <CertiHeader route={route.params.challenge} />
+            </HeaderContainer>
+            <TabContainer>
+              <CertiTapButton route={route.params.challenge} />
+            </TabContainer>
+          </BodyContainer>
+        }
+      >
+        {/* <ScrollView contentContainerStyle={{ flexGrow: 1 }}> */}
+        {/* </ScrollView> */}
+      </FlatList>
     </BgContainer>
   );
 };

@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components/native";
 import { Dimensions, View, Image, TouchableOpacity, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { Button } from "@rneui/themed";
+import { Button, Text } from "@rneui/themed";
 import { getMyCertifications } from "../../modules/certificationSlice";
 import Ip from "../../util/Ip";
 import api from "../../api";
 import { useNavigation } from "@react-navigation/native";
+import YearMonthDay from "../../util/Time/YearMonthDay";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -38,6 +39,10 @@ const ImageContainer = styled.View`
 
 const ButtonContainer = styled.View`
   margin-top: 10px;
+`;
+const DateContainer = styled.View`
+  align-items: center;
+  margin-top: 8px;
 `;
 
 export default ({
@@ -110,6 +115,9 @@ export default ({
               source={{ uri: Ip.localIp + photo }}
               style={{ width: 50, height: 50, borderRadius: 20 }}
             />
+            <DateContainer>
+              <YearMonthDay type={"MonthDay"} DateTime={certification_data} />
+            </DateContainer>
           </TouchableOpacity>
         </ImageContainer>
       </CertificationContainer>
