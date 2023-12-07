@@ -8,14 +8,13 @@ import {
   Text,
 } from "react-native";
 import styled from "styled-components/native";
-import Test from "../../screens/Main/Certification/Test";
+import UsersCertiList from "../../screens/Main/Certification/UsersCertiList";
 import MyStatus from "../../screens/Main/Certification/MyStatus";
 
 const TopButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 10px;
-  margin-bottom: 5px;
 `;
 const FirstButton = styled.TouchableOpacity`
   border-bottom-color: ${(props) =>
@@ -77,7 +76,7 @@ const TopButton = ({ route }) => {
         {focused === "myStatus" ? (
           <MyStatus challengeId={route.id} />
         ) : (
-          <Test />
+          <UsersCertiList challengeId={route.id} />
         )}
       </View>
     </>

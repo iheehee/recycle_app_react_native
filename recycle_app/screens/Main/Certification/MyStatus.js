@@ -20,13 +20,13 @@ export default ({ challengeId }) => {
   const myCertifications = useSelector(
     (state) => state.certificationReducer.myCertifications
   );
-  let num = 0;
+  //let num = 0;
 
   return (
     <Container>
       <ScrollView horizontal={true}>
         <CertificationContainer>
-          {myCertifications.map((certification) =>
+          {myCertifications.map((certification, num) =>
             certification.challenge_id === challengeId ? (
               <CardContainer
                 key={"cardContainer_" + certification.certification_id}
@@ -37,7 +37,7 @@ export default ({ challengeId }) => {
                   certificationId={certification.certification_id}
                   photo={certification.certification_photo}
                   comment={certification.certification_comment}
-                  num={++num}
+                  num={num}
                   nickname={certification.participant_id.nickname_id}
                   avatar={certification.participant_id.avatar}
                   certification_data={certification.certification_date}

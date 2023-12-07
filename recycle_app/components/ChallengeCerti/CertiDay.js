@@ -39,6 +39,11 @@ const CertiDay = ({ start_day, duration, frequency }) => {
     let dt = new Date(start_day);
     const dayOfTheWeek = {
       1: "월",
+      2: "화",
+      3: "수",
+      4: "목",
+      5: "금",
+      6: "토",
       0: "일",
     };
     const durationDay = {
