@@ -4,7 +4,7 @@ import Ip from "./util/Ip";
 const callApi = async (method_type, path, data, jwt) => {
   const headers = {
     "Content-Type": "application/json",
-    Authorization: jwt,
+    Access: jwt,
   };
 
   const baseUrl = Ip.localIp;
@@ -27,12 +27,12 @@ const callApi = async (method_type, path, data, jwt) => {
 };
 
 export default {
-  createAccount: (form) => callApi("post", "/users/", form),
-  login: (form) => callApi("post", "/users/login/", form),
-  challenges: (page) => callApi("get", "/challenges/", page),
-  challengeDetail: (form) => callApi("get", "/challenges/" + form, ""),
+  createAccount: (form) => callApi("post", "/user/", form),
+  login: (form) => callApi("post", "/auth/login/", form),
+  challenges: (page) => callApi("get", "/challenge/", page),
+  challengeDetail: (form) => callApi("get", "/challenge/" + form, ""),
   challengeApply: (form, data, jwt) =>
-    callApi("post", `/challenges/${form}/apply_challenge/`, data, jwt),
+    callApi("post", `/challenge/${form}/apply/`, data, jwt),
   leaveChallenge: (challengeId, jwt) => {
     callApi(
       "delete",

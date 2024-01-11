@@ -18,7 +18,6 @@ import axios from "axios";
 import { getMyCertifications } from "../../modules/certificationSlice";
 import Ip from "../Ip";
 import TextCounter from "../../components/ChallengeCreate/TextCounter";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default ({ route }) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);

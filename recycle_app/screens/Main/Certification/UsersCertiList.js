@@ -6,16 +6,16 @@ import {
   ActivityIndicator,
   View,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Image } from "@rneui/themed";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsersCertifications } from "../../../modules/certificationSlice";
 import Ip from "../../../util/Ip";
+import { useNavigation } from "@react-navigation/native";
 
-const { width, height } = Dimensions.get("screen");
 const ImageAPI = ({ challengeId }) => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getUsersCertifications(challengeId));
   }, []);
@@ -23,6 +23,8 @@ const ImageAPI = ({ challengeId }) => {
     (state) => state.certificationReducer.usersCertifications
   );
   const baseUrl = Ip.localIp;
+  const navigation = useNavigation();
+  console.log(certifications);
   return (
     <>
       <SafeAreaView>
@@ -32,16 +34,30 @@ const ImageAPI = ({ challengeId }) => {
           numColumns={2}
           keyExtractor={(item) => item.certification_id}
           renderItem={({ item }) => (
-            <Image
-              source={{ uri: baseUrl + item.certification_photo }}
-              containerStyle={styles.item}
-              style={{}}
-              PlaceholderContent={
-                <View style={{ flexDirection: "row", height: "100%" }}>
-                  <ActivityIndicator />
-                </View>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() =>
+                navigation.navigate("Feed", {
+                  photo: item.certification_photo,
+                  comment: item.certification_comment,
+                  nickname: item.participant_id.nickname_id,
+                  avatar: item.participant_id.avatar,
+                  certification_date: item.certification_date,
+                })
               }
-            />
+              style={styles.item}
+            >
+              <Image
+                source={{ uri: baseUrl + item.certification_photo }}
+                containerStyle={styles.item}
+                style={{}}
+                PlaceholderContent={
+                  <View style={{ flexDirection: "row", height: "100%" }}>
+                    <ActivityIndicator />
+                  </View>
+                }
+              />
+            </TouchableOpacity>
           )}
         />
       </SafeAreaView>

@@ -53,7 +53,7 @@ export default ({
   nickname,
   num,
   avatar,
-  certification_data,
+  certification_date,
 }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   const dispatch = useDispatch();
@@ -83,44 +83,44 @@ export default ({
   };
   return (
     <BgContainer>
-      <CertificationContainer
-        style={{
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 1,
-            height: 1,
-          },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          borderRadius: 15,
-        }}
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Feed", {
+            photo: photo,
+            certificationId: certificationId,
+            comment: comment,
+            nickname: nickname,
+            avatar: avatar,
+            certification_date: certification_date,
+          })
+        }
       >
-        <DurationContainer>
-          <Num>{num}</Num>
-        </DurationContainer>
-        <ImageContainer>
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Feed", {
-                photo: photo,
-                certificationId: certificationId,
-                comment: comment,
-                nickname: nickname,
-                avatar: avatar,
-                certification_data: certification_data,
-              })
-            }
-          >
+        <CertificationContainer
+          style={{
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 1,
+              height: 1,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 4,
+            borderRadius: 15,
+          }}
+        >
+          <DurationContainer>
+            <Num>{num}</Num>
+          </DurationContainer>
+          <ImageContainer>
             <Image
               source={{ uri: Ip.localIp + photo }}
               style={{ width: 50, height: 50, borderRadius: 20 }}
             />
             <DateContainer>
-              <YearMonthDay type={"MonthDay"} DateTime={certification_data} />
+              <YearMonthDay type={"MonthDay"} DateTime={certification_date} />
             </DateContainer>
-          </TouchableOpacity>
-        </ImageContainer>
-      </CertificationContainer>
+          </ImageContainer>
+        </CertificationContainer>
+      </TouchableOpacity>
       <ButtonContainer>
         <Button
           title="삭제"

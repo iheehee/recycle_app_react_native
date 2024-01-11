@@ -1,5 +1,6 @@
 import React from "react";
 import Pt from "prop-types";
+import Ip from "../util/Ip";
 import styled from "styled-components/native";
 import { Dimensions, View, Image, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -58,7 +59,7 @@ const ChallengeCard = ({
   success_example,
 }) => {
   const navigation = useNavigation();
-
+  console.log(Ip.staticIp + banner);
   return (
     <TouchableOpacity
       onPress={() => {
@@ -86,7 +87,7 @@ const ChallengeCard = ({
       <Container>
         <ImageContainer>
           <Image
-            source={{ uri: banner }}
+            source={{ uri: Ip.localIp + banner }}
             style={{ width: width / 2.2, height: height / 8, borderRadius: 10 }}
           />
         </ImageContainer>

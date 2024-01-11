@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components/native";
 import CertiHeader from "../../../components/ChallengeCerti/CertiHeader";
 import CertiTapButton from "../../../components/ChallengeCerti/CertiTapButton";
-import { ScrollView } from "react-native";
 import { FlatList } from "react-native";
 
 const BgContainer = styled.View`

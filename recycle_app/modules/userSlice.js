@@ -29,9 +29,10 @@ export const { logIn, logOut, myChallenges } = userSlice.actions;
 export const userLogin = (form) => async (dispatch) => {
   try {
     const {
-      data: { id, token },
+      data: { token },
     } = await api.login(form);
-    if (id && token) {
+
+    if (token) {
       dispatch(logIn({ token }));
     }
   } catch (e) {

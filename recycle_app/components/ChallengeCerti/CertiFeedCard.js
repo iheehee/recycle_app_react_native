@@ -19,6 +19,7 @@ const HeadContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 `;
 const HeaderInfoContainer = styled.View`
   flex-direction: row;
@@ -31,11 +32,12 @@ const CommentContainer = styled.View`
   margin-top: 10px;
 `;
 
+
 export default ({ route }) => {
   const baseUrl = Ip.localIp;
   const { width, height } = Dimensions.get("screen");
-  const { nickname, comment, avatar, certification_data, photo } = route.params;
-
+  const { nickname, comment, avatar, certification_date, photo } = route.params;
+  console.log(route);
   return (
     <BgContainer>
       <Container>
@@ -43,26 +45,26 @@ export default ({ route }) => {
           <HeaderInfoContainer>
             <Avatar size={46} rounded source={{ uri: baseUrl + avatar }} />
             <NameDateContainer>
-              <Text h4>{route.params.nickname}</Text>
+              <Text h4>{nickname}</Text>
               <Text>
                 <YearMonthDay
-                  DateTime={certification_data}
+                  DateTime={certification_date}
                   type={"YearMonthDay"}
                 />{" "}
-                <AmPm DateTime={certification_data} />{" "}
-                <Time DateTime={certification_data} />
+                <AmPm DateTime={certification_date} />{" "}
+                <Time DateTime={certification_date} />
               </Text>
             </NameDateContainer>
           </HeaderInfoContainer>
           <ModalMenu />
         </HeadContainer>
-        <Text>{route.params.certification_date}</Text>
+
         <Image
           source={{ uri: baseUrl + photo }}
           style={{ width: width - 20, height: 410 }}
         />
         <CommentContainer>
-          <Text>{route.params.comment}</Text>
+          <Text>{comment}</Text>
         </CommentContainer>
       </Container>
     </BgContainer>
