@@ -33,20 +33,17 @@ export default {
   challengeDetail: (form) => callApi("get", "/challenge/" + form, ""),
   challengeApply: (form, data, jwt) =>
     callApi("post", `/challenge/${form}/apply/`, data, jwt),
-  leaveChallenge: (challengeId, jwt) => {
-    callApi(
-      "delete",
-      `/challenges/3/leave_challenge?challenge_id=${challengeId}`,
-      null,
-      jwt
-    );
+  deleteChallenge: (challengeId, jwt) => {
+    callApi("delete", `/challenge/${challengeId}/`, null, jwt);
   },
   createChallenge: (data, jwt) => callApi("post", "/challenges/", data, jwt),
+  myChallenges: (jwt) =>
+    callApi("get", "/user/profile/my_challenges/", "", jwt),
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
   certifications: (form) =>
     callApi("get", `/challenges/${form}/certification/`),
-  profile: (jwt) => callApi("get", "/users/profile/", "", jwt),
+  profile: (jwt) => callApi("get", "/user/profile/", "", jwt),
   removeCertification: (id, certificationId, jwt) =>
     callApi(
       "delete",

@@ -1,13 +1,14 @@
 import styled from "styled-components/native";
 import { ScrollView, Dimensions } from "react-native";
-import AppliedChallengeCard from "../../../components/ChallengeCerti/AppliedChallengeCard";
+import ChallengeCard from "../../../components/ChallengeCerti/ChallengeCard";
 
 const { width, height } = Dimensions.get("screen");
 const MainContainer = styled.View`
   flex: 1;
-  background-color: white;
+  background-color: #1b2631;
 `;
 const ChallengeContainer = styled.View`
+  margin-top: 20px;
   justify-content: center;
   align-items: center;
 `;
@@ -27,7 +28,7 @@ export default ({ myChallenges }) => {
         <ChallengeContainer>
           {myChallenges.map((challenge) => (
             <Container key={"challengeContainer_" + challenge.id}>
-              <AppliedChallengeCard challenge={challenge} />
+              <ChallengeCard challenge={challenge} />
             </Container>
           ))}
         </ChallengeContainer>

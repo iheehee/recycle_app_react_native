@@ -7,16 +7,7 @@ const createChallengeSlice = createSlice({
     newChallenge: {
       title: null,
       summery: null,
-      description: null,
-      start_day: null,
-      frequency: null,
-      duration: null,
-      certifications_start_time: null,
-      certifications_end_time: null,
-      certification_notice: null,
-      max_member: null,
-      success_photo_example: null,
-      fail_photo_example: null,
+      max_hour: 1,
     },
   },
   reducers: {
@@ -30,17 +21,7 @@ const createChallengeSlice = createSlice({
       const challengeObject = state.newChallenge;
       challengeObject.title = null;
       challengeObject.summery = null;
-      challengeObject.title_banner = null;
-      challengeObject.description = null;
-      challengeObject.start_day = null;
-      challengeObject.frequency = null;
-      challengeObject.duration = null;
-      challengeObject.certifications_start_time = null;
-      challengeObject.certifications_end_time = null;
-      challengeObject.certification_notice = null;
-      challengeObject.max_member = null;
-      challengeObject.success_photo_example = null;
-      challengeObject.fail_photo_example = null;
+      challengeObject.max_hour = 1;
     },
   },
 });
@@ -49,42 +30,14 @@ const setNewChallengeValue = (challengeObject, key, value) => {
     case "title":
       challengeObject.title = value;
       break;
-    case "title_banner":
-      challengeObject.title_banner = value;
-      break;
     case "summery":
       challengeObject.summery = value;
       break;
-    case "description":
-      challengeObject.description = value;
+    case "max_hour":
+      challengeObject.max_hour = value;
       break;
-    case "start_day":
-      challengeObject.start_day = value;
-      break;
-    case "frequency":
-      challengeObject.frequency = value;
-      break;
-    case "duration":
-      challengeObject.duration = value;
-      break;
-    case "max_member":
-      challengeObject.max_member = value;
-      break;
-    case "certifications_start_time":
-      challengeObject.certifications_start_time = value;
-      break;
-    case "certifications_end_time":
-      challengeObject.certifications_end_time = value;
-      break;
-    case "certification_notice":
-      challengeObject.certification_notice = value;
-      break;
-    case "success_photo_example":
-      challengeObject.success_photo_example = value;
-
-      break;
-    case "fail_photo_example":
-      challengeObject.fail_photo_example = value;
+    case "title_banner":
+      challengeObject.title_banner = value;
       break;
   }
 };

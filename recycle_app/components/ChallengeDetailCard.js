@@ -1,9 +1,9 @@
 import React from "react";
 import Pt from "prop-types";
 import styled from "styled-components/native";
+import Ip from "../util/Ip";
 import { Dimensions, Image, Text, ScrollView, View } from "react-native";
 import { MaterialCommunityIcons, Entypo, Feather } from "@expo/vector-icons";
-
 
 const { width, height } = Dimensions.get("screen");
 
@@ -114,7 +114,6 @@ const ChallengeDetailCard = ({ route }) => {
     count_member,
     max_member,
     applied_member,
-    start_day,
     summery,
     description,
     notice,
@@ -126,7 +125,7 @@ const ChallengeDetailCard = ({ route }) => {
       <BgContainer>
         <BannerContainer>
           <Image
-            source={{ uri: banner }}
+            source={{ uri: Ip.localIp + banner }}
             style={{ width: width / 1, height: height / 3.6 }}
           />
         </BannerContainer>

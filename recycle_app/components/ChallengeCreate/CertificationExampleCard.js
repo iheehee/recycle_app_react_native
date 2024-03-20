@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, Platform, StyleSheet,  } from "react-native";
+import {
+  Image,
+  View,
+  Platform,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { Text } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
-import { TouchableOpacity } from "@gorhom/bottom-sheet";
+/* import { TouchableOpacity } from "@gorhom/bottom-sheet"; */
 import { Feather } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { createChallenge } from "../../modules/createChallengeSlice";

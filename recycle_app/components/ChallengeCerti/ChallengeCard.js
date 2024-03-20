@@ -3,30 +3,29 @@ import styled from "styled-components/native";
 import { Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ip from "../../util/Ip";
-import BottomSheetMenu from "./PopUpMenu";
+import BottomSheetMenu from "./ModalMenu";
 
-const BgContainer = styled.View`
+const BgContainer = styled.TouchableOpacity`
   flex: 1;
-  background-color: white;
+  background-color: #050d18;
   margin-top: 5px;
   margin-bottom: 5px;
 `;
 
-const ImageContainer = styled.View`
-  align-content: start;
-`;
 const HeaderContainer = styled.View`
   margin: 15px;
   flex-direction: row;
+  justify-content: space-between;
 `;
 const ChallengeInfoContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 const MainContainer = styled.View`
-  margin-left: 15px;
+  margin-left: 10px;
   flex-direction: column;
-  width: 71%;
+  justify-content: flex-start;
+  width: 70%;
 `;
 const DurationContainer = styled.View`
   margin-top: 5px;
@@ -35,21 +34,12 @@ const DurationContainer = styled.View`
   flex-direction: row;
 `;
 
-const IconContainer = styled.View`
-  width: 29%;
-  margin-left: 20px;
-`;
+const IconContainer = styled.View``;
 
 const Title = styled.Text`
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 400;
-  color: #222222;
-`;
-const TextBox = styled.Text`
-  font-size: 13px;
-  margin-bottom: 2px;
-  font-weight: 400;
-  color: gray;
+  color: white;
 `;
 
 export default ({ challenge }) => {
@@ -71,11 +61,7 @@ export default ({ challenge }) => {
   } = challenge;
 
   const navigation = useNavigation();
-  const Certification = () =>
-    navigation.navigate("CertificationDetail", {
-      screen: "ChallengeCertiDetail",
-      params: { challenge: challenge },
-    });
+  const CertificationScreen = () => navigation.navigate("Certification");
 
   let dt = new Date(start_day);
   const startDay = () =>
@@ -83,18 +69,12 @@ export default ({ challenge }) => {
   return (
     <BgContainer
       style={{
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 1,
-          height: 1,
-        },
-        shadowOpacity: 0.1,
-        shadowRadius: 4,
         borderRadius: 15,
       }}
+      onPress={() => CertificationScreen()}
     >
       <HeaderContainer>
-        <ImageContainer>
+        {/* <ImageContainer>
           <Image
             source={{ uri: Ip.localIp + title_banner }}
             style={{
@@ -103,21 +83,12 @@ export default ({ challenge }) => {
               borderRadius: 30,
             }}
           />
-        </ImageContainer>
-        <MainContainer>
-          <ChallengeInfoContainer>
-            <TouchableOpacity onPress={() => Certification()}>
-              <Title>{title}</Title>
+        </ImageContainer> */}
 
-              <DurationContainer>
-                <TextBox>{`${frequency}, `}</TextBox>
-                <TextBox>{duration}</TextBox>
-              </DurationContainer>
-              <TextBox>{"인증시간:" + " " + "00:00:00 ~ 23:59:59"}</TextBox>
-              <TextBox>{"시작일:" + "    " + startDay()}</TextBox>
-            </TouchableOpacity>
-          </ChallengeInfoContainer>
-        </MainContainer>
+        <ChallengeInfoContainer>
+          <Title>{title}</Title>
+        </ChallengeInfoContainer>
+
         <IconContainer>
           <BottomSheetMenu challengeId={id} />
         </IconContainer>

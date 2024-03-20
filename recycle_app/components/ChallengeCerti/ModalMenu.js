@@ -1,80 +1,106 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Dimensions,
-} from "react-native";
-import Modal from "react-native-modal";
+import React, { useRef } from "react";
+import { View, TouchableOpacity, Dimensions, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
+import { useSelector, useDispatch } from "react-redux";
+import { getMyChallenges } from "../../modules/userSlice";
+import RBSheet from "react-native-raw-bottom-sheet";
+import api from "../../api";
+import Ip from "../../util/Ip";
+import axios from "axios";
 
-const { width, height } = Dimensions.get("screen");
+export default function ModalMenu({ challengeId }) {
+  const refRBSheet = useRef();
+  const dispatch = useDispatch();
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const { width, height } = Dimensions.get("screen");
 
-export default () => {
-  const [visible, setVisible] = useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+  const buttonStyle = {
+    backgroundColor: "white",
+    borderWidth: 5,
+    borderColor: "white",
+    borderRadius: 20,
+    height: 60,
+  };
+  const buttonContainerStyle = {
+    width: width / 1.1,
+    marginHorizontal: 2,
+    marginVertical: 5,
+  };
   const list = [
     {
-      title: "편집",
-      onPress: () => console.log("하이"),
+      title: "채린지 탈퇴하기",
+      onPress: () => {
+        axios({
+          method: "delete",
+          url: Ip.localIp + `/challenge/${challengeId}/`,
+          headers: {
+            Access: jwt,
+            "Content-Type": "application/json",
+          },
+        }).then((response) => {
+          const { result } = response.data;
+          Alert.alert(result, "", [
+            {
+              text: "확인",
+              onPress: () => {
+                dispatch(getMyChallenges(jwt));
+              },
+            },
+          ]);
+        });
+      },
     },
+
     {
       title: "취소",
-      onPress: () => hideModal(),
+      onPress: () => refRBSheet.current.close(),
     },
   ];
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => showModal()}>
-        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
-      </TouchableOpacity>
-      <Modal
-        style={styles.modal}
-        isVisible={visible}
-        onBackdropPress={() => hideModal()}
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        backdropTransitionOutTiming={500}
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "transparents",
+      }}
+    >
+      <TouchableOpacity
+        onPress={() => refRBSheet.current.open()}
+        style={{ backgroundColor: "#050d18" }}
       >
-        {/* place your buttons here */}
-        {list.map((item, num) => (
+        <MaterialCommunityIcons name="dots-vertical" size={24} color="white" />
+      </TouchableOpacity>
+
+      <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={false}
+        closeOnPressMask={true}
+        animationType={"slide"}
+        customStyles={{
+          container: {
+            alignItems: "center",
+            height: height / 5.5,
+            backgroundColor: "transparent",
+          },
+          draggableIcon: {
+            backgroundColor: "#000",
+          },
+        }}
+      >
+        {list.map((list, i) => (
           <Button
-            title={item.title}
-            loading={false}
-            loadingProps={{ size: "small", color: "white" }}
-            buttonStyle={{
-              backgroundColor: "white",
-              borderRadius: 10,
-              height: 50,
-            }}
-            titleStyle={{ color: "black", fontSize: 18 }}
-            containerStyle={{
-              marginHorizontal: 10,
-              marginVertical: 3,
-            }}
-            onPress={item.onPress}
+            key={i}
+            title={list.title}
+            buttonStyle={buttonStyle}
+            containerStyle={buttonContainerStyle}
+            titleStyle={{ fontWeight: "bold", color: "black" }}
+            onPress={list.onPress}
           />
         ))}
-      </Modal>
+      </RBSheet>
     </View>
   );
-};
-
-const styles = StyleSheet.create({
-  modal: {
-    margin: 0,
-    backgroundColor: "#00ff0000",
-    height: 200,
-    flex: 0,
-    bottom: 0,
-    position: "absolute",
-    width: "100%",
-  },
-});
+}

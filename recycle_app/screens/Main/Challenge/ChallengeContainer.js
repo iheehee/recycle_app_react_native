@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
-import ChallengePresenter from "./ChallengePresenter";
+import ChallengeList from "./ChallengeList";
+import { useSelector } from "react-redux";
 
-export default ({ getChallenges, challenges, page }) => {
+/* export default ({}) => {
+  const myChallenges = useSelector(
+    (state) => state.usersReducer.profile.myChallenges
+  );
+  console.log(myChallenges);
+  return <AppliedChallengeList myChallenges={myChallenges} />;
+};
+ */
+export default ({ getMyChallenges, myChallenges }) => {
+  const jwt = useSelector((state) => state.usersReducer.token);
   useEffect(() => {
-    getChallenges(1);
+    getMyChallenges(jwt);
   }, []);
-  useEffect(() => {
-    getChallenges(page);
-  }, [page]);
 
-  return <ChallengePresenter challenges={challenges} />;
+  return <ChallengeList myChallenges={myChallenges} />;
 };

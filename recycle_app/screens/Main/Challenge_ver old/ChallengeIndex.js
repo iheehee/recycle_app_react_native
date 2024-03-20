@@ -1,15 +1,16 @@
 import { connect } from "react-redux";
-import { getMyChallenges } from "../../../modules/userSlice";
+import { getChallenges } from "../../../modules/challengesSlice";
 import ChallengeContainer from "./ChallengeContainer";
 
 function mapDispatchToProps(dispatch) {
   return {
-    getMyChallenges: (page) => dispatch(getMyChallenges(page)),
+    getChallenges: (page) => dispatch(getChallenges(page)),
+    increasePage: () => dispatch(increasePage()),
   };
 }
 
 function mapStateToProps(state) {
-  return state.usersReducer.profile;
+  return state.challengesReducer.explore;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChallengeContainer);

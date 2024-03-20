@@ -12,6 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Ip from "../../util/Ip";
 import axios from "axios";
 import { getMyChallenges } from "../../modules/userSlice";
+import api from "../../api";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -78,7 +79,7 @@ const BottomSheetMenu = (params) => {
   return (
     <SafeAreaView>
       <TouchableOpacity onPress={() => setIsVisible(true)}>
-        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
+        <MaterialCommunityIcons name="dots-vertical" size={24} color="white" />
       </TouchableOpacity>
       <BottomSheet
         containerStyle={{ marginBottom: 20 }}

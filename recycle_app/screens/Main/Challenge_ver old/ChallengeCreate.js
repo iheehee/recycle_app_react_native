@@ -17,9 +17,10 @@ import CreateBtn from "../../../components/ChallengeCreate/CreateBtn";
 import ImagePicker from "../../../util/Camera/ImagePicker";
 
 const { width, height } = Dimensions.get("screen");
-const containerMarginBottomValue = 40;
+const containerMarginBottomValue = 20;
 const MainContainer = styled.View`
   flex: 1;
+  height: ${height}px;
   background-color: white;
 `;
 const BgContainer = styled.View`
@@ -44,10 +45,7 @@ const CertificationTimeContainer = styled.View`
 const CertificationExamplePhotoScroll = styled.ScrollView`
   margin-bottom: ${containerMarginBottomValue}px;
 `;
-const MainTitle = styled.Text`
-  margin-bottom: 30px;
-  font-size: 30px;
-`;
+
 const Title = styled.Text`
   margin-bottom: 10px;
   font-size: 22px;
@@ -64,7 +62,6 @@ export default ({ route }) => {
     <KeyboardAwareScrollView>
       <MainContainer>
         <BgContainer>
-          <MainTitle>챌린지를 만들어주세요</MainTitle>
           <Container>
             <Title>챌린지 제목</Title>
             <TitleInput />
@@ -73,11 +70,11 @@ export default ({ route }) => {
             <Title>챌린지 요약</Title>
             <SummeryInput />
           </Container>
-          <Container>
+          {/* <Container>
             <Title>챌린지 대표 이미지</Title>
             <ImagePicker />
-          </Container>
-          <Container>
+          </Container> */}
+          {/*  <Container>
             <Title>인증 빈도</Title>
             <FrequencyButtonGroup fontSize={buttonFontSize} />
           </Container>
@@ -115,10 +112,9 @@ export default ({ route }) => {
               />
               <CertificationExampleCard title={"인증 실패"} />
             </CertificationExamplePhotoScroll>
-          </Container>
+          </Container> */}
           <Container>
-            <Title>챌린지 최대인원</Title>
-            <SubTitle>(최소 2명 ~ 최대 100명)</SubTitle>
+            <Title>챌린지 최대시간</Title>
             <MaxMemberButton />
           </Container>
           <CreateBtn />

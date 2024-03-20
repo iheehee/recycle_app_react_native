@@ -4,20 +4,18 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigationState } from "@react-navigation/native";
 import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
-import ChallengeCertification from "../screens/Main/Challenge/ChallengeCertification";
+import ChallengeCertification from "../screens/Main/Challenge_ver old/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
-import CertificationContainer from "../screens/Main/Certification/CertificationContainer";
-import ChallengeCertiDetail from "../screens/Main/Certification/ChallengeCertiDetail";
-import ChallengeCreate from "../screens/Main/Challenge/ChallengeCreate";
-import CertiFeedList from "../screens/Main/Certification/CertiFeedList";
+
+import CertificationList from "../screens/Main/Challenge/Certification/CertificationList";
+import ChallengeCreate from "../screens/Main/Challenge_ver old/ChallengeCreate";
 import Recycle from "../screens/Main/Recycle";
-import Profile from "../screens/Main/Profile";
+import Home from "../screens/Main/Home";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
 import HeaderButton from "../components/ChallengeDetail/HeaderButton";
 import BackBtn from "../components/ChallengeCreate/BackBtn";
-import { Feather } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
@@ -33,7 +31,7 @@ const TabIcon = ({ name, size, color }) => {
   );
 };
 
-const ChallengeStackNavi = () => {
+/* const ChallengeStackNavi = () => {
   return (
     <Stack.Navigator
       presentation="card"
@@ -77,7 +75,7 @@ const ChallengeStackNavi = () => {
       />
     </Stack.Navigator>
   );
-};
+}; */
 
 const ChallengeDetailTapNavi = () => {
   return (
@@ -144,7 +142,7 @@ const ChallengeCertiTapNavi = () => {
     </Tab.Navigator>
   );
 };
-const ChallengeCertiStackNavi = () => {
+const ChallengeStackNavi = () => {
   return (
     <Stack.Navigator
       presentation="card"
@@ -155,15 +153,23 @@ const ChallengeCertiStackNavi = () => {
     >
       <Stack.Screen
         name="MyChallenge"
-        component={CertificationContainer}
+        component={ChallengeIndex}
         options={{
           title: null,
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="CertificationDetail"
-        component={ChallengeCertiTapNavi}
+        name="ChallengeCreate"
+        component={ChallengeCreate}
+        options={{
+          title: null,
+          headerBackImage: () => <BackBtn />,
+        }}
+      />
+      <Stack.Screen
+        name="Certification"
+        component={CertificationList}
         options={{
           title: null,
         }}
@@ -229,11 +235,14 @@ const TabNavigation = () => {
         tabBarIcon: (props) => {
           let name = "";
           const size = 24;
+
           if (route.name === "챌린지") name = "medal-outline";
-          else if (route.name === "인증") name = "camera-outline";
           else if (route.name === "재활용") name = "recycle";
           else name = "user-circle-o";
           return TabIcon({ ...props, name, size });
+        },
+        tabBarStyle: {
+          borderTopColor: "transparent",
         },
         tabBarItemStyle: {
           paddingTop: 10,
@@ -242,24 +251,36 @@ const TabNavigation = () => {
         },
       })}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="챌린지"
         component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: false,
-          tabBarStyle: { display: getVisibility(0, [1]) },
+          tabBarStyle: {
+            display: getVisibility(0, [1]),
+          },
         })}
-      />
+      /> */}
       <Tab.Screen
-        name="인증"
-        component={ChallengeCertiStackNavi}
+        name="챌린지"
+        component={ChallengeStackNavi}
         options={(route) => ({
-          headerShown: headerVisibility(1, [1, 2]),
+          headerShown: headerVisibility(0, [1, 2]),
           tabBarStyle: { display: getVisibility(1, [1, 2]) },
+          headerRightContainerStyle: { paddingRight: 12 },
+          headerRight: () => (
+            <HeaderButton shape={"plus"} onPress={"ChallengeCreate"} />
+          ),
         })}
       />
       <Tab.Screen name="재활용" component={Recycle} />
-      <Tab.Screen name="프로필" component={Profile} />
+      <Tab.Screen
+        name="프로필"
+        component={Home}
+        options={{
+          headerTransparent: true,
+        }}
+      />
     </Tab.Navigator>
   );
 };

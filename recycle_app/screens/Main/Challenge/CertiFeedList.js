@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { ScrollView, Dimensions } from "react-native";
-import AppliedChallengeCard from "../../../components/ChallengeCerti/AppliedChallengeCard";
+import ChallengeCard from "../../../components/ChallengeCerti/ChallengeCard";
 
 const { width, height } = Dimensions.get("screen");
 const MainContainer = styled.View`

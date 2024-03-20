@@ -19,12 +19,12 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.token = null;
     },
-    myChallenges(state, action) {
-      state.profile.myChallenges = action.payload.profile.my_challenges;
+    setMyChallenges(state, action) {
+      state.profile.myChallenges = action.payload.data;
     },
   },
 });
-export const { logIn, logOut, myChallenges } = userSlice.actions;
+export const { logIn, logOut, setMyChallenges } = userSlice.actions;
 
 export const userLogin = (form) => async (dispatch) => {
   try {
@@ -41,8 +41,8 @@ export const userLogin = (form) => async (dispatch) => {
 };
 export const getMyChallenges = (jwt) => async (dispatch) => {
   try {
-    const { data } = await api.profile(jwt);
-    dispatch(myChallenges({ profile: data }));
+    const { data } = await api.myChallenges(jwt);
+    dispatch(setMyChallenges({ data: data }));
   } catch (e) {
     console.warn(e);
   }

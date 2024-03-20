@@ -59,7 +59,7 @@ const ChallengeCard = ({
   success_example,
 }) => {
   const navigation = useNavigation();
-  console.log(Ip.staticIp + banner);
+
   return (
     <TouchableOpacity
       onPress={() => {

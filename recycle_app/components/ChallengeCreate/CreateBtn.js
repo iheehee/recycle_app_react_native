@@ -13,7 +13,7 @@ const Button = styled.TouchableOpacity`
   margin: 0px 0px 0px 0px;
   border-radius: 10px;
   padding: 15px 0px;
-  width: 80%;
+  width: 90%;
   background-color: ${(props) => (props.focus ? "#DCDCDC" : "black")};
   align-items: center;
 `;
@@ -27,23 +27,16 @@ const CreateBtn = () => {
   const newChallenge = useSelector(
     (state) => state.createChallengeReducer.newChallenge
   );
-  console.log(newChallenge);
+
   const formData = new FormData();
   const jsonData = {
     title: newChallenge.title,
     summery: newChallenge.summery,
-    description: newChallenge.description,
-    start_day: newChallenge.start_day,
-    frequency: newChallenge.frequency,
-    duration: newChallenge.duration,
-    max_member: newChallenge.max_member,
-    certifications_start_time: newChallenge.certifications_start_time,
-    certifications_end_time: newChallenge.certifications_end_time,
-    certification_notice: newChallenge.certification_notice,
+    max_hour: newChallenge.max_hour,
   };
 
   formData.append("document", JSON.stringify(jsonData));
-  const successPhotoEx = newChallenge.success_photo_example;
+  /* const successPhotoEx = newChallenge.success_photo_example;
   const failPhotoEx = newChallenge.fail_photo_example;
   const photoType = [successPhotoEx, failPhotoEx];
   for (const type of photoType) {
@@ -60,14 +53,14 @@ const CreateBtn = () => {
         }
       );
     }
-  }
+  } */
   const title_banner = newChallenge.title_banner;
   formData.append("title_banner", {
     name: jsonData.title + "title_banner.jpeg",
     type: "image/jpeg",
     uri: title_banner,
   });
-  console.log(formData);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const jwt = useSelector((state) => state.usersReducer.token);
@@ -79,11 +72,11 @@ const CreateBtn = () => {
           onPress: async () =>
             await axios({
               method: "post",
-              url: `${baseUrl}/challenges/`,
+              url: `${baseUrl}/challenge/create/`,
               data: formData,
               timeout: 2000,
               headers: {
-                Authorization: jwt,
+                Access: jwt,
                 "Content-Type": "multipart/form-data",
               },
             }).then((response) => {
@@ -93,20 +86,8 @@ const CreateBtn = () => {
                 {
                   text: "확인",
                   onPress: () => {
-                    Alert.alert("인증화면으로 이동하시겠습니까?", "", [
-                      {
-                        text: "확인",
-                        onPress: () => {
-                          dispatch(resetCreateChallenge());
-                          return navigation.navigate("인증", {
-                            screen: "MyChallenge",
-                          });
-                        },
-                      },
-                      {
-                        text: "취소",
-                      },
-                    ]);
+                    dispatch(resetCreateChallenge());
+                    return navigation.goBack();
                   },
                 },
               ]);
@@ -131,7 +112,7 @@ const CreateBtn = () => {
       }
       ++count;
     }
-    count >= 12 ? setButtonVisible(false) : setButtonVisible(true);
+    count >= 2 ? setButtonVisible(false) : setButtonVisible(true);
 
     return null;
   };
