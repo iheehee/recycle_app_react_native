@@ -1,70 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
-  FlatList,
   SafeAreaView,
   StyleSheet,
   ActivityIndicator,
   View,
   Text,
   TouchableOpacity,
+  Dimensions,
+  Image,
 } from "react-native";
 import styled from "styled-components/native";
 import CountDown from "react-native-countdown-component";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import Counter from "../../components/ChallengeCerti/Counter";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Store from "./Store";
 
+const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
+  flex: 1;
+  background-color: #050d18;
   align-items: center;
-  justify-content: space-between;
+`;
+const ButtonContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
-const Certification = () => {
+const Certification = (ss) => {
+  /*  const [time, setTime] = useState(3600);
   const [running, setRunning] = useState(false);
-  let saveTime;
+  const [finished, setFinishied] = useState(false);
+  const [reset, setReset] = useState(false); */
   /* const [saveTime, setSaveTime] = useState(0); */
   return (
     <BgContainer>
-      <CountDown
-        size={30}
-        until={3600}
-        running={running}
-        onFinish={() => alert("Finished")}
-        onChange={null}
-        digitStyle={{
-          backgroundColor: "#FFF",
-        }}
-        digitTxtStyle={{ color: "#1CC625" }}
-        timeLabelStyle={{ color: "red", fontWeight: "bold" }}
-        separatorStyle={{ color: "#1CC625" }}
-        timeToShow={["H", "M", "S"]}
-        timeLabels={{ m: null, s: null }}
-        showSeparator
-      />
-      <TouchableOpacity
-        onPress={() => (running ? setRunning(false) : setRunning(true))}
-      >
-        {!running ? (
-          <FontAwesome5 name="play-circle" size={60} color="black" />
-        ) : (
-          <FontAwesome5 name="pause-circle" size={60} color="black" />
-        )}
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text>시간 저장하기</Text>
-      </TouchableOpacity>
+      <Store time={3600} />
     </BgContainer>
   );
 };
-{
-  /* <Image
-              source={{ uri: BASE_URI + item }}
-              containerStyle={styles.item}
-              PlaceholderContent={<ActivityIndicator />}
-            /> */
-}
+
 const styles = StyleSheet.create({
   list: {
     width: "100%",

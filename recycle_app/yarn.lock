@@ -9067,6 +9067,13 @@ react-native-countdown-component@^2.7.1:
     prop-types "^15.5.8"
     sprintf-js "^1.1.1"
 
+react-native-customizable-countdown@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-customizable-countdown/-/react-native-customizable-countdown-1.1.3.tgz#22b038d7cc4c942c7679a63b0e6e8a90c1b42668"
+  integrity sha512-fA1H1mwFzC8m6IpjFQAt5wBQ15duX5kDvwS+voOCkkTcXCgNGd0RIhtO7/uJfyKb0tO0XDsTZz/jJI+B37Z7MQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-gesture-handler@~2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-2.8.0.tgz#ef9857871c10663c95a51546225b6e00cd4740cf"
