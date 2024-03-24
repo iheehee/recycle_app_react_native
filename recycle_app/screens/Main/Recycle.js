@@ -10,10 +10,8 @@ import {
   Image,
 } from "react-native";
 import styled from "styled-components/native";
-import CountDown from "react-native-countdown-component";
-import Counter from "../../components/ChallengeCerti/Counter";
+
 import { FontAwesome5 } from "@expo/vector-icons";
-import Store from "./Store";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -32,11 +30,7 @@ const Certification = (ss) => {
   const [finished, setFinishied] = useState(false);
   const [reset, setReset] = useState(false); */
   /* const [saveTime, setSaveTime] = useState(0); */
-  return (
-    <BgContainer>
-      <Store time={3600} />
-    </BgContainer>
-  );
+  return <BgContainer></BgContainer>;
 };
 
 const styles = StyleSheet.create({

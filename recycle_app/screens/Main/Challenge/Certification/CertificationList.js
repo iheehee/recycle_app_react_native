@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import { Image } from "@rneui/themed";
 
@@ -17,6 +18,8 @@ const BgContainer = styled.View`
 `;
 
 const Certification = () => {
+  const navigation = useNavigation();
+  const CountDownScreen = () => navigation.navigate("CountDown");
   return (
     <BgContainer>
       {/* <SafeAreaView> */}
@@ -26,7 +29,10 @@ const Certification = () => {
         numColumns={3}
         keyExtractor={(e) => e}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity
+            style={styles.item}
+            onPress={() => CountDownScreen()}
+          >
             <View>
               <Text>{item}</Text>
             </View>

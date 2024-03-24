@@ -35,7 +35,6 @@ export default ({ route }) => {
       setHasCameraPermission(cameraStatus.status === "granted");
     })();
   }, []);
-  const { id } = route.params.challenge;
 
   const takePicture = async () => {
     if (cameraRef) {

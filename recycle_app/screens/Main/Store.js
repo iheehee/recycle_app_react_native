@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import CountDown from "react-native-countdown-component";
-import Counter from "../../components/ChallengeCerti/Counter";
+
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("screen");
@@ -31,11 +31,7 @@ const Certification = ({ time }) => {
   const [finished, setFinishied] = useState(false);
   const [reset, setReset] = useState(false); */
   /* const [saveTime, setSaveTime] = useState(0); */
-  return (
-    <BgContainer>
-      <Counter initialTime={time} reset={false} run={false} />
-    </BgContainer>
-  );
+  return <BgContainer></BgContainer>;
 };
 
 const styles = StyleSheet.create({

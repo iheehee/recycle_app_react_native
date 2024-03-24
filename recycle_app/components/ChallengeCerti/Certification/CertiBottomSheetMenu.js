@@ -9,35 +9,28 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Ip from "../../util/Ip";
-import axios from "axios";
-import { getMyChallenges } from "../../modules/userSlice";
+import { useNavigation } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("screen");
 
-const BottomSheetMenu = (params) => {
-  const { challengeId } = params;
-  const jwt = useSelector((state) => state.usersReducer.token);
-  const dispatch = useDispatch();
-  const [isVisible, setIsVisible] = useState(false);
+const BottomSheetMenu = ({ isVisible }) => {
+  const [bottomMenuIsVisible, setbottomMenuIsVisible] = useState(isVisible);
   const contentStyle = {
     width: width,
     alignItems: "center",
   };
   const list = [
     {
-      title: "채린지 탈퇴하기",
+      title: "카메라",
       contentStyle: contentStyle,
       onPress: () => leaveChallenge(challengeId, jwt),
     },
     {
       title: "Cancel",
-      containerStyle: {
-        backgroundColor: "red",
-      },
+
       contentStyle: contentStyle,
       titleStyle: { color: "white" },
-      onPress: () => setIsVisible(false),
+      onPress: () => setbottomMenuIsVisible(false),
     },
   ];
   const leaveChallenge = (challengeId, jwt) => {
@@ -77,14 +70,11 @@ const BottomSheetMenu = (params) => {
 
   return (
     <SafeAreaView>
-      <TouchableOpacity onPress={() => setIsVisible(true)}>
-        <MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
-      </TouchableOpacity>
       <BottomSheet
         containerStyle={{ marginBottom: 20 }}
-        onBackdropPress={() => setIsVisible(false)}
+        onBackdropPress={() => setbottomMenuIsVisible(false)}
         modalProps={{}}
-        isVisible={isVisible}
+        isVisible={bottomMenuIsVisible}
       >
         {list.map((l, i) => (
           <ListItem

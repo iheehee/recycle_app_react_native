@@ -6,9 +6,9 @@ import { useNavigationState } from "@react-navigation/native";
 import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
 import ChallengeCertification from "../screens/Main/Challenge_ver old/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
-
 import CertificationList from "../screens/Main/Challenge/Certification/CertificationList";
 import ChallengeCreate from "../screens/Main/Challenge_ver old/ChallengeCreate";
+import CountDown from "../screens/Main/Challenge/Certification/CountDown";
 import Recycle from "../screens/Main/Recycle";
 import Home from "../screens/Main/Home";
 import Day from "../components/ChallengeDetail/Day";
@@ -175,8 +175,8 @@ const ChallengeStackNavi = () => {
         }}
       />
       <Stack.Screen
-        name="Feed"
-        component={CertiFeedCard}
+        name="CountDown"
+        component={CountDown}
         options={{
           title: null,
         }}
@@ -265,7 +265,7 @@ const TabNavigation = () => {
         name="챌린지"
         component={ChallengeStackNavi}
         options={(route) => ({
-          headerShown: headerVisibility(0, [1, 2]),
+          headerShown: headerVisibility(0, [1, 2, 3]),
           tabBarStyle: { display: getVisibility(1, [1, 2]) },
           headerRightContainerStyle: { paddingRight: 12 },
           headerRight: () => (
