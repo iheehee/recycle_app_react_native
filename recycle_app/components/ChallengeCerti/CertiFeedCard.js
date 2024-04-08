@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Alert, Dimensions } from "react-native";
 import { Avatar, Text } from "@rneui/themed";
 import styled from "styled-components/native";
 import Ip from "../../util/Ip";
-import ModalMenu from "./ModalMenu";
+import ModalMenu from "./ChallengeList/ModalMenu";
 import AmPm from "../../util/Time/AmPm";
 import YearMonthDay from "../../util/Time/YearMonthDay";
 import Time from "../../util/Time/Time";
@@ -31,7 +31,6 @@ const NameDateContainer = styled.View`
 const CommentContainer = styled.View`
   margin-top: 10px;
 `;
-
 
 export default ({ route }) => {
   const baseUrl = Ip.localIp;

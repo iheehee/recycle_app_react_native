@@ -10,11 +10,16 @@ import { useSelector } from "react-redux";
   return <AppliedChallengeList myChallenges={myChallenges} />;
 };
  */
-export default ({ getMyChallenges, myChallenges }) => {
+export default ({ getMyChallenges, myChallenges, myCertifications }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
   useEffect(() => {
     getMyChallenges(jwt);
   }, []);
 
-  return <ChallengeList myChallenges={myChallenges} />;
+  return (
+    <ChallengeList
+      myChallenges={myChallenges}
+      myCertifications={myCertifications}
+    />
+  );
 };

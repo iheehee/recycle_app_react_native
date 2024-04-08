@@ -3,10 +3,10 @@ import { View, TouchableOpacity, Dimensions, Alert } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
 import { useSelector, useDispatch } from "react-redux";
-import { getMyChallenges } from "../../modules/userSlice";
+import { getMyChallenges } from "../../../modules/userSlice";
 import RBSheet from "react-native-raw-bottom-sheet";
-import api from "../../api";
-import Ip from "../../util/Ip";
+import api from "../../../api";
+import Ip from "../../../util/Ip";
 import axios from "axios";
 
 export default function ModalMenu({ challengeId }) {

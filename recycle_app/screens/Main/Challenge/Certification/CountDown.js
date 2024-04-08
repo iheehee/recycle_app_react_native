@@ -14,7 +14,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
-import BottomSheetMenu from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
+import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -103,22 +103,7 @@ const Couter = ({}) => {
         </ButtonContainer>
       ) : (
         <>
-          <Button
-            title="인증하기"
-            buttonStyle={{
-              backgroundColor: "black",
-              borderWidth: 2,
-              borderColor: "white",
-              borderRadius: 30,
-            }}
-            containerStyle={{
-              width: 200,
-              marginHorizontal: 50,
-              marginVertical: 10,
-            }}
-            titleStyle={{ fontWeight: "bold" }}
-            onPress={() => setBottomMenuIsVisible(true)}
-          />
+          <BottomMenuButton />
           <Button
             title="건너뛰기"
             buttonStyle={{
@@ -133,8 +118,10 @@ const Couter = ({}) => {
               marginVertical: 10,
             }}
             titleStyle={{ fontWeight: "bold" }}
+            onPress={() =>
+              navigation.navigate("Certification", { params: { id: 123 } })
+            }
           />
-          <BottomSheetMenu isVisible={bottomMenuIsVisible} />
         </>
       )}
     </BgContainer>

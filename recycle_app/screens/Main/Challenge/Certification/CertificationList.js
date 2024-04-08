@@ -7,37 +7,86 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Image,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
-import { Image } from "@rneui/themed";
+import { FontAwesome } from "@expo/vector-icons";
+
+const { width, height } = Dimensions.get("screen");
 
 const BgContainer = styled.View`
-  align-items: center;
+  flex: 1;
+`;
+const IconContainer = styled.View``;
+const Container = styled.View`
+  flex: 1;
+  flex-direction: row;
   justify-content: space-between;
+  padding: 5px;
 `;
 
-const Certification = () => {
+const Certification = ({ route }) => {
   const navigation = useNavigation();
+  const { myCertifications } = route.params;
   const CountDownScreen = () => navigation.navigate("CountDown");
+
   return (
     <BgContainer>
       {/* <SafeAreaView> */}
       <FlatList
-        data={[...new Array(5)].map((_, i) => i.toString())}
+        data={[...new Array(1)].map((_, i) => Number(i + 1))}
         style={styles.list}
         numColumns={3}
         keyExtractor={(e) => e}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.item}
-            onPress={() => CountDownScreen()}
-          >
-            <View>
-              <Text>{item}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) =>
+          myCertifications.forEach((certification) => {
+            console.log(certification.certification_id, item);
+
+            certification.certification_id === item ? (
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => CountDownScreen()}
+              >
+                <Container>
+                  <Text>{item}</Text>
+                  <IconContainer>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "flex-end",
+                        height: width / 3.25,
+                      }}
+                    >
+                      <FontAwesome name="camera" size={20} color="white" />
+                    </View>
+                  </IconContainer>
+                </Container>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.item}
+                onPress={() => CountDownScreen()}
+              >
+                <Container>
+                  <Text>{item}</Text>
+                  <IconContainer>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "flex-end",
+                        height: width / 3.25,
+                      }}
+                    >
+                      <FontAwesome name="camera" size={20} color="white" />
+                    </View>
+                  </IconContainer>
+                </Container>
+              </TouchableOpacity>
+            );
+          })
+        }
       />
     </BgContainer>
   );
@@ -57,7 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     aspectRatio: 1,
     marginLeft: 1,
-    width: "33%",
+    width: width / 3.03,
   },
 });
 

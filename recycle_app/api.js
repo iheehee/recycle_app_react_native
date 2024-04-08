@@ -41,8 +41,8 @@ export default {
     callApi("get", "/user/profile/my_challenges/", "", jwt),
   myCertifications: (jwt) =>
     callApi("get", "/challenges/my_certifications/", null, jwt),
-  certifications: (form) =>
-    callApi("get", `/challenges/${form}/certification/`),
+  certifications: (form, jwt) =>
+    callApi("get", `/challenge/${form}/certification/`, "", jwt),
   profile: (jwt) => callApi("get", "/user/profile/", "", jwt),
   removeCertification: (id, certificationId, jwt) =>
     callApi(

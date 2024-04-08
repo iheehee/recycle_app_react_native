@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components/native";
 import { Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import Ip from "../../util/Ip";
-import BottomSheetMenu from "./ModalMenu";
+import BottomSheetMenu from "./ChallengeList/ModalMenu";
+import { getMyCertifications } from "../../modules/certificationSlice";
 
 const BgContainer = styled.TouchableOpacity`
   flex: 1;
@@ -42,7 +44,7 @@ const Title = styled.Text`
   color: white;
 `;
 
-export default ({ challenge }) => {
+export default ({ challenge, myCertifications }) => {
   const {
     id,
     title,
@@ -61,7 +63,10 @@ export default ({ challenge }) => {
   } = challenge;
 
   const navigation = useNavigation();
-  const CertificationScreen = () => navigation.navigate("Certification");
+  const CertificationScreen = () =>
+    navigation.navigate("Certification", { myCertifications });
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const dispatch = useDispatch();
 
   let dt = new Date(start_day);
   const startDay = () =>
@@ -71,7 +76,10 @@ export default ({ challenge }) => {
       style={{
         borderRadius: 15,
       }}
-      onPress={() => CertificationScreen()}
+      onPress={() => {
+        dispatch(getMyCertifications(id, jwt));
+        return CertificationScreen();
+      }}
     >
       <HeaderContainer>
         {/* <ImageContainer>

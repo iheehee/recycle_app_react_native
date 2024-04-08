@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BottomSheet, ListItem } from "@rneui/themed";
 import {
   SafeAreaView,
@@ -8,27 +8,41 @@ import {
   Text,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import RBSheet from "react-native-raw-bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
+
+import { Button } from "@rneui/themed";
 
 const { width, height } = Dimensions.get("screen");
 
 const BottomSheetMenu = ({ isVisible }) => {
   const [bottomMenuIsVisible, setbottomMenuIsVisible] = useState(isVisible);
-  const contentStyle = {
-    width: width,
-    alignItems: "center",
+  const refRBSheet = useRef();
+  const navigation = useNavigation();
+
+  const buttonStyle = {
+    backgroundColor: "white",
+    borderWidth: 5,
+    borderColor: "white",
+    borderRadius: 20,
+    height: 60,
+  };
+  const buttonContainerStyle = {
+    width: width / 1.1,
+    marginHorizontal: 2,
+    marginVertical: 5,
   };
   const list = [
     {
       title: "카메라",
-      contentStyle: contentStyle,
-      onPress: () => leaveChallenge(challengeId, jwt),
+      onPress: () => {
+        refRBSheet.current.close();
+        return navigation.navigate("Camera");
+      },
     },
     {
       title: "Cancel",
 
-      contentStyle: contentStyle,
       titleStyle: { color: "white" },
       onPress: () => setbottomMenuIsVisible(false),
     },
@@ -69,26 +83,53 @@ const BottomSheetMenu = ({ isVisible }) => {
   };
 
   return (
-    <SafeAreaView>
-      <BottomSheet
-        containerStyle={{ marginBottom: 20 }}
-        onBackdropPress={() => setbottomMenuIsVisible(false)}
-        modalProps={{}}
-        isVisible={bottomMenuIsVisible}
+    <>
+      <Button
+        title="인증하기"
+        buttonStyle={{
+          backgroundColor: "black",
+          borderWidth: 2,
+          borderColor: "white",
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 200,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+        titleStyle={{ fontWeight: "bold" }}
+        onPress={() => refRBSheet.current.open()}
+      />
+
+      <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={false}
+        closeOnPressMask={true}
+        animationType={"slide"}
+        closeDuration={10}
+        customStyles={{
+          container: {
+            alignItems: "center",
+            height: height / 5.5,
+            backgroundColor: "transparent",
+          },
+          draggableIcon: {
+            backgroundColor: "#000",
+          },
+        }}
       >
-        {list.map((l, i) => (
-          <ListItem
+        {list.map((list, i) => (
+          <Button
             key={i}
-            containerStyle={l.containerStyle}
-            onPress={l.onPress}
-          >
-            <ListItem.Content style={l.contentStyle}>
-              <Text style={l.titleStyle}>{l.title}</Text>
-            </ListItem.Content>
-          </ListItem>
+            title={list.title}
+            buttonStyle={buttonStyle}
+            containerStyle={buttonContainerStyle}
+            titleStyle={{ fontWeight: "bold", color: "black" }}
+            onPress={list.onPress}
+          />
         ))}
-      </BottomSheet>
-    </SafeAreaView>
+      </RBSheet>
+    </>
   );
 };
 

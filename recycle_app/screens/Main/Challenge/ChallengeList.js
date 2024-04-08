@@ -18,7 +18,7 @@ const Container = styled.View`
   margin: 3px;
 `;
 
-export default ({ myChallenges }) => {
+export default ({ myChallenges, myCertifications }) => {
   return (
     <MainContainer>
       <ScrollView
@@ -28,7 +28,10 @@ export default ({ myChallenges }) => {
         <ChallengeContainer>
           {myChallenges.map((challenge) => (
             <Container key={"challengeContainer_" + challenge.id}>
-              <ChallengeCard challenge={challenge} />
+              <ChallengeCard
+                challenge={challenge}
+                myCertifications={myCertifications}
+              />
             </Container>
           ))}
         </ChallengeContainer>

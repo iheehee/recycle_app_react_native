@@ -20,9 +20,9 @@ const certificationsSlice = createSlice({
 export const { setMyCertifications, setUsersCertifications } =
   certificationsSlice.actions;
 
-export const getMyCertifications = (jwt) => async (dispatch) => {
+export const getMyCertifications = (id, jwt) => async (dispatch) => {
   try {
-    const { data } = await api.myCertifications(jwt);
+    const { data } = await api.certifications(id, jwt);
 
     dispatch(
       setMyCertifications({
@@ -36,7 +36,7 @@ export const getMyCertifications = (jwt) => async (dispatch) => {
 export const getUsersCertifications = (form) => async (dispatch) => {
   try {
     const { data } = await api.certifications(form);
-    console.log(data);
+
     dispatch(
       setUsersCertifications({
         usersCertifications: data,
