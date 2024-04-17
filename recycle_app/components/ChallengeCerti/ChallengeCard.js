@@ -45,26 +45,11 @@ const Title = styled.Text`
 `;
 
 export default ({ challenge, myCertifications }) => {
-  const {
-    id,
-    title,
-    title_banner,
-    duration,
-    frequency,
-    member,
-    count_member,
-    max_member,
-    applied_member,
-    start_day,
-    summery,
-    description,
-    notice,
-    success_example,
-  } = challenge;
+  const { id, title, start_day } = challenge;
 
   const navigation = useNavigation();
   const CertificationScreen = () =>
-    navigation.navigate("Certification", { myCertifications });
+    navigation.navigate("Certification", { challengeId: id, myCertifications });
   const jwt = useSelector((state) => state.usersReducer.token);
   const dispatch = useDispatch();
 

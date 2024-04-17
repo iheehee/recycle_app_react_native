@@ -9,7 +9,16 @@ const certificationsSlice = createSlice({
   },
   reducers: {
     setMyCertifications(state, action) {
-      state.myCertifications = action.payload.my_certifications;
+      const challengeId = action.payload.challengeId;
+      const existChallenge = state.myCertifications.findIndex(
+        (element) => element.challengeId === challengeId
+      );
+      if (existChallenge) {
+        state.myCertifications.remove(existChallenge);
+        state.myCertifications.push(action.payload.my_certifications);
+      } else {
+        state.myCertifications.push(action.payload.my_certifications);
+      }
     },
     setUsersCertifications(state, action) {
       state.usersCertifications = action.payload.usersCertifications;
@@ -36,7 +45,6 @@ export const getMyCertifications = (id, jwt) => async (dispatch) => {
 export const getUsersCertifications = (form) => async (dispatch) => {
   try {
     const { data } = await api.certifications(form);
-
     dispatch(
       setUsersCertifications({
         usersCertifications: data,

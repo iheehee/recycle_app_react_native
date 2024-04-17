@@ -38,7 +38,6 @@ export default ({ route }) => {
 
   const takePicture = async () => {
     if (cameraRef) {
-      console.log(cameraRef.current);
       try {
         const data = await cameraRef.current.takePictureAsync();
         console.log(data);

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,13 +8,17 @@ import {
   Dimensions,
   Image,
 } from "react-native";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
+
 import CountDown from "react-native-countdown-component";
+import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
+import api from "../../../../api";
+
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "@rneui/themed";
-import { useNavigation } from "@react-navigation/native";
-import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -27,11 +31,30 @@ const ButtonContainer = styled.View`
   align-items: center;
 `;
 
-const Couter = ({}) => {
+const Couter = ({ route }) => {
   const navigation = useNavigation();
   const [running, setRunning] = useState(false);
   const [finished, setFinishied] = useState(false);
   const [bottomMenuIsVisible, setBottomMenuIsVisible] = useState(false);
+
+  const { challengeId, certificationId } = route.params;
+  console.log(certificationId);
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const callApi = () => {
+    const formData = new FormData();
+    /* formData.append("file", {
+            name: `${id}.jpeg`,
+            type: "image/jpeg",
+            uri: image,
+          }); */
+
+    const document = {
+      certification_id: certificationId,
+      challenge_id: challengeId,
+    };
+    formData.append("document", JSON.stringify(document));
+    api.createCertification(challengeId, formData, jwt);
+  };
 
   return (
     <BgContainer>
@@ -118,9 +141,10 @@ const Couter = ({}) => {
               marginVertical: 10,
             }}
             titleStyle={{ fontWeight: "bold" }}
-            onPress={() =>
-              navigation.navigate("Certification", { params: { id: 123 } })
-            }
+            onPress={() => {
+              callApi();
+              navigation.goBack();
+            }}
           />
         </>
       )}
