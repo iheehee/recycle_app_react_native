@@ -9,17 +9,31 @@ const certificationsSlice = createSlice({
   },
   reducers: {
     setMyCertifications(state, action) {
-      const challengeId = action.payload.challengeId;
-      const existChallenge = state.myCertifications.findIndex(
+      const { myCertifications } = state;
+      const { payload } = action;
+      const challengeId = payload.challengeId;
+      const existChallenge = myCertifications.findIndex(
         (element) => element.challengeId === challengeId
       );
-      if (existChallenge) {
-        state.myCertifications.remove(existChallenge);
-        state.myCertifications.push(action.payload.my_certifications);
+
+      if (existChallenge !== -1) {
+        targetChallenge = myCertifications[existChallenge];
+        console.log(targetChallenge);
+        certifications = targetChallenge.certifications;
+        const existCertification = certifications.findIndex(
+          (element) => element.certificationId === payload.certificationId
+        );
+        if (existCertification !== -1) {
+          certifications.spice(existCertification);
+          certifications.push(payload.my_certifications);
+        } else {
+          certifications.push(payload.my_certifications);
+        }
       } else {
-        state.myCertifications.push(action.payload.my_certifications);
+        myCertifications.push(payload.my_certifications);
       }
     },
+    setCertifications(state, action) {},
     setUsersCertifications(state, action) {
       state.usersCertifications = action.payload.usersCertifications;
     },

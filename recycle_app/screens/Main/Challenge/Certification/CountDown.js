@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import {
   SafeAreaView,
-  StyleSheet,
-  View,
   Text,
   TouchableOpacity,
   Dimensions,
   Image,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
 import CountDown from "react-native-countdown-component";
 import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 import api from "../../../../api";
+import { setMyCertifications } from "../../../../modules/certificationSlice";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -38,9 +37,10 @@ const Couter = ({ route }) => {
   const [bottomMenuIsVisible, setBottomMenuIsVisible] = useState(false);
 
   const { challengeId, certificationId } = route.params;
-  console.log(certificationId);
+
+  const dispatch = useDispatch();
   const jwt = useSelector((state) => state.usersReducer.token);
-  const callApi = () => {
+  const callApi = async () => {
     const formData = new FormData();
     /* formData.append("file", {
             name: `${id}.jpeg`,
@@ -53,7 +53,8 @@ const Couter = ({ route }) => {
       challenge_id: challengeId,
     };
     formData.append("document", JSON.stringify(document));
-    api.createCertification(challengeId, formData, jwt);
+    const { data } = await api.createCertification(challengeId, formData, jwt);
+    dispatch(setMyCertifications(data));
   };
 
   return (
