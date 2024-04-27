@@ -18,22 +18,26 @@ const certificationsSlice = createSlice({
 
       if (existChallenge !== -1) {
         targetChallenge = myCertifications[existChallenge];
-        console.log(targetChallenge);
         certifications = targetChallenge.certifications;
         const existCertification = certifications.findIndex(
-          (element) => element.certificationId === payload.certificationId
+          (element) => element.certificationId === payload.certification_id
         );
+        console.log(existCertification);
+
         if (existCertification !== -1) {
-          certifications.spice(existCertification);
-          certifications.push(payload.my_certifications);
+          certifications.splice(
+            existCertification,
+            1,
+            payload.my_certifications
+          );
+          //certifications.push(payload.my_certifications);
         } else {
-          certifications.push(payload.my_certifications);
+          certifications.push(payload);
         }
       } else {
         myCertifications.push(payload.my_certifications);
       }
     },
-    setCertifications(state, action) {},
     setUsersCertifications(state, action) {
       state.usersCertifications = action.payload.usersCertifications;
     },

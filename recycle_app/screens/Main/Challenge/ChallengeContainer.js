@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
  */
 export default ({ getMyChallenges, myChallenges, myCertifications }) => {
   const jwt = useSelector((state) => state.usersReducer.token);
+
   useEffect(() => {
     getMyChallenges(jwt);
   }, []);

@@ -74,7 +74,7 @@ const Couter = ({ route }) => {
         until={1}
         running={running}
         onFinish={() => setFinishied(true)}
-        onChange={(e) => console.log(e)}
+        onChange={(e) => e}
         digitStyle={{
           backgroundColor: null,
           marginHorizontal: -12,

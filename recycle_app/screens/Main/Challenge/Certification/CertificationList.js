@@ -33,7 +33,7 @@ const Certification = ({ route }) => {
   const myCertifications = useSelector(
     (state) => state.certificationReducer.myCertifications
   );
-  console.log(myCertifications);
+
   const targetChallenge = myCertifications.find(
     (challenge) => challenge.challenge_id === challengeId
   );
@@ -63,7 +63,7 @@ const Certification = ({ route }) => {
     });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
-
+  console.log(e);
   return (
     <BgContainer>
       {/* <SafeAreaView> */}
