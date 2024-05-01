@@ -13,7 +13,7 @@ import styled from "styled-components/native";
 import CountDown from "react-native-countdown-component";
 import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 import api from "../../../../api";
-import { setMyCertifications } from "../../../../modules/certificationSlice";
+import { addCertifications } from "../../../../modules/certificationSlice";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
@@ -54,7 +54,8 @@ const Couter = ({ route }) => {
     };
     formData.append("document", JSON.stringify(document));
     const { data } = await api.createCertification(challengeId, formData, jwt);
-    dispatch(setMyCertifications(data));
+    console.log(data);
+    dispatch(addCertifications(data));
   };
 
   return (

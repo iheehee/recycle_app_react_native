@@ -19,6 +19,7 @@ import BackBtn from "../components/ChallengeCreate/BackBtn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
+import CertificationIndex from "../screens/Main/Challenge/Certification/CertificationIndex";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -169,7 +170,7 @@ const ChallengeStackNavi = () => {
       />
       <Stack.Screen
         name="Certification"
-        component={CertificationList}
+        component={CertificationIndex}
         options={{
           title: null,
         }}
@@ -194,7 +195,7 @@ const ChallengeStackNavi = () => {
 
 const getVisibility = (selectedTabIndex, blockIndexArray) => {
   const routeIndex = useNavigationState((state) => state);
-
+  console.log(routeIndex);
   let stackScreenIndex;
   !routeIndex
     ? null
@@ -251,22 +252,12 @@ const TabNavigation = () => {
         },
       })}
     >
-      {/* <Tab.Screen
-        name="챌린지"
-        component={ChallengeStackNavi}
-        options={(route) => ({
-          headerShown: false,
-          tabBarStyle: {
-            display: getVisibility(0, [1]),
-          },
-        })}
-      /> */}
       <Tab.Screen
         name="챌린지"
         component={ChallengeStackNavi}
         options={(route) => ({
           headerShown: headerVisibility(0, [1, 2, 3]),
-          tabBarStyle: { display: getVisibility(1, [1, 2]) },
+          tabBarStyle: { display: getVisibility(0, [1, 2, 3]) },
           headerRightContainerStyle: { paddingRight: 12 },
           headerRight: () => (
             <HeaderButton shape={"plus"} onPress={"ChallengeCreate"} />

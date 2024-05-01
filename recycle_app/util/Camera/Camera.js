@@ -68,7 +68,7 @@ export default ({ route }) => {
         formData.append("document", JSON.stringify(document));
         await axios({
           method: "post",
-          url: `${baseUrl}/challenges/${id}/certification/`,
+          url: `${baseUrl}/challenges/${id}/certification/create/`,
           data: formData,
           headers: {
             Authorization: jwt,

@@ -28,11 +28,8 @@ const Container = styled.View`
   padding: 5px;
 `;
 
-const Certification = ({ route }) => {
+const Certification = ({ route, myCertifications }) => {
   const { challengeId } = route.params;
-  const myCertifications = useSelector(
-    (state) => state.certificationReducer.myCertifications
-  );
 
   const targetChallenge = myCertifications.find(
     (challenge) => challenge.challenge_id === challengeId
@@ -63,7 +60,7 @@ const Certification = ({ route }) => {
     });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
-  console.log(e);
+  //console.log(e);
   return (
     <BgContainer>
       {/* <SafeAreaView> */}
