@@ -48,7 +48,10 @@ export default ({ challenge, myCertifications }) => {
   const { id, title, start_day } = challenge;
   const navigation = useNavigation();
   const CertificationScreen = () =>
-    navigation.navigate("Certification", { challengeId: id, myCertifications });
+    navigation.navigate("Certification", {
+      challenge_id: id,
+      myCertifications,
+    });
   const jwt = useSelector((state) => state.usersReducer.token);
   const dispatch = useDispatch();
 

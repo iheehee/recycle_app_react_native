@@ -15,7 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import Button from "./component/Button";
 import axios from "axios";
-import { getMyCertifications } from "../../modules/certificationSlice";
+import { addCertifications } from "../../modules/certificationSlice";
 import Ip from "../Ip";
 import TextCounter from "../../components/ChallengeCreate/TextCounter";
 
@@ -47,7 +47,7 @@ export default ({ route }) => {
       }
     }
   };
-
+  const { challenge_id, certification_id } = route.params;
   const jwt = useSelector((state) => state.usersReducer.token);
   const baseUrl = Ip.localIp;
 
@@ -56,38 +56,37 @@ export default ({ route }) => {
       try {
         MediaLibrary.createAssetAsync(image);
         const formData = new FormData();
-        formData.append("file", {
-          name: `${id}.jpeg`,
+        formData.append("image", {
+          name: `challenge_${challenge_id}_${certification_id}.jpeg`,
           type: "image/jpeg",
           uri: image,
         });
         const document = {
           comment: comment,
-          challenge_id: id,
+          challenge_id: challenge_id,
+          certification_id: certification_id,
         };
         formData.append("document", JSON.stringify(document));
         await axios({
           method: "post",
-          url: `${baseUrl}/challenges/${id}/certification/create/`,
+          url: `${baseUrl}/challenge/${challenge_id}/certification/create/`,
           data: formData,
           headers: {
-            Authorization: jwt,
+            Access: jwt,
             "Content-Type": "multipart/form-data",
           },
         }).then((response) => {
-          const { result } = response.data;
-          Alert.alert(result, "", [
+          const { data } = response;
+
+          Alert.alert("등록되었습니다.", "", [
             {
               text: "확인",
               onPress: () => {
-                dispatch(getMyCertifications(jwt));
-                navigation.navigate("CertificationDetail", {
-                  screen: "ChallengeCertiDetail",
-                  params: {
-                    challenge: route.params.challenge,
-                  },
-                }); //카메라 인증 후 디테일 페이지로 이동
-              },
+                dispatch(addCertifications(data));
+                return navigation.navigate("Certification", {
+                  challenge_id: challenge_id,
+                });
+              }, //카메라 인증 후 디테일 페이지로 이동
             },
           ]);
         });

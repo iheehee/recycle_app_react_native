@@ -54,7 +54,6 @@ const Couter = ({ route }) => {
     };
     formData.append("document", JSON.stringify(document));
     const { data } = await api.createCertification(challengeId, formData, jwt);
-    console.log(data);
     dispatch(addCertifications(data));
   };
 
@@ -128,7 +127,10 @@ const Couter = ({ route }) => {
         </ButtonContainer>
       ) : (
         <>
-          <BottomMenuButton />
+          <BottomMenuButton
+            challenge_id={challengeId}
+            certification_id={certificationId}
+          />
           <Button
             title="건너뛰기"
             buttonStyle={{

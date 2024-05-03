@@ -15,8 +15,7 @@ import { Button } from "@rneui/themed";
 
 const { width, height } = Dimensions.get("screen");
 
-const BottomSheetMenu = ({ isVisible }) => {
-  const [bottomMenuIsVisible, setbottomMenuIsVisible] = useState(isVisible);
+const BottomSheetMenu = ({ challenge_id, certification_id }) => {
   const refRBSheet = useRef();
   const navigation = useNavigation();
 
@@ -37,7 +36,10 @@ const BottomSheetMenu = ({ isVisible }) => {
       title: "카메라",
       onPress: () => {
         refRBSheet.current.close();
-        return navigation.navigate("Camera");
+        return navigation.navigate("Camera", {
+          challenge_id: challenge_id,
+          certification_id: certification_id,
+        });
       },
     },
     {

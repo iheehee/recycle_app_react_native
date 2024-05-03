@@ -29,10 +29,10 @@ const Container = styled.View`
 `;
 
 const Certification = ({ route, myCertifications }) => {
-  const { challengeId } = route.params;
+  const { challenge_id } = route.params;
 
   const targetChallenge = myCertifications.find(
-    (challenge) => challenge.challenge_id === challengeId
+    (challenge) => challenge.challenge_id === challenge_id
   );
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Certification = ({ route, myCertifications }) => {
     });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
-  //console.log(e);
+  console.log(e);
   return (
     <BgContainer>
       {/* <SafeAreaView> */}

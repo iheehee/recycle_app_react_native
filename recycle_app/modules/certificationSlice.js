@@ -15,9 +15,6 @@ const certificationsSlice = createSlice({
         (element) => element.challengeId === challengeId
       );
 
-      //console.log(myCertifications[existChallenge].certifications);
-      //console.log(payload.my_certifications.certifications);
-
       if (myCertifications.length === 0) {
         //state에 데이터가 없으면 캐싱한다.
         myCertifications.push(payload.my_certifications);
@@ -56,33 +53,10 @@ const certificationsSlice = createSlice({
           myCertifications.push(payload.my_certifications);
         }
       }
-      /* if (existChallenge !== -1) {
-        targetChallenge = myCertifications[existChallenge];
-        certifications = targetChallenge.certifications;
-        const existCertification = certifications.findIndex(
-          (element) => element.certificationId === payload.certification_id
-        );
-        console.log(targetChallenge.certifications.length);
-        console.log(existCertification);
-
-        if (existCertification !== -1) {
-          certifications.splice(
-            existCertification,
-            1,
-            payload.my_certifications
-          );
-          //certifications.push(payload.my_certifications);
-        } else {
-          certifications.push(payload);
-        }
-      } else {
-        myCertifications.push(payload.my_certifications);
-      } */
     },
     addCertifications(state, action) {
-      const { myCertifications } = state;
       const challenge_id = action.payload.challenge_id;
-      const existChallenge = myCertifications.findIndex(
+      const existChallenge = state.myCertifications.findIndex(
         (element) => element.challenge_id === challenge_id
       );
       const targetChallenge = state.myCertifications[existChallenge];

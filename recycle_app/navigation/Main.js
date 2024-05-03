@@ -195,8 +195,8 @@ const ChallengeStackNavi = () => {
 
 const getVisibility = (selectedTabIndex, blockIndexArray) => {
   const routeIndex = useNavigationState((state) => state);
-  console.log(routeIndex);
   let stackScreenIndex;
+
   !routeIndex
     ? null
     : (stackScreenIndex = routeIndex.routes[selectedTabIndex].state);
