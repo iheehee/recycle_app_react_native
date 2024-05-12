@@ -10,13 +10,13 @@ const certificationsSlice = createSlice({
     setMyCertifications(state, action) {
       const { myCertifications } = state;
       const { payload } = action;
-      const challengeId = payload.challengeId;
+      const challenge_id = payload.my_certifications.challenge_id;
       const existChallenge = myCertifications.findIndex(
-        (element) => element.challengeId === challengeId
+        (element) => element.challenge_id === challenge_id
       );
 
-      if (myCertifications.length === 0) {
-        //state에 데이터가 없으면 캐싱한다.
+      if (existChallenge === -1) {
+        //새로운 챌린지를 생성한다.
         myCertifications.push(payload.my_certifications);
       } else if (
         myCertifications[existChallenge].certifications.length !==
@@ -55,12 +55,13 @@ const certificationsSlice = createSlice({
       }
     },
     addCertifications(state, action) {
+      console.log(action.payload);
       const challenge_id = action.payload.challenge_id;
-      const existChallenge = state.myCertifications.findIndex(
+      const find_Challenge_index = state.myCertifications.findIndex(
         (element) => element.challenge_id === challenge_id
       );
-      const targetChallenge = state.myCertifications[existChallenge];
-      targetChallenge.certifications.push(action.payload);
+      const targetChallenge = state.myCertifications[find_Challenge_index];
+      targetChallenge.certifications.push(action.payload.data);
     },
   },
 });

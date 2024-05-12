@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import Ip from "../../../../util/Ip";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -30,7 +31,6 @@ const Container = styled.View`
 
 const Certification = ({ route, myCertifications }) => {
   const { challenge_id } = route.params;
-
   const targetChallenge = myCertifications.find(
     (challenge) => challenge.challenge_id === challenge_id
   );
@@ -39,7 +39,7 @@ const Certification = ({ route, myCertifications }) => {
     if (targetChallenge) {
       maxArray.forEach((num) => {
         const exist = targetChallenge.certifications.find(
-          (certification) => certification.certification_id === num
+          (certification) => certification.certification_num === num
         );
         if (exist) {
           DATA.push(exist);
@@ -55,8 +55,8 @@ const Certification = ({ route, myCertifications }) => {
   const navigation = useNavigation();
   const CountDownScreen = (certification_id) =>
     navigation.navigate("CountDown", {
-      certificationId: certification_id,
-      challengeId: challengeId,
+      certification_id: certification_id,
+      challenge_id: challenge_id,
     });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
@@ -89,32 +89,45 @@ const Certification = ({ route, myCertifications }) => {
               }
             >
               <Container>
-                <Text>
-                  {item.certification_id ? item.certification_id : item}
+                <Text style={{ color: "white" }}>
+                  {item.certification_num ? item.certification_num : item}
                 </Text>
-                {item.certification_id ? (
-                  item.certification_image ? null : (
-                    <View
+                {item.certification_num ? (
+                  //certification_local_photo_url가 ""(빈 string) 이 아니라면 이미지를 표시한다.
+                  item.certification_local_photo_url.length > 0 ? (
+                    <Image
+                      source={{ uri: item.certification_local_photo_url }}
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center",
+                        zIndex: -1,
+                        position: "absolute",
+                        width: width / 3.03,
+                        height: height / 6.6,
                       }}
-                    >
-                      <FontAwesome name="check" size={24} color="orange" />
-                    </View>
+                    />
+                  ) : (
+                    <>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <FontAwesome name="check" size={24} color="orange" />
+                      </View>
+                      <IconContainer>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            alignItems: "flex-end",
+                            height: width / 3.25,
+                          }}
+                        >
+                          <FontAwesome name="camera" size={20} color="white" />
+                        </View>
+                      </IconContainer>
+                    </>
                   )
                 ) : null}
-                <IconContainer>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "flex-end",
-                      height: width / 3.25,
-                    }}
-                  >
-                    <FontAwesome name="camera" size={20} color="white" />
-                  </View>
-                </IconContainer>
               </Container>
             </TouchableOpacity>
           )}
@@ -139,6 +152,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     marginLeft: 1,
     width: width / 3.03,
+    height: height / 6.6,
   },
 });
 

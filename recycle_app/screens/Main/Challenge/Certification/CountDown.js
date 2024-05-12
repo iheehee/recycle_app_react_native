@@ -34,9 +34,8 @@ const Couter = ({ route }) => {
   const navigation = useNavigation();
   const [running, setRunning] = useState(false);
   const [finished, setFinishied] = useState(false);
-  const [bottomMenuIsVisible, setBottomMenuIsVisible] = useState(false);
 
-  const { challengeId, certificationId } = route.params;
+  const { challenge_id, certification_id } = route.params;
 
   const dispatch = useDispatch();
   const jwt = useSelector((state) => state.usersReducer.token);
@@ -49,12 +48,13 @@ const Couter = ({ route }) => {
           }); */
 
     const document = {
-      certification_id: certificationId,
-      challenge_id: challengeId,
+      certification_num: certification_id,
+      challenge_id: challenge_id,
+      certification_local_photo_url: "",
     };
     formData.append("document", JSON.stringify(document));
-    const { data } = await api.createCertification(challengeId, formData, jwt);
-    dispatch(addCertifications(data));
+    const { data } = await api.createCertification(challenge_id, formData, jwt);
+    dispatch(addCertifications({ challenge_id: challenge_id, data }));
   };
 
   return (
@@ -128,8 +128,8 @@ const Couter = ({ route }) => {
       ) : (
         <>
           <BottomMenuButton
-            challenge_id={challengeId}
-            certification_id={certificationId}
+            challenge_id={challenge_id}
+            certification_id={certification_id}
           />
           <Button
             title="건너뛰기"

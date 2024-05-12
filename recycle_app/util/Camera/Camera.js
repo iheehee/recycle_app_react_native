@@ -64,7 +64,8 @@ export default ({ route }) => {
         const document = {
           comment: comment,
           challenge_id: challenge_id,
-          certification_id: certification_id,
+          certification_num: certification_id,
+          certification_local_photo_url: image,
         };
         formData.append("document", JSON.stringify(document));
         await axios({
@@ -77,12 +78,14 @@ export default ({ route }) => {
           },
         }).then((response) => {
           const { data } = response;
-
+          console.log(data);
           Alert.alert("등록되었습니다.", "", [
             {
               text: "확인",
               onPress: () => {
-                dispatch(addCertifications(data));
+                dispatch(
+                  addCertifications({ challenge_id: challenge_id, data })
+                );
                 return navigation.navigate("Certification", {
                   challenge_id: challenge_id,
                 });
