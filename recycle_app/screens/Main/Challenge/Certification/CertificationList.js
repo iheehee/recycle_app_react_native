@@ -53,11 +53,13 @@ const Certification = ({ route, myCertifications }) => {
 
   const [e, setE] = useState([]);
   const navigation = useNavigation();
-  const CountDownScreen = (certification_id) =>
+  const CountDownScreen = (certification_num) =>
     navigation.navigate("CountDown", {
-      certification_id: certification_id,
+      certification_num: certification_num,
       challenge_id: challenge_id,
     });
+  const CertificationDetailScreen = () =>
+    navigation.navigate("CertificationDetailScreen");
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
   console.log(e);
@@ -83,9 +85,9 @@ const Certification = ({ route, myCertifications }) => {
             <TouchableOpacity
               style={styles.item}
               onPress={() =>
-                CountDownScreen(
-                  item.certification_id ? item.certification_id : item
-                )
+                item.certification_num
+                  ? CertificationDetailScreen()
+                  : CountDownScreen(item)
               }
             >
               <Container>

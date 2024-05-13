@@ -19,7 +19,9 @@ import BackBtn from "../components/ChallengeCreate/BackBtn";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
+
 import CertificationIndex from "../screens/Main/Challenge/Certification/CertificationIndex";
+import CertificationDetailScreen from "../screens/Main/Challenge/Certification/CertificationDetailScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -185,6 +187,13 @@ const ChallengeStackNavi = () => {
       <Stack.Screen
         name="Camera"
         component={Camera}
+        options={{
+          title: null,
+        }}
+      />
+      <Stack.Screen
+        name="CertificationDetailScreen"
+        component={CertificationDetailScreen}
         options={{
           title: null,
         }}

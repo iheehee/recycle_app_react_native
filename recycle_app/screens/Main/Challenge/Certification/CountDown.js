@@ -35,7 +35,7 @@ const Couter = ({ route }) => {
   const [running, setRunning] = useState(false);
   const [finished, setFinishied] = useState(false);
 
-  const { challenge_id, certification_id } = route.params;
+  const { challenge_id, certification_num } = route.params;
 
   const dispatch = useDispatch();
   const jwt = useSelector((state) => state.usersReducer.token);
@@ -48,7 +48,7 @@ const Couter = ({ route }) => {
           }); */
 
     const document = {
-      certification_num: certification_id,
+      certification_num: certification_num,
       challenge_id: challenge_id,
       certification_local_photo_url: "",
     };
