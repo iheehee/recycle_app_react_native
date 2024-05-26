@@ -129,7 +129,7 @@ const Couter = ({ route }) => {
         <>
           <BottomMenuButton
             challenge_id={challenge_id}
-            certification_id={certification_id}
+            certification_id={certification_num}
           />
           <Button
             title="건너뛰기"

@@ -10,6 +10,7 @@ const certificationsSlice = createSlice({
     setMyCertifications(state, action) {
       const { myCertifications } = state;
       const { payload } = action;
+
       const challenge_id = payload.my_certifications.challenge_id;
       const existChallenge = myCertifications.findIndex(
         (element) => element.challenge_id === challenge_id
@@ -21,6 +22,7 @@ const certificationsSlice = createSlice({
       } else if (
         myCertifications[existChallenge].certifications.length !==
         payload.my_certifications.certifications.length
+
         //서버에 새로운 인증 데이터가 추가되었다면 기존 state 데이터를 지우고 새로운 데이터를 캐싱한다
       ) {
         state.myCertifications = [];

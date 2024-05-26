@@ -58,8 +58,11 @@ const Certification = ({ route, myCertifications }) => {
       certification_num: certification_num,
       challenge_id: challenge_id,
     });
-  const CertificationDetailScreen = () =>
-    navigation.navigate("CertificationDetailScreen");
+  const CertificationDetailScreen = (certification_num) =>
+    navigation.navigate("CertificationDetailScreen", {
+      certification_num: certification_num,
+      challenge_id: challenge_id,
+    });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
   console.log(e);
@@ -129,7 +132,19 @@ const Certification = ({ route, myCertifications }) => {
                       </IconContainer>
                     </>
                   )
-                ) : null}
+                ) : (
+                  <IconContainer>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        alignItems: "flex-end",
+                        height: width / 3.25,
+                      }}
+                    >
+                      <FontAwesome name="camera" size={20} color="white" />
+                    </View>
+                  </IconContainer>
+                )}
               </Container>
             </TouchableOpacity>
           )}

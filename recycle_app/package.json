@@ -10,6 +10,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@bam.tech/react-native-image-resizer": "^3.0.9",
     "@expo/ngrok": "^4.1.0",
     "@gorhom/bottom-sheet": "^4.6.1",
     "@react-native-async-storage/async-storage": "~1.17.3",
@@ -41,6 +42,7 @@
     "react-native-auto-size-text": "^1.1.1",
     "react-native-countdown-component": "^2.7.1",
     "react-native-gesture-handler": "~2.8.0",
+    "react-native-image-crop-picker": "^0.41.1",
     "react-native-input-spinner": "^1.8.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-modal": "^13.0.1",
@@ -69,7 +71,4 @@
     "postinstall-postinstall": "^2.1.0"
   },
   "private": true
-  
-  
-  
 }
