@@ -14,12 +14,11 @@ import styled from "styled-components/native";
 import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 import api from "../../../../api";
 import { addCertifications } from "../../../../modules/certificationSlice";
+import * as ImagePicker from "expo-image-picker";
 
+import { Button } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
-
-import * as ImagePicker from "expo-image-picker";
-import ImageResizer from "@bam.tech/react-native-image-resizer";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -38,7 +37,7 @@ const DiaryIconContainer = styled.View`
 const ImageContainer = styled.TouchableOpacity`
   background-color: #09172b;
   width: ${width}px;
-  height: ${height / 4}px;
+  height: ${height / 3}px;
 
   align-items: center;
   justify-content: center;
@@ -46,6 +45,7 @@ const ImageContainer = styled.TouchableOpacity`
 
 const CertificationDetailScreen = ({ route }) => {
   const [image, setImage] = useState(null);
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -55,20 +55,7 @@ const CertificationDetailScreen = ({ route }) => {
       quality: 1,
     });
     if (!result.canceled) {
-      /* setImage(result.assets[0].uri); */
-
-      const resizedImage = async () =>
-        await ImageResizer.createResizedImage(
-          image, // path
-          300, // width
-          300, // height
-          "JPEG", // format
-          100, // quality
-          0, // rotation
-          null, // outputPath
-          false, // keepMeta,
-          { onlyScaleDown: true } // options => object
-        ).then((response) => console.log(response.path));
+      setImage(result.assets[0].uri);
     }
   };
 
@@ -93,19 +80,7 @@ const CertificationDetailScreen = ({ route }) => {
     const { data } = await api.createCertification(challenge_id, formData, jwt);
     dispatch(addCertifications({ challenge_id: challenge_id, data }));
   };
-  /* const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
 
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  }; */
   return (
     <BgContainer>
       <ImageContainer onPress={() => pickImage()}>
@@ -132,6 +107,21 @@ const CertificationDetailScreen = ({ route }) => {
           </Text>
         </DiaryIconContainer>
       </DiaryContainer>
+      <Button
+        title="건너뛰기"
+        buttonStyle={{
+          backgroundColor: "black",
+          borderWidth: 2,
+          borderColor: "white",
+          borderRadius: 30,
+        }}
+        containerStyle={{
+          width: 200,
+          marginHorizontal: 50,
+          marginVertical: 10,
+        }}
+        titleStyle={{ fontWeight: "bold" }}
+      />
       <TextInput
         editable
         multiline
