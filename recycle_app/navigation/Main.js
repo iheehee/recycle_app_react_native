@@ -9,19 +9,24 @@ import ChallengeDetailCard from "../components/ChallengeDetailCard";
 import CertificationList from "../screens/Main/Challenge/Certification/CertificationList";
 import ChallengeCreate from "../screens/Main/Challenge_ver old/ChallengeCreate";
 import CountDown from "../screens/Main/Challenge/Certification/CountDown";
+
 import Recycle from "../screens/Main/Recycle";
 import Home from "../screens/Main/Home";
 import Day from "../components/ChallengeDetail/Day";
 import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
+
 import HeaderButton from "../components/ChallengeDetail/HeaderButton";
+import HeaderEditButton from "../components/CertificationDetail/HeaderEditButton";
 import BackBtn from "../components/ChallengeCreate/BackBtn";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
 
 import CertificationIndex from "../screens/Main/Challenge/Certification/CertificationIndex";
 import CertificationDetailScreen from "../screens/Main/Challenge/Certification/CertificationDetailScreen";
+import CertificationFeedEditScreen from "../screens/Main/Challenge/Certification/CertificationFeedEditScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -196,6 +201,22 @@ const ChallengeStackNavi = () => {
         component={CertificationDetailScreen}
         options={{
           title: null,
+          headerRight: () => (
+            <HeaderEditButton
+              text={"Edit"}
+              onPress={"CertificationFeedEditScreen"}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="CertificationFeedEditScreen"
+        component={CertificationFeedEditScreen}
+        options={{
+          title: null,
+          headerRight: () => (
+            <HeaderEditButton text={"Save"} onPress={"ChallengeCreate"} />
+          ),
         }}
       />
     </Stack.Navigator>

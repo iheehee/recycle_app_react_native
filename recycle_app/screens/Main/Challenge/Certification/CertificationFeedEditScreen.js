@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
-import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
 import api from "../../../../api";
 import { addCertifications } from "../../../../modules/certificationSlice";
 import * as ImagePicker from "expo-image-picker";
@@ -52,7 +51,7 @@ const WriteButtonContainer = styled.View`
   height: ${height / 14}px;
   border-radius: 15px;
 `;
-const ImageContainer = styled.View`
+const ImageContainer = styled.TouchableOpacity`
   background-color: #09172b;
   width: ${width}px;
   height: ${height / 3}px;
@@ -63,9 +62,44 @@ const ImageContainer = styled.View`
 const CertificationDetailScreen = ({ route }) => {
   const [image, setImage] = useState(null);
 
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+  const jwt = useSelector((state) => state.usersReducer.token);
+  const callApi = async () => {
+    const formData = new FormData();
+    /* formData.append("file", {
+              name: `${id}.jpeg`,
+              type: "image/jpeg",
+              uri: image,
+            }); */
+
+    const document = {
+      certification_num: certification_id,
+      challenge_id: challenge_id,
+      certification_local_photo_url: "",
+    };
+    formData.append("document", JSON.stringify(document));
+    const { data } = await api.createCertification(challenge_id, formData, jwt);
+    dispatch(addCertifications({ challenge_id: challenge_id, data }));
+  };
+  const [name, setName] = useState("");
   return (
     <BgContainer>
-      <ImageContainer>
+      <ImageContainer onPress={() => pickImage()}>
         {image ? (
           <Image
             source={{ uri: image }}
@@ -76,8 +110,8 @@ const CertificationDetailScreen = ({ route }) => {
           />
         ) : (
           <>
-            <FontAwesome name="image" size={50} color="white" />
-            {/* <Text style={{ color: "white", fontSize: 14 }}>Not Image</Text> */}
+            <FontAwesome name="camera" size={50} color="white" />
+            <Text style={{ color: "white", fontSize: 14 }}>Add Image</Text>
           </>
         )}
       </ImageContainer>
@@ -104,8 +138,8 @@ const CertificationDetailScreen = ({ route }) => {
           titleStyle={{ fontWeight: "bold" }}
         />
       </WriteButtonContainer> */}
-      <DiaryBodyTextContainer></DiaryBodyTextContainer>
-      {/* <TextInput
+      {/* <DiaryBodyTextContainer></DiaryBodyTextContainer> */}
+      <TextInput
         editable
         multiline
         maxLength={300}
@@ -120,7 +154,7 @@ const CertificationDetailScreen = ({ route }) => {
           fontSize: 16,
           padding: 10,
         }}
-      /> */}
+      />
     </BgContainer>
   );
 };
