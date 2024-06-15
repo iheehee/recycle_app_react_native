@@ -58,4 +58,11 @@ export default {
       null,
       jwt
     ),
+  modified_Certification: (id, certificationId, jwt) =>
+    callApi(
+      "put",
+      `/challenges/${id}/certification?certification_id=${certificationId}`,
+      data,
+      jwt
+    ),
 };

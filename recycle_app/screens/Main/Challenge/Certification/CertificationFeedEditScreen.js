@@ -61,7 +61,7 @@ const ImageContainer = styled.TouchableOpacity`
 
 const CertificationDetailScreen = ({ route }) => {
   const [image, setImage] = useState(null);
-
+  
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -154,6 +154,7 @@ const CertificationDetailScreen = ({ route }) => {
           fontSize: 16,
           padding: 10,
         }}
+        onChangeText={null}
       />
     </BgContainer>
   );
