@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -16,6 +16,7 @@ import { addCertifications } from "../../../../modules/certificationSlice";
 import * as ImagePicker from "expo-image-picker";
 
 import { Ionicons, Feather, FontAwesome } from "@expo/vector-icons";
+import HeaderSaveButton from "../../../../components/CertificationDetail/HeaderSaveButton";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -60,8 +61,19 @@ const ImageContainer = styled.TouchableOpacity`
 `;
 
 const CertificationDetailScreen = ({ route }) => {
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <HeaderSaveButton text={"Save"} data={null} />,
+    });
+  }, []);
   const [image, setImage] = useState(null);
-  
+  const [inputTextValue, setInputTextValue] = useState("");
+
+  /* const { challenge_id } = route.params; */
+
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -75,9 +87,6 @@ const CertificationDetailScreen = ({ route }) => {
     }
   };
 
-  const navigation = useNavigation();
-
-  const dispatch = useDispatch();
   const jwt = useSelector((state) => state.usersReducer.token);
   const callApi = async () => {
     const formData = new FormData();
@@ -91,12 +100,12 @@ const CertificationDetailScreen = ({ route }) => {
       certification_num: certification_id,
       challenge_id: challenge_id,
       certification_local_photo_url: "",
+      diary: inputTextValue,
     };
     formData.append("document", JSON.stringify(document));
     const { data } = await api.createCertification(challenge_id, formData, jwt);
     dispatch(addCertifications({ challenge_id: challenge_id, data }));
   };
-  const [name, setName] = useState("");
   return (
     <BgContainer>
       <ImageContainer onPress={() => pickImage()}>
@@ -143,7 +152,7 @@ const CertificationDetailScreen = ({ route }) => {
         editable
         multiline
         maxLength={300}
-        value={name}
+        value={inputTextValue}
         style={{
           height: 300,
           width: 400,
@@ -154,7 +163,7 @@ const CertificationDetailScreen = ({ route }) => {
           fontSize: 16,
           padding: 10,
         }}
-        onChangeText={null}
+        onChangeText={(e) => setInputTextValue(e)}
       />
     </BgContainer>
   );

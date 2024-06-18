@@ -37,7 +37,7 @@ const DiaryBodyTextContainer = styled.View`
   border-width: 1px;
   border-color: white;
   color: "white";
-  font-size: 16;
+  font-size: 16px;
   padding: 10px;
 `;
 const IconContainer = styled.View`

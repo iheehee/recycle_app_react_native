@@ -17,6 +17,7 @@ import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
 
 import HeaderButton from "../components/ChallengeDetail/HeaderButton";
+import HeaderSaveButton from "../components/CertificationDetail/HeaderSaveButton";
 import HeaderEditButton from "../components/CertificationDetail/HeaderEditButton";
 import BackBtn from "../components/ChallengeCreate/BackBtn";
 
@@ -212,12 +213,11 @@ const ChallengeStackNavi = () => {
       <Stack.Screen
         name="CertificationFeedEditScreen"
         component={CertificationFeedEditScreen}
-        options={{
+        options={() => ({
           title: null,
-          headerRight: () => (
-            <HeaderEditButton text={"Save"} onPress={"ChallengeCreate"} />
-          ),
-        }}
+          headerRight: null,
+          /* <HeaderSaveButton text={"Save"} onPress={route} /> */
+        })}
       />
     </Stack.Navigator>
   );

@@ -12,13 +12,7 @@ const EditButton = styled.TouchableOpacity`
 export default ({ text, onPress }) => {
   const navigation = useNavigation();
   return (
-    <EditButton
-      onPress={() =>
-        text === "Edit"
-          ? navigation.navigate(onPress)
-          : api.modified_Certification()
-      }
-    >
+    <EditButton onPress={() => navigation.navigate(onPress)}>
       <Text style={{ color: "black", fontSize: 19 }}>{text}</Text>
     </EditButton>
   );

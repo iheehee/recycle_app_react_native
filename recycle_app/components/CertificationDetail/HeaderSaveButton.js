@@ -10,11 +10,12 @@ const EditButton = styled.TouchableOpacity`
   margin-right: 10px;
 `;
 
-export default ({ text, onPress }) => {
+export default ({ text, data }) => {
   const navigation = useNavigation();
+  console.log(data);
   return (
-    <EditButton onPress={() => api.modified_Certification()}>
-      <Text style={{ color: "black", fontSize: 19 }}>{text}</Text>
+    <EditButton onPress={() => null /* api.modified_Certification() */}>
+      <Text style={{ color: "black", fontSize: 19 }}>Save</Text>
     </EditButton>
   );
 };
