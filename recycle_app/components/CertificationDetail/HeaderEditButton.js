@@ -9,8 +9,8 @@ const EditButton = styled.TouchableOpacity`
   margin-right: 10px;
 `;
 
-export default ({ text, onPress }) => {
-  const navigation = useNavigation();
+export default ({ navigation, text, onPress }) => {
+  console.log("에디트");
   return (
     <EditButton onPress={() => navigation.navigate(onPress)}>
       <Text style={{ color: "black", fontSize: 19 }}>{text}</Text>

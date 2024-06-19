@@ -213,10 +213,9 @@ const ChallengeStackNavi = () => {
       <Stack.Screen
         name="CertificationFeedEditScreen"
         component={CertificationFeedEditScreen}
-        options={() => ({
+        options={({ route }) => ({
           title: null,
           headerRight: null,
-          /* <HeaderSaveButton text={"Save"} onPress={route} /> */
         })}
       />
     </Stack.Navigator>

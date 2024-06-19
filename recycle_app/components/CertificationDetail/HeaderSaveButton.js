@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
@@ -11,8 +11,10 @@ const EditButton = styled.TouchableOpacity`
 `;
 
 export default ({ text, data }) => {
-  const navigation = useNavigation();
-  console.log(data);
+  /* console.log("얍"); */
+  /* useEffect(() => {
+    console.log("얍");
+  }, []); */
   return (
     <EditButton onPress={() => null /* api.modified_Certification() */}>
       <Text style={{ color: "black", fontSize: 19 }}>Save</Text>

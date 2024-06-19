@@ -60,18 +60,19 @@ const ImageContainer = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-const CertificationDetailScreen = ({ route }) => {
+const CertificationDetailScreen = ({ route, navigation }) => {
   useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <HeaderSaveButton text={"Save"} data={null} />,
-    });
+    navigation
+      ? navigation.setOptions({
+          headerRight: () => <HeaderSaveButton text={"Save"} data={"하이"} />,
+        })
+      : null;
   }, []);
   const [image, setImage] = useState(null);
   const [inputTextValue, setInputTextValue] = useState("");
 
   /* const { challenge_id } = route.params; */
 
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   const pickImage = async () => {
