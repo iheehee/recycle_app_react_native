@@ -65,10 +65,25 @@ const certificationsSlice = createSlice({
       const targetChallenge = state.myCertifications[find_Challenge_index];
       targetChallenge.certifications.push(action.payload.data);
     },
+    modify_Certifications(state, action) {
+      console.log(action.payload);
+      const challenge_id = action.payload.challenge_id;
+      const certification_num = action.payload.certification_num;
+      const modified_data = action.payload.data;
+      const find_Challenge_index = state.myCertifications.findIndex(
+        (element) => element.challenge_id === challenge_id
+      );
+      const targetChallenge = state.myCertifications[find_Challenge_index];
+      targetChallenge.certifications.splice(
+        certification_num - 1,
+        1,
+        modified_data
+      );
+    },
   },
 });
 
-export const { setMyCertifications, addCertifications } =
+export const { setMyCertifications, addCertifications, modify_Certifications } =
   certificationsSlice.actions;
 
 export const getMyCertifications = (id, jwt) => async (dispatch) => {

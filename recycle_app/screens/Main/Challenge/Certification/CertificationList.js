@@ -58,10 +58,9 @@ const Certification = ({ route, myCertifications }) => {
       certification_num: certification_num,
       challenge_id: challenge_id,
     });
-  const CertificationDetailScreen = (certification_num) =>
+  const CertificationDetailScreen = (certification_data) =>
     navigation.navigate("CertificationDetailScreen", {
-      certification_num: certification_num,
-      challenge_id: challenge_id,
+      certification_data,
     });
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
   const DATA = [];
@@ -89,7 +88,7 @@ const Certification = ({ route, myCertifications }) => {
               style={styles.item}
               onPress={() =>
                 item.certification_num
-                  ? CertificationDetailScreen()
+                  ? CertificationDetailScreen(item)
                   : CountDownScreen(item)
               }
             >
@@ -99,9 +98,9 @@ const Certification = ({ route, myCertifications }) => {
                 </Text>
                 {item.certification_num ? (
                   //certification_local_photo_url가 ""(빈 string) 이 아니라면 이미지를 표시한다.
-                  item.certification_local_photo_url.length > 0 ? (
+                  item.certification_photo !== null ? (
                     <Image
-                      source={{ uri: item.certification_local_photo_url }}
+                      source={{ uri: Ip.localIp + item.certification_photo }}
                       style={{
                         zIndex: -1,
                         position: "absolute",

@@ -17,8 +17,6 @@ import CertiBtn from "../components/ChallengeCerti/CertiBtn";
 import Camera from "../util/Camera/Camera";
 
 import HeaderButton from "../components/ChallengeDetail/HeaderButton";
-import HeaderSaveButton from "../components/CertificationDetail/HeaderSaveButton";
-import HeaderEditButton from "../components/CertificationDetail/HeaderEditButton";
 import BackBtn from "../components/ChallengeCreate/BackBtn";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -202,12 +200,7 @@ const ChallengeStackNavi = () => {
         component={CertificationDetailScreen}
         options={{
           title: null,
-          headerRight: () => (
-            <HeaderEditButton
-              text={"Edit"}
-              onPress={"CertificationFeedEditScreen"}
-            />
-          ),
+          headerRight: null,
         }}
       />
       <Stack.Screen

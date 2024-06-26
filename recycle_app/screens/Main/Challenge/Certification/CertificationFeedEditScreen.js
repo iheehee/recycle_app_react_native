@@ -7,8 +7,7 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+
 import styled from "styled-components/native";
 
 import api from "../../../../api";
@@ -61,52 +60,42 @@ const ImageContainer = styled.TouchableOpacity`
 `;
 
 const CertificationDetailScreen = ({ route, navigation }) => {
-  useEffect(() => {
-    navigation
-      ? navigation.setOptions({
-          headerRight: () => <HeaderSaveButton text={"Save"} data={"하이"} />,
-        })
-      : null;
-  }, []);
+  const { challenge_id, certification_num } = route.params.certification_data;
+
   const [image, setImage] = useState(null);
   const [inputTextValue, setInputTextValue] = useState("");
 
-  /* const { challenge_id } = route.params; */
+  useEffect(() => {
+    navigation
+      ? navigation.setOptions({
+          headerRight: () => (
+            <HeaderSaveButton data_to_modify={data_to_modify} image={image} />
+          ),
+        })
+      : null;
+  }, [inputTextValue, image]);
 
-  const dispatch = useDispatch();
+  const data_to_modify = {
+    challenge_id: challenge_id,
+    certification_num: certification_num,
+    certification_diary: inputTextValue,
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
+      aspect: [1, 1],
+      quality: 0.5,
+      height: 1080,
+      width: 1080,
     });
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
 
-  const jwt = useSelector((state) => state.usersReducer.token);
-  const callApi = async () => {
-    const formData = new FormData();
-    /* formData.append("file", {
-              name: `${id}.jpeg`,
-              type: "image/jpeg",
-              uri: image,
-            }); */
-
-    const document = {
-      certification_num: certification_id,
-      challenge_id: challenge_id,
-      certification_local_photo_url: "",
-      diary: inputTextValue,
-    };
-    formData.append("document", JSON.stringify(document));
-    const { data } = await api.createCertification(challenge_id, formData, jwt);
-    dispatch(addCertifications({ challenge_id: challenge_id, data }));
-  };
   return (
     <BgContainer>
       <ImageContainer onPress={() => pickImage()}>

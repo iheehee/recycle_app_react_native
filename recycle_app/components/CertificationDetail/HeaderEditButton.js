@@ -9,11 +9,16 @@ const EditButton = styled.TouchableOpacity`
   margin-right: 10px;
 `;
 
-export default ({ navigation, text, onPress }) => {
-  console.log("에디트");
+export default ({ onPress, certificationData }) => {
+  const navigation = useNavigation();
+
   return (
-    <EditButton onPress={() => navigation.navigate(onPress)}>
-      <Text style={{ color: "black", fontSize: 19 }}>{text}</Text>
+    <EditButton
+      onPress={() =>
+        navigation.navigate(onPress, { certification_data: certificationData })
+      }
+    >
+      <Text style={{ color: "black", fontSize: 19 }}>Edit</Text>
     </EditButton>
   );
 };

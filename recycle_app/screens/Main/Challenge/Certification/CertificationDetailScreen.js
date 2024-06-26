@@ -11,12 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
-import BottomMenuButton from "../../../../components/ChallengeCerti/Certification/CertiBottomSheetMenu";
-import api from "../../../../api";
-import { addCertifications } from "../../../../modules/certificationSlice";
 import * as ImagePicker from "expo-image-picker";
 
 import { Ionicons, Feather, FontAwesome } from "@expo/vector-icons";
+
+import HeaderEditButton from "../../../../components/CertificationDetail/HeaderEditButton";
+import Ip from "../../../../util/Ip";
 
 const { width, height } = Dimensions.get("screen");
 const BgContainer = styled.View`
@@ -60,15 +60,37 @@ const ImageContainer = styled.View`
   justify-content: center;
 `;
 
-const CertificationDetailScreen = ({ route }) => {
+const CertificationDetailScreen = ({ navigation, route }) => {
+  /* const certification_data = {
+    certification_num: route.params.certification_num,
+    challenge_id: route.params.challenge_id,
+  }; */
+  const certification_data = route.params.certification_data;
   const [image, setImage] = useState(null);
+
+  /* 헤더의 오른쪽 버튼
+  : 버튼 컴포넌트에 어느 챌린지의 몇번 째 인증인지를 props로 보낸다.*/
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderEditButton
+          certificationData={certification_data}
+          onPress={"CertificationFeedEditScreen"}
+        />
+      ),
+    });
+  }, []);
 
   return (
     <BgContainer>
       <ImageContainer>
-        {image ? (
+        {route.params.certification_photo !== null ? (
           <Image
-            source={{ uri: image }}
+            source={{
+              uri:
+                Ip.localIp +
+                route.params.certification_data.certification_photo,
+            }}
             style={{
               width: width,
               height: height / 3,
@@ -104,7 +126,9 @@ const CertificationDetailScreen = ({ route }) => {
           titleStyle={{ fontWeight: "bold" }}
         />
       </WriteButtonContainer> */}
-      <DiaryBodyTextContainer></DiaryBodyTextContainer>
+      <DiaryBodyTextContainer>
+        <Text>{route.params.certification_data.certification_diary}</Text>
+      </DiaryBodyTextContainer>
       {/* <TextInput
         editable
         multiline

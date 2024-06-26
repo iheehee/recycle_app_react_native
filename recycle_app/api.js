@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     "Content-Type": "application/json",
     Access: jwt,
   };
-
+  console.log(method_type, path, data, jwt);
   const baseUrl = Ip.localIp;
 
   const fullUrl = `${baseUrl}${path}`;
@@ -58,11 +58,11 @@ export default {
       null,
       jwt
     ),
-  /* modified_Certification: (id, certificationId, jwt) =>
+  modify_Certification: (challenge_id, certification_num, data, jwt) =>
     callApi(
-      "put",
-      `/challenges/${id}/certification?certification_id=${certificationId}`,
+      "patch",
+      `/challenge/${challenge_id}/certification/${certification_num}/`,
       data,
       jwt
-    ), */
+    ),
 };
