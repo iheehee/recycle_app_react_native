@@ -60,10 +60,11 @@ const ImageContainer = styled.TouchableOpacity`
 `;
 
 const CertificationDetailScreen = ({ route, navigation }) => {
-  const { challenge_id, certification_num } = route.params.certification_data;
+  const { challenge_id, certification_num, certification_diary } =
+    route.params.certification_data;
 
   const [image, setImage] = useState(null);
-  const [inputTextValue, setInputTextValue] = useState("");
+  const [inputTextValue, setInputTextValue] = useState(certification_diary);
 
   useEffect(() => {
     navigation
@@ -87,7 +88,7 @@ const CertificationDetailScreen = ({ route, navigation }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 0.5,
+      quality: 0,
       height: 1080,
       width: 1080,
     });
@@ -123,21 +124,6 @@ const CertificationDetailScreen = ({ route, navigation }) => {
         </IconContainer>
       </DiaryTitleContainer>
 
-      {/* <WriteButtonContainer>
-        <Button
-          title="White Diary"
-          buttonStyle={{
-            backgroundColor: "#09172b",
-            borderRadius: 10,
-          }}
-          containerStyle={{
-            width: width / 1.12,
-            marginVertical: 10,
-          }}
-          titleStyle={{ fontWeight: "bold" }}
-        />
-      </WriteButtonContainer> */}
-      {/* <DiaryBodyTextContainer></DiaryBodyTextContainer> */}
       <TextInput
         editable
         multiline

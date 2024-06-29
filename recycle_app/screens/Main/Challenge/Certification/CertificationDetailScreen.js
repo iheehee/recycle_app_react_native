@@ -35,36 +35,33 @@ const DiaryBodyTextContainer = styled.View`
   width: 400px;
   margin: 12px;
   border-width: 1px;
-  border-color: white;
-  color: "white";
-  font-size: 16px;
+  border-color: #0d2340;
+  border-radius: 20px;
+  border-width: 6px;
   padding: 10px;
+  background-color: #09182c;
 `;
 const IconContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-const WriteButtonContainer = styled.View`
+/* const WriteButtonContainer = styled.View`
   align-items: center;
   justify-content: center;
   background-color: black;
   width: ${width / 1.05}px;
   height: ${height / 14}px;
   border-radius: 15px;
-`;
+`; */
 const ImageContainer = styled.View`
   background-color: #09172b;
   width: ${width}px;
-  height: ${height / 3}px;
+  height: ${height / 2.5}px;
   align-items: center;
   justify-content: center;
 `;
 
 const CertificationDetailScreen = ({ navigation, route }) => {
-  /* const certification_data = {
-    certification_num: route.params.certification_num,
-    challenge_id: route.params.challenge_id,
-  }; */
   const certification_data = route.params.certification_data;
   const [image, setImage] = useState(null);
 
@@ -80,11 +77,11 @@ const CertificationDetailScreen = ({ navigation, route }) => {
       ),
     });
   }, []);
-
+  console.log(route.params.certification_data.certification_photo);
   return (
     <BgContainer>
       <ImageContainer>
-        {route.params.certification_photo !== null ? (
+        {route.params.certification_data.certification_photo !== null ? (
           <Image
             source={{
               uri:
@@ -93,58 +90,30 @@ const CertificationDetailScreen = ({ navigation, route }) => {
             }}
             style={{
               width: width,
-              height: height / 3,
+              height: height / 2.5,
             }}
           />
         ) : (
           <>
             <FontAwesome name="image" size={50} color="white" />
-            {/* <Text style={{ color: "white", fontSize: 14 }}>Not Image</Text> */}
+            <Text style={{ color: "white", fontSize: 14 }}>Not Image</Text>
           </>
         )}
       </ImageContainer>
       <DiaryTitleContainer>
         <IconContainer>
-          <Ionicons name="journal-outline" size={30} color="white" />
-          <Text style={{ color: "white", fontSize: 28, marginLeft: 5 }}>
+          <Ionicons name="journal-outline" size={24} color="white" />
+          <Text style={{ color: "white", fontSize: 22, marginLeft: 5 }}>
             Diary
           </Text>
         </IconContainer>
       </DiaryTitleContainer>
 
-      {/* <WriteButtonContainer>
-        <Button
-          title="White Diary"
-          buttonStyle={{
-            backgroundColor: "#09172b",
-            borderRadius: 10,
-          }}
-          containerStyle={{
-            width: width / 1.12,
-            marginVertical: 10,
-          }}
-          titleStyle={{ fontWeight: "bold" }}
-        />
-      </WriteButtonContainer> */}
       <DiaryBodyTextContainer>
-        <Text>{route.params.certification_data.certification_diary}</Text>
+        <Text style={{ color: "white", fontSize: 16 }}>
+          {route.params.certification_data.certification_diary}
+        </Text>
       </DiaryBodyTextContainer>
-      {/* <TextInput
-        editable
-        multiline
-        maxLength={300}
-        value={name}
-        style={{
-          height: 300,
-          width: 400,
-          margin: 12,
-          borderWidth: 1,
-          borderColor: "white",
-          color: "white",
-          fontSize: 16,
-          padding: 10,
-        }}
-      /> */}
     </BgContainer>
   );
 };

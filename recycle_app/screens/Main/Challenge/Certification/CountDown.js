@@ -50,7 +50,6 @@ const Couter = ({ route }) => {
     const document = {
       certification_num: certification_num,
       challenge_id: challenge_id,
-      certification_local_photo_url: "",
     };
     formData.append("document", JSON.stringify(document));
     const { data } = await api.createCertification(challenge_id, formData, jwt);
