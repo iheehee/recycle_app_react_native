@@ -17,7 +17,8 @@ export default ({}) => {
     inputContainer: {
       borderWidth: 0.2,
       borderRadius: 12,
-      paddingHorizontal: 10,
+      paddingHorizontal: 15,
+      height: 60,
       ...backgroundColorToggle,
     },
   };
@@ -26,6 +27,7 @@ export default ({}) => {
       <Input
         value={text}
         maxLength={30}
+        placeholder="예: 독서하기, 운동하기"
         containerStyle={inputStyle.container}
         inputContainerStyle={inputStyle.inputContainer}
         onChangeText={(text) => setText(text)}

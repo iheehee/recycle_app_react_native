@@ -10,10 +10,14 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+
 import Ip from "../../../../util/Ip";
 
 const { width, height } = Dimensions.get("screen");
@@ -28,13 +32,48 @@ const Container = styled.View`
   justify-content: space-between;
   padding: 5px;
 `;
+const TimeStampContainer = styled.View`
+  flex: 1;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 4px;
+`;
+const DateContainer = styled.View``;
+const TimeContainer = styled.View`
+  justify-content: flex-end;
+`;
+const DateText = styled.Text`
+  font-size: ${(props) => props.size}px;
+  font-family: ${(props) => props.font};
+  color: white;
+  margin-top: -3px;
+`;
 
 const Certification = ({ route, myCertifications }) => {
+  SplashScreen.preventAutoHideAsync();
+  const maxArray = [...new Array(100)].map((_, i) => i + 1);
+  const DATA = [];
+  const [e, setE] = useState([]);
+
   const { challenge_id } = route.params;
+
   const targetChallenge = myCertifications.find(
     (challenge) => challenge.challenge_id === challenge_id
   );
+  let [loaded, error] = useFonts({
+    JockeyOne: require("../../../../assets/font/Oswald-Regular.ttf"),
+    Lobster: require("../../../../assets/font/Lobster-Regular.ttf"),
+  });
+  console.log(loaded, error);
+  /* useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
 
+  if (!loaded && !error) {
+    return null;
+  } */
   useEffect(() => {
     if (targetChallenge) {
       maxArray.forEach((num) => {
@@ -51,7 +90,12 @@ const Certification = ({ route, myCertifications }) => {
     setE(DATA);
   }, [myCertifications]);
 
-  const [e, setE] = useState([]);
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
   const navigation = useNavigation();
   const CountDownScreen = (certification_num) =>
     navigation.navigate("CountDown", {
@@ -62,9 +106,16 @@ const Certification = ({ route, myCertifications }) => {
     navigation.navigate("CertificationDetailScreen", {
       certification_data,
     });
-  const maxArray = [...new Array(100)].map((_, i) => i + 1);
-  const DATA = [];
+
   console.log(e);
+  const dateTime = (dateTime) => {
+    let time = new Date(dateTime);
+    console.log(time.getDay());
+  };
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <BgContainer>
       {/* <SafeAreaView> */}
@@ -93,21 +144,46 @@ const Certification = ({ route, myCertifications }) => {
               }
             >
               <Container>
-                <Text style={{ color: "white" }}>
-                  {item.certification_num ? item.certification_num : item}
-                </Text>
+                {item.certification_num ? (
+                  <Text style={{ color: "white" }}>
+                    {/*   {item.certification_num} */}
+                  </Text>
+                ) : (
+                  <Text>{item}</Text>
+                )}
+
                 {item.certification_num ? (
                   //certification_local_photo_url가 ""(빈 string) 이 아니라면 이미지를 표시한다.
                   item.certification_photo !== null ? (
-                    <Image
-                      source={{ uri: Ip.localIp + item.certification_photo }}
-                      style={{
-                        zIndex: -1,
-                        position: "absolute",
-                        width: width / 3.03,
-                        height: height / 6.6,
-                      }}
-                    />
+                    <>
+                      <Image
+                        source={{ uri: Ip.localIp + item.certification_photo }}
+                        style={{
+                          zIndex: -1,
+                          position: "absolute",
+                          width: width / 3.03,
+                          height: height / 6.6,
+                        }}
+                      />
+                      <TimeStampContainer>
+                        <DateContainer>
+                          <DateText size="12" font="JockeyOne">
+                            2011
+                          </DateText>
+                          <DateText size="18" font="JockeyOne">
+                            JAN
+                          </DateText>
+                          <DateText size="44" font="Lobster">
+                            7
+                          </DateText>
+                        </DateContainer>
+                        <TimeContainer>
+                          <DateText size="13" font="JockeyOne">
+                            9:32 AM
+                          </DateText>
+                        </TimeContainer>
+                      </TimeStampContainer>
+                    </>
                   ) : (
                     <>
                       <View
@@ -133,6 +209,7 @@ const Certification = ({ route, myCertifications }) => {
                   )
                 ) : (
                   <IconContainer>
+                    {/* 카메라 아이콘 */}
                     <View
                       style={{
                         flexDirection: "row",

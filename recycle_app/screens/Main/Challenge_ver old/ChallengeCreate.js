@@ -8,8 +8,6 @@ import FrequencyButtonGroup from "../../../components/ChallengeCreate/FrequencyB
 import DurationButtonGroup from "../../../components/ChallengeCreate/DurationButtonGroup";
 import StartDayButtonGroup from "../../../components/ChallengeCreate/StartDayButtonGroup";
 import MaxMemberButton from "../../../components/ChallengeCreate/MaxMemberButton";
-import DescriptionInput from "../../../components/ChallengeCreate/DescriptionInput";
-import CertificationNoticeInput from "../../../components/ChallengeCreate/CertificationNoticeInput";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import TitleInput from "../../../components/ChallengeCreate/TitleInput";
 import SummeryInput from "../../../components/ChallengeCreate/SummeryInput";

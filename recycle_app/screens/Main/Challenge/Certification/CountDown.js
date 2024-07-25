@@ -30,7 +30,7 @@ const ButtonContainer = styled.View`
   align-items: center;
 `;
 
-const Couter = ({ route }) => {
+const Counter = ({ route }) => {
   const navigation = useNavigation();
   const [running, setRunning] = useState(false);
   const [finished, setFinishied] = useState(false);
@@ -67,7 +67,7 @@ const Couter = ({ route }) => {
           marginVertical: 50,
         }}
       />
-      {/* <Text style={{ color: "white", fontSize: 18 }}>나를 증명하라</Text> */}
+
       <CountDown
         size={40}
         until={1}
@@ -155,4 +155,4 @@ const Couter = ({ route }) => {
   );
 };
 
-export default Couter;
+export default Counter;

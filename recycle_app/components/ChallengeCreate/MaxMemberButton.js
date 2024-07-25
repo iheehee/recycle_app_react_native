@@ -43,13 +43,13 @@ export default ({}) => {
           inputStyle={inputStyle.inputStyle}
           onChangeText={(text) => setText(text)}
           onFocus={() => setFocus(true)}
-          placeholder="1"
+          placeholder="5"
           onBlur={() => {
             setFocus(false);
             dispatch(createChallenge({ max_hour: text }));
           }}
         />
-        <Text style={{ fontSize: 20, paddingBottom: 10 }}>시간</Text>
+        <Text style={{ fontSize: 20, paddingBottom: 10 }}>분</Text>
       </InputContainer>
     </Container>
   );

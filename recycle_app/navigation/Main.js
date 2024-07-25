@@ -6,7 +6,8 @@ import { useNavigationState } from "@react-navigation/native";
 import ChallengeIndex from "../screens/Main/Challenge/ChallengeIndex";
 import ChallengeCertification from "../screens/Main/Challenge_ver old/ChallengeCertification";
 import ChallengeDetailCard from "../components/ChallengeDetailCard";
-import CertificationList from "../screens/Main/Challenge/Certification/CertificationList";
+
+import RoutineCreate from "../screens/Main/Challenge/Create/RoutineCreate";
 import ChallengeCreate from "../screens/Main/Challenge_ver old/ChallengeCreate";
 import CountDown from "../screens/Main/Challenge/Certification/CountDown";
 
@@ -167,8 +168,8 @@ const ChallengeStackNavi = () => {
         }}
       />
       <Stack.Screen
-        name="ChallengeCreate"
-        component={ChallengeCreate}
+        name="RoutineCreate"
+        component={RoutineCreate}
         options={{
           title: null,
           headerBackImage: () => <BackBtn />,
@@ -282,7 +283,7 @@ const TabNavigation = () => {
           tabBarStyle: { display: getVisibility(0, [1, 2, 3]) },
           headerRightContainerStyle: { paddingRight: 12 },
           headerRight: () => (
-            <HeaderButton shape={"plus"} onPress={"ChallengeCreate"} />
+            <HeaderButton shape={"plus"} onPress={"RoutineCreate"} />
           ),
         })}
       />
