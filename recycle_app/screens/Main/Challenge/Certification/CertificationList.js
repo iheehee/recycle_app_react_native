@@ -19,6 +19,7 @@ import styled from "styled-components/native";
 import { FontAwesome } from "@expo/vector-icons";
 
 import Ip from "../../../../util/Ip";
+import utils from "../../../../utils";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -48,7 +49,11 @@ const DateText = styled.Text`
   color: white;
   margin-top: -3px;
 `;
-
+/* const dateTime = (dateTime) => {
+  let time = new Date(dateTime);
+  return time.getFullYear();
+};
+ */
 const Certification = ({ route, myCertifications }) => {
   SplashScreen.preventAutoHideAsync();
   const maxArray = [...new Array(100)].map((_, i) => i + 1);
@@ -65,15 +70,7 @@ const Certification = ({ route, myCertifications }) => {
     Lobster: require("../../../../assets/font/Lobster-Regular.ttf"),
   });
   console.log(loaded, error);
-  /* useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded, error]);
 
-  if (!loaded && !error) {
-    return null;
-  } */
   useEffect(() => {
     if (targetChallenge) {
       maxArray.forEach((num) => {
@@ -108,10 +105,7 @@ const Certification = ({ route, myCertifications }) => {
     });
 
   console.log(e);
-  const dateTime = (dateTime) => {
-    let time = new Date(dateTime);
-    console.log(time.getDay());
-  };
+
   if (!loaded && !error) {
     return null;
   }
@@ -168,10 +162,10 @@ const Certification = ({ route, myCertifications }) => {
                       <TimeStampContainer>
                         <DateContainer>
                           <DateText size="12" font="JockeyOne">
-                            2011
+                            {utils.dateTime("year", item.certification_date)}
                           </DateText>
-                          <DateText size="18" font="JockeyOne">
-                            JAN
+                          <DateText size="17" font="JockeyOne">
+                            {utils.dateTime("month", item.certification_date)}
                           </DateText>
                           <DateText size="44" font="Lobster">
                             7
