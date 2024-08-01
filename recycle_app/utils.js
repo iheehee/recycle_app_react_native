@@ -9,7 +9,6 @@ export default {
   },
   dateTime: (type, dateTime) => {
     let time = new Date(dateTime);
-
     switch (type) {
       case "year":
         return time.getFullYear();
@@ -17,6 +16,12 @@ export default {
         return time.toLocaleString("en-EN", { month: "short" }).toUpperCase();
       case "day":
         return time.getDay();
+      case "time":
+        const hours = time.getHours() % 12 ? time.getHours() % 12 : 12;
+        const minutes =
+          time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
+        const ampm = time.getHours() >= 12 ? "PM" : "AM";
+        return `${hours}:${minutes}`;
     }
   },
 };

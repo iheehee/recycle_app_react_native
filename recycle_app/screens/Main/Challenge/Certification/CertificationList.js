@@ -168,12 +168,12 @@ const Certification = ({ route, myCertifications }) => {
                             {utils.dateTime("month", item.certification_date)}
                           </DateText>
                           <DateText size="44" font="Lobster">
-                            7
+                            {utils.dateTime("day", item.certification_date)}
                           </DateText>
                         </DateContainer>
                         <TimeContainer>
                           <DateText size="13" font="JockeyOne">
-                            9:32 AM
+                            {utils.dateTime("time", item.certification_date)}
                           </DateText>
                         </TimeContainer>
                       </TimeStampContainer>
