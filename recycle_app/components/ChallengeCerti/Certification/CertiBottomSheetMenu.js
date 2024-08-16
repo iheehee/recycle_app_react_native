@@ -46,7 +46,7 @@ const BottomSheetMenu = ({ challenge_id, certification_id }) => {
       title: "Cancel",
 
       titleStyle: { color: "white" },
-      onPress: () => setbottomMenuIsVisible(false),
+      onPress: () => refRBSheet.current.close(),
     },
   ];
   const leaveChallenge = (challengeId, jwt) => {

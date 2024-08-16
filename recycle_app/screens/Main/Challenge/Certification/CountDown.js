@@ -70,7 +70,7 @@ const Counter = ({ route }) => {
 
       <CountDown
         size={40}
-        until={1}
+        until={3600}
         running={running}
         onFinish={() => setFinishied(true)}
         onChange={(e) => e}

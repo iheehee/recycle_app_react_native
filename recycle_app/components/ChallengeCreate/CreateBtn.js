@@ -134,7 +134,7 @@ const CreateBtn = () => {
     axios.interceptors.response.use(
       function (response) {
         setLoading(false);
-        console.log(response);
+
         return response;
       },
       function (error) {

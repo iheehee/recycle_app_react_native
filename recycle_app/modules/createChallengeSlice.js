@@ -7,7 +7,7 @@ const createChallengeSlice = createSlice({
     newChallenge: {
       title: null,
       summery: null,
-      max_hour: 1,
+      duration: 60,
     },
   },
   reducers: {
@@ -21,7 +21,7 @@ const createChallengeSlice = createSlice({
       const challengeObject = state.newChallenge;
       challengeObject.title = null;
       challengeObject.summery = null;
-      challengeObject.max_hour = 1;
+      challengeObject.duration_seconds = 60;
     },
   },
 });
@@ -34,7 +34,7 @@ const setNewChallengeValue = (challengeObject, key, value) => {
       challengeObject.summery = value;
       break;
     case "max_hour":
-      challengeObject.max_hour = value;
+      challengeObject.duration_seconds = value;
       break;
     case "title_banner":
       challengeObject.title_banner = value;

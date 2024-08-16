@@ -6,12 +6,14 @@ import styled from "styled-components/native";
 import { createChallenge } from "../../modules/createChallengeSlice";
 import { Input } from "@rneui/themed";
 import { TextInput, View } from "react-native";
+import TimeButton from "./TimeButton";
 
 const Container = styled.View``;
 
 const InputContainer = styled.View`
   flex-direction: row;
   align-items: center;
+  background-color: grey;
 `;
 
 export default ({}) => {
@@ -35,7 +37,7 @@ export default ({}) => {
   return (
     <Container>
       <InputContainer>
-        <Input
+        {/* <Input
           value={text}
           maxLength={3}
           containerStyle={inputStyle.container}
@@ -48,8 +50,7 @@ export default ({}) => {
             setFocus(false);
             dispatch(createChallenge({ max_hour: text }));
           }}
-        />
-        <Text style={{ fontSize: 20, paddingBottom: 10 }}>분</Text>
+        /> */}
       </InputContainer>
     </Container>
   );

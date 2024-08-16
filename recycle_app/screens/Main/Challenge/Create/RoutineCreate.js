@@ -9,6 +9,7 @@ import MaxMemberButton from "../../../../components/ChallengeCreate/MaxMemberBut
 import TitleInput from "../../../../components/ChallengeCreate/TitleInput";
 import SummeryInput from "../../../../components/ChallengeCreate/SummeryInput";
 import CreateBtn from "../../../../components/ChallengeCreate/CreateBtn";
+import TimePicker from "../../../../components/ChallengeCreate/TimePicker";
 
 const { width, height } = Dimensions.get("screen");
 const containerMarginBottomValue = 20;
@@ -66,8 +67,8 @@ export default ({ route }) => {
           </Container> */}
 
           <Container>
-            <Title>지속시간</Title>
-            <MaxMemberButton />
+            {/* <Title>지속시간</Title> */}
+            <TimePicker />
           </Container>
           <CreateBtn />
         </BgContainer>

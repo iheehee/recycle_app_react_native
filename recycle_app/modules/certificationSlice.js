@@ -57,7 +57,6 @@ const certificationsSlice = createSlice({
       }
     },
     addCertifications(state, action) {
-      console.log(action.payload);
       const challenge_id = action.payload.challenge_id;
       const find_Challenge_index = state.myCertifications.findIndex(
         (element) => element.challenge_id === challenge_id
@@ -66,7 +65,6 @@ const certificationsSlice = createSlice({
       targetChallenge.certifications.push(action.payload.data);
     },
     modify_Certifications(state, action) {
-      console.log(action.payload);
       const challenge_id = action.payload.challenge_id;
       const certification_num = action.payload.certification_num;
       const modified_data = action.payload.data;

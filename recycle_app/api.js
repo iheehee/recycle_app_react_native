@@ -6,7 +6,7 @@ const callApi = async (method_type, path, data, jwt) => {
     "Content-Type": "application/json",
     Access: jwt,
   };
-  console.log(method_type, path, data, jwt);
+
   const baseUrl = Ip.localIp;
 
   const fullUrl = `${baseUrl}${path}`;

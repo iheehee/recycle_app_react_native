@@ -21,7 +21,7 @@ export default {
         const minutes =
           time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
         const ampm = time.getHours() >= 12 ? "PM" : "AM";
-        return `${hours}:${minutes}`;
+        return `${hours}:${minutes} ${ampm}`;
     }
   },
 };
