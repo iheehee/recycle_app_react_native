@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Dimensions } from "react-native";
 import { TimerPickerModal } from "react-native-timer-picker";
+import { createChallenge } from "../../modules/createChallengeSlice";
+import { useDispatch } from "react-redux";
 
 export default ({}) => {
   const { width, height } = Dimensions.get("screen");
   const [showPicker, setShowPicker] = useState(false);
   const [timeValue, setTimeValue] = useState(null);
-  const timePresenter = ({ hours, minutes, seconds }) => {
-    const tt = [dd, dd, dd];
-    console.log();
-    /* if (hours) {
 
-    } */
+  const dispatch = useDispatch();
 
-    return hours;
+  const timeSaver = ({ hours, minutes, seconds }) => {
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    dispatch(createChallenge({ duration_seconds: totalSeconds }));
+    return totalSeconds;
   };
   const formatTime = ({ hours, minutes, seconds }) => {
     const timeParts = [];
@@ -72,6 +73,7 @@ export default ({}) => {
         visible={showPicker}
         setIsVisible={setShowPicker}
         onConfirm={(pickedDuration) => {
+          timeSaver(pickedDuration);
           setShowPicker(false);
         }}
         modalTitle="루틴 지속시간"

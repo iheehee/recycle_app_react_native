@@ -27,6 +27,7 @@ import CertiFeedCard from "../components/ChallengeCerti/CertiFeedCard";
 import CertificationIndex from "../screens/Main/Challenge/Certification/CertificationIndex";
 import CertificationDetailScreen from "../screens/Main/Challenge/Certification/CertificationDetailScreen";
 import CertificationFeedEditScreen from "../screens/Main/Challenge/Certification/CertificationFeedEditScreen";
+import RoutineCreateIndex from "../screens/Main/Challenge/Create/RoutineCreateIndex";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -169,7 +170,7 @@ const ChallengeStackNavi = () => {
       />
       <Stack.Screen
         name="RoutineCreate"
-        component={RoutineCreate}
+        component={RoutineCreateIndex}
         options={{
           title: null,
           headerBackImage: () => <BackBtn />,

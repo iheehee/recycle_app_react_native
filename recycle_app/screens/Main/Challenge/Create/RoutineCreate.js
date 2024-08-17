@@ -51,7 +51,8 @@ const SubTitle = styled.Text`
   color: gray;
 `;
 
-export default ({ route }) => {
+export default ({ newChallenge }) => {
+  console.log(newChallenge);
   const buttonFontSize = 15;
   return (
     <KeyboardAwareScrollView>
